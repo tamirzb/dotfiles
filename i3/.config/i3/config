@@ -112,6 +112,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 # Set the i3bar
 bar {
 }
+# Focus on a window when it's activated
+focus_on_window_activation focus
 
 # Use feh to put a wallpaper
 exec feh --bg-fill ~/.config/i3/lampard_wallpaper.jpg --no-fehbg
