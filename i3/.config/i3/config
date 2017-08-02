@@ -109,9 +109,6 @@ bindsym $mod+r mode "resize"
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 
-# Set the i3bar
-bar {
-}
 # Focus on a window when it's activated
 focus_on_window_activation focus
 
@@ -123,3 +120,6 @@ exec compton -b
 
 # Hide the cursor when typing
 exec xbanish
+
+# Use polybar to show a bar with information
+exec --no-startup-id polybar default
