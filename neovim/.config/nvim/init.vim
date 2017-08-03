@@ -109,3 +109,7 @@ set nohlsearch
 
 " Highlight current line.
 set cursorline
+
+" Use j and k even on the same line.
+nnoremap j gj
+nnoremap k gk
