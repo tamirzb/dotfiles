@@ -1,3 +1,3 @@
 set fish_greeting
 
-export EDITOR=nvim
+set -x EDITOR nvim
