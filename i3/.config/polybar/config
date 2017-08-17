@@ -33,7 +33,7 @@ font-2 = FontAwesome:pixelsize=24;1
 
 modules-left = i3 xwindow
 modules-center =
-modules-right = xbacklight volume xkeyboard memory cpu wlan battery updates date
+modules-right = xbacklight volume xkeyboard memory cpu temperature wlan battery updates date
 
 [module/updates]
 ; Shows a number of available Arch package updates
@@ -222,6 +222,27 @@ format-disconnected = <label-disconnected>
 format-disconnected-underline = ${self.format-connected-underline}
 format-disconnected-background = ${colors.alert}
 label-disconnected = No Wi-Fi
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 7
+warn-temperature = 80
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature%
+label-warn = %temperature%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-foreground = ${colors.foreground-alt}
 
 [settings]
 screenchange-reload = true
