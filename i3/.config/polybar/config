@@ -9,7 +9,7 @@ alert = #bd2c40
 
 [bar/default]
 width = 100%
-height = 55
+height = 60
 fixed-center = false
 
 background = #cc222222
