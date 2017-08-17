@@ -113,10 +113,10 @@ focus_on_window_activation focus
 exec feh --bg-fill ~/.config/i3/lampard_wallpaper.jpg --no-fehbg
 
 # Use compton as a composite manager (gives fade, shadow, opacity, etc)
-exec compton -b
+exec --no-startup-id compton -b
 
 # Hide the cursor when typing
-exec xbanish
+exec --no-startup-id xbanish
 
 # Use polybar to show a bar with information
 exec --no-startup-id polybar default
