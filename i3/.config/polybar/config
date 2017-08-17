@@ -33,7 +33,7 @@ font-2 = FontAwesome:pixelsize=24;1
 
 modules-left = i3 xwindow
 modules-center =
-modules-right = xbacklight volume xkeyboard memory cpu battery updates date
+modules-right = xbacklight volume xkeyboard memory cpu wlan battery updates date
 
 [module/updates]
 ; Shows a number of available Arch package updates
@@ -206,9 +206,22 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
 
-animation-charging-0 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
+[module/wlan]
+type = internal/network
+interface = wlp58s0
+interval = 3.0
+
+format-connected = <label-connected>
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+
+format-connected-underline = #9f78e1
+label-connected = %essid%
+
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${self.format-connected-underline}
+format-disconnected-background = ${colors.alert}
+label-disconnected = No Wi-Fi
 
 [settings]
 screenchange-reload = true
