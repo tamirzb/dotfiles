@@ -75,6 +75,9 @@ format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
 
+; Only show workspaces defined on the same output as the bar
+pin-workspaces = true
+
 label-mode-padding = 2
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
@@ -91,8 +94,6 @@ label-unfocused-padding = 2
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
