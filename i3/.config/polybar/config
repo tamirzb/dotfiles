@@ -38,7 +38,7 @@ modules-right = xbacklight volume xkeyboard memory cpu temperature wlan battery 
 [module/updates]
 ; Shows a number of available Arch package updates
 type = custom/script
-interval = 1200
+interval = 300
 format = <label>
 format-underline = #f50a4d
 label = "%output%"
