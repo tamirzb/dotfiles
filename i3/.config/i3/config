@@ -121,7 +121,7 @@ workspace 6 output DP1-2
 workspace 7 output DP1-2
 workspace 8 output DP1-2
 workspace 9 output DP1-2
-workspace 0 output DP1-2
+workspace 10 output DP1-2
 
 # Use compton as a composite manager (gives fade, shadow, opacity, etc)
 exec --no-startup-id compton -b
