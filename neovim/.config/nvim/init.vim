@@ -100,6 +100,7 @@ nnoremap <C-k> O<Esc>
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+set tabstop=4
 
 " Smart case search.
 set ignorecase
