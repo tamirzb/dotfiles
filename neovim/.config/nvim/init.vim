@@ -4,6 +4,7 @@
 
 call plug#begin()
 Plug 'w0ng/vim-hybrid'
+Plug 'dag/vim-fish'
 call plug#end()
 
 " Load installed vim packages.
