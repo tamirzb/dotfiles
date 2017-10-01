@@ -35,7 +35,7 @@ font-2 = FontAwesome:pixelsize=24;1
 
 modules-left = i3 xwindow
 modules-center =
-modules-right = xbacklight volume xkeyboard memory cpu temperature wlan battery updates date
+modules-right = volume xbacklight xkeyboard memory cpu temperature wlan battery updates date
 
 [module/updates]
 ; Shows a number of available Arch package updates
@@ -107,20 +107,10 @@ label-urgent-padding = 2
 
 [module/xbacklight]
 type = internal/xbacklight
-
-format = <label> <bar>
-label = 
-
-bar-width = 6
-bar-indicator = |
-bar-indicator-foreground = #ff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #ffc53a
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #ffc53a
+label = %percentage%%
 
 [module/backlight-acpi]
 inherit = module/xbacklight
