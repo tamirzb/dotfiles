@@ -114,12 +114,30 @@ bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 # Focus on a window when it's activated
 focus_on_window_activation focus
 
+# Seperate workspaces between monitors.
+# Left monitor: 1-5
+# Right monitor: 6-10
+set_from_resource $left_monitor i3wm.left.monitor
+set_from_resource $right_monitor i3wm.right.monitor
+workspace 1 output $left_monitor
+workspace 2 output $left_monitor
+workspace 3 output $left_monitor
+workspace 4 output $left_monitor
+workspace 5 output $left_monitor
+workspace 6 output $right_monitor
+workspace 7 output $right_monitor
+workspace 8 output $right_monitor
+workspace 9 output $right_monitor
+workspace 10 output $right_monitor
+
 # Use compton as a composite manager (gives fade, shadow, opacity, etc)
 exec --no-startup-id compton -b
 
 # Hide the cursor when typing
 exec --no-startup-id xbanish
 
-# Everything else depends on some more complex monitor configuration
-# This includes polybar and wallpaper
-exec_always --no-startup-id $HOME/.config/i3/monitors.fish
+# Put a wallpaper
+exec_always --no-startup-id feh --bg-fill ~/.config/i3/lampard_wallpaper.jpg --no-fehbg
+
+# Launch polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.fish $left_monitor $right_monitor
