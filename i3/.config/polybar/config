@@ -204,7 +204,7 @@ ramp-capacity-foreground = ${colors.foreground-alt}
 
 [module/wlan]
 type = internal/network
-interface = wlp58s0
+interface = ${xrdb:polybar.interface}
 interval = 3.0
 
 format-connected = <label-connected>
@@ -221,7 +221,7 @@ label-disconnected = No Wi-Fi
 
 [module/temperature]
 type = internal/temperature
-thermal-zone = 7
+thermal-zone = ${xrdb:polybar.thermal-zone}
 warn-temperature = 80
 
 format = <ramp> <label>
