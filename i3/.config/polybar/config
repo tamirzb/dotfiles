@@ -45,7 +45,7 @@ interval = 300
 format = <label>
 format-underline = #f50a4d
 label = "%output%"
-exec = $HOME/.config/polybar/updates.sh
+exec = $HOME/.config/polybar/updates.sh ${env:MONITOR}
 exec-if = "ping -q -w 2 -c 1 8.8.8.8 > /dev/null"
 
 [module/xwindow]

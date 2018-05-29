@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export CHECKUPDATES_DB="/tmp/checkup-db-$MONITOR"
 updates_arch=$(checkupdates | wc -l)
 updates_aur=$(cower -u 2>/dev/null | wc -l)
 updates=$(("$updates_arch" + "$updates_aur"))
