@@ -1,3 +1,3 @@
 function adbs
-    adb shell -t "su -c bash"
+    adb $argv shell -t "su -c bash"
 end
