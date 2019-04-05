@@ -151,11 +151,13 @@ format-underline = #0a6cf5
 label = %date% %time%
 
 [module/volume]
-type = internal/alsa
+type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
-label-volume = 
-label-volume-foreground = ${root.foreground}
+format-volume = <label-volume>
+format-volume-underline = #2fb52a
+
+format-volume-prefix = " "
+format-volume-prefix-foreground = ${colors.foreground-alt}
 
 format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
