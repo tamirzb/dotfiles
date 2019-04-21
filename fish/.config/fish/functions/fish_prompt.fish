@@ -1,5 +1,5 @@
 function fish_prompt --description 'Write out the prompt'
-	set -l last_status $status
+    set -l last_status $status
 
     if not set -q __fish_git_prompt_show_informative_status
         set -g __fish_git_prompt_show_informative_status 1
@@ -74,6 +74,15 @@ function fish_prompt --description 'Write out the prompt'
         case '*'
             set color_cwd $fish_color_cwd
             set suffix '$'
+    end
+
+    # Show user@host on SSH
+    if set -q SSH_TTY
+        echo -n -s "$USER" @
+        set_color $fish_color_host
+        echo -n -s (prompt_hostname)
+        set_color normal
+        echo -n -s ' '
     end
 
     # PWD
