@@ -5,6 +5,10 @@
 call plug#begin()
 Plug 'w0ng/vim-hybrid'
 Plug 'dag/vim-fish'
+"" Plugins available as Arch packages:
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " Load installed vim packages.
