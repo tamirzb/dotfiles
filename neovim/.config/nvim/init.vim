@@ -5,6 +5,7 @@
 call plug#begin()
 Plug 'w0ng/vim-hybrid'
 Plug 'dag/vim-fish'
+Plug 'mboughaba/i3config.vim'
 "" Plugins available as Arch packages:
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
