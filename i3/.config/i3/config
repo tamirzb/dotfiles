@@ -112,6 +112,11 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-mute @DEFAULT_S
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && \
     pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym $mod+equal exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && \
+            pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym $mod+minus exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && \
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $mod+m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Focus on a window when it's activated
 focus_on_window_activation focus
