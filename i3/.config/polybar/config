@@ -214,7 +214,7 @@ format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 
 format-connected-underline = #9f78e1
-label-connected = %essid%
+label-connected = %essid:0:13:...%
 
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${self.format-connected-underline}
