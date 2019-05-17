@@ -76,6 +76,14 @@ function fish_prompt --description 'Write out the prompt'
             set suffix '$'
     end
 
+    # Notify about background jobs
+    set -l jobs_num (jobs -p | wc -l)
+    if test $jobs_num -gt 0
+        set_color $fish_color_jobs
+        echo -n -s "[$jobs_num] "
+        set_color normal
+    end
+
     # Show user@host on SSH
     if set -q SSH_TTY
         echo -n -s "$USER" @
