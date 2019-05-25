@@ -82,8 +82,8 @@ syntax on
 " Turn line numbers on.
 set number
 
-" Add a column at 100 characters.
-set colorcolumn=99
+" Add a column at 80 characters.
+set colorcolumn=79
 
 " Display invisible characters.
 set list
