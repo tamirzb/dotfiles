@@ -90,8 +90,8 @@ set list
 " Configure 'list' to properly display only trailing invisible characters.
 let &listchars = "tab:>-,trail:\u2591,extends:>,precedes:<,nbsp:\u00b7"
 
-" Tell airline to use Powerline fonts.
-let g:airline_powerline_fonts = 1
+" Tell airline to use Powerline fonts, only if using a capable terminal.
+let g:airline_powerline_fonts = $TERM =~ "xterm"
 
 
 """"""""""""""""
