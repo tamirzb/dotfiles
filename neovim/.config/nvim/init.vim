@@ -64,6 +64,9 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 " Detect file types and indent them accordingly.
 filetype indent on
 
+" Remember 1000 files in v:oldfiles.
+set shada=!,'1000,<50,s10,h
+
 
 """"""""""""""
 " Appearance "
