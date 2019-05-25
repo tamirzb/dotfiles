@@ -14,6 +14,7 @@ Plug 'mboughaba/i3config.vim'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 "Plug 'tpope/vim-fugitive'
+"Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " Load installed vim packages.
@@ -124,3 +125,34 @@ set cursorline
 " Use j and k even on the same line.
 nnoremap j gj
 nnoremap k gk
+
+
+"""""""
+" FZF "
+"""""""
+
+" By default the FZF window should be on the entire screen
+let g:fzf_layout = {'down': '100%'}
+
+" Setup :FromIndex
+" Like :FZF, but uses an file index as list of possible files to open
+" File index path is stored in g:index_file, which by default is 'files'
+" The idea is kind of like tags file
+let g:index_file = "files"
+function! s:from_index()
+    if !filereadable(g:index_file)
+        echoerr "Couldn't find file '" . g:index_file . "'"
+        return
+    endif
+    call fzf#vim#files("", {"source": "cat " . g:index_file})
+endfunction
+command! FromIndex call s:from_index()
+
+" Shortcuts for different FZF commands
+nnoremap <leader>e :Files<CR>
+nnoremap <leader>f :FromIndex<CR>
+nnoremap <leader>t :BTags<CR>
+nnoremap <leader>l :Lines<CR>
+nnoremap <leader>h :History<CR>
+nnoremap <leader>; :History:<CR>
+nnoremap <leader>/ :History/<CR>
