@@ -8,7 +8,7 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/default]
-monitor = ${env:MONITOR}
+monitor = ${xrdb:i3wm.monitor}
 dpi = ${xrdb:Xft.dpi:-1}
 
 width = 100%
@@ -38,6 +38,16 @@ modules-left = i3 xwindow
 modules-center =
 modules-right = volume xbacklight xkeyboard memory cpu temperature wlan battery updates date
 
+; Default is to run with single monitor, while there is an option for bars on right and left in a
+; dual-monitor setup
+[bar/left]
+inherit = bar/default
+monitor = ${xrdb:i3wm.left.monitor}
+
+[bar/right]
+inherit = bar/default
+monitor = ${xrdb:i3wm.right.monitor}
+
 [module/updates]
 ; Shows a number of available Arch package updates
 type = custom/script
@@ -45,7 +55,7 @@ interval = 300
 format = <label>
 format-underline = #f50a4d
 label = "%output%"
-exec = $HOME/.config/polybar/updates.sh ${env:MONITOR}
+exec = $HOME/.config/polybar/updates.fish
 exec-if = "ping -q -w 2 -c 1 8.8.8.8 > /dev/null"
 
 [module/xwindow]

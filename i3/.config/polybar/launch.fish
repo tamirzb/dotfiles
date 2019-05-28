@@ -2,8 +2,11 @@
 
 killall -q polybar
 
-# Run polybar for each monitor.
-for monitor in (printf "%s\n" $argv | uniq)
-    set -x MONITOR $monitor
+if xgetres i3wm.monitor
+    # Single monitor setup
     polybar -r default &
+else
+    # Dual-monitor setup
+    polybar -r left &
+    polybar -r right &
 end

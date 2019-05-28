@@ -149,6 +149,6 @@ exec --no-startup-id xbanish
 exec_always --no-startup-id feh --bg-scale ~/.config/i3/munnar_wallpaper.jpg --no-fehbg
 
 # Launch polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.fish $left_monitor $right_monitor
+exec_always --no-startup-id $HOME/.config/polybar/launch.fish
 
 # vim: ft=i3config
