@@ -103,10 +103,10 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Screen brightness control
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
-bindsym Control+$mod+equal exec --no-startup-id xbacklight -inc 10
-bindsym Control+$mod+minus exec --no-startup-id xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+bindsym Control+$mod+equal exec --no-startup-id xbacklight -inc 5
+bindsym Control+$mod+minus exec --no-startup-id xbacklight -dec 5
 
 # Volume control
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ false && \
