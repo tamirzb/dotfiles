@@ -170,6 +170,7 @@ nnoremap <leader>e :Files<CR>
 nnoremap <leader>f :FromIndex<CR>
 nnoremap <leader>t :BTags<CR>
 nnoremap <leader>l :Lines<CR>
+nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>; :History:<CR>
 nnoremap <leader>/ :History/<CR>
