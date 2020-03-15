@@ -154,6 +154,17 @@ function! s:from_index()
 endfunction
 command! FromIndex call s:from_index()
 
+function! s:ag_index(query)
+    if !filereadable(g:index_file)
+        echoerr "Couldn't find file '" . g:index_file . "'"
+        return
+    endif
+    call fzf#vim#grep("xargs -a " . g:index_file . " -d '\\n' ag --nogroup --column --color " . a:query, 0)
+endfunction
+command! -nargs=+ AgIndex call s:ag_index(<q-args>)
+
+command! -bang -complete=dir -nargs=+ Ag call fzf#vim#ag_raw(<q-args>, <bang>-1)
+
 " Shortcuts for different FZF commands
 nnoremap <leader>e :Files<CR>
 nnoremap <leader>f :FromIndex<CR>
