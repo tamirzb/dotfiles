@@ -1,8 +1,8 @@
 [colors]
-background = #222
-background-alt = #444
+background = #cc222222
+background-alt = #cc444444
 foreground = #dfdfdf
-foreground-alt = #555
+foreground-alt = #777
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
@@ -15,14 +15,13 @@ width = 100%
 height = 30
 fixed-center = false
 
-background = #cc222222
+background = ${colors.background}
 foreground = ${colors.foreground}
 
 line-size = 2
-line-color = #f00
 
 border-size = 2
-border-color = #00000000
+border-color = ${colors.background}
 
 padding-left = 0
 padding-right = 2
@@ -107,7 +106,7 @@ label-unfocused-padding = 2
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
-label-visible-background = #333
+label-visible-background = #cc333333
 label-visible-underline= ${colors.secondary}
 label-visible-padding = ${self.label-focused-padding}
 
