@@ -73,12 +73,14 @@ set shada=!,'1000,<50,s10,h
 " Appearance "
 """"""""""""""
 
+" Color text based on the file type.
+syntax on
+
 " Set the colorscheme to dark hybrid.
 colorscheme hybrid
 set background=dark
-
-" Color text based on the file type.
-syntax on
+" Don't use theme background, but rather terminal background.
+highlight Normal ctermbg=NONE
 
 " Turn line numbers on.
 set number
