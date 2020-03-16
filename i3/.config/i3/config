@@ -6,7 +6,7 @@ set $mod Mod4
 font pango:Hack 12
 
 # Set the size of window borders
-new_window pixel 2
+default_border pixel 2
 
 # Put gaps between windows
 gaps inner 7
