@@ -22,7 +22,8 @@ bindsym $mod+Shift+q kill
 
 # Rofi (launcher/window switcher/etc) hotkeys
 bindsym $mod+d exec rofi -show run
-bindsym $mod+Shift+w exec rofi -show window
+bindsym $mod+Shift+d exec rofi -show drun -show-icons
+bindsym $mod+Shift+w exec rofi -show window -show-icons
 
 # change focus
 bindsym $mod+h focus left
