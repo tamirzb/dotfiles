@@ -1,0 +1,44 @@
+configuration {
+    theme: "my_rofi_theme";
+
+/* Use fish for running commands */
+    run-command: "fish -c '{cmd}'";
+    run-list-command: "fish -c functions";
+
+
+/*
+ * Keyboard shortcuts
+ */
+
+/* Use Control+w to remove a word instead of clear the whole line */
+    kb-clear-line: "";
+    kb-remove-word-back: "Control+w";
+
+/* Only accept with Enter to avoid mistakes */
+    kb-accept-entry: "Return,KP_Enter";
+
+/* Add Control+j/k as ways to navigate rows (like fzf) */
+    kb-row-up: "Up,Control+p,ISO_Left_Tab,Control+k";
+    kb-row-down: "Down,Control+n,Control+j";
+/* This was Control+k */
+    kb-remove-to-eol: "";
+
+/* Cancel with Esc/Control+c */
+    kb-cancel: "Escape,Control+c";
+
+/* Remove Super+*NUM* to avoid confusion with i3 */
+    kb-select-1: "";
+    kb-select-2: "";
+    kb-select-3: "";
+    kb-select-4: "";
+    kb-select-5: "";
+    kb-select-6: "";
+    kb-select-7: "";
+    kb-select-8: "";
+    kb-select-9: "";
+    kb-select-10: "";
+}
+
+/*
+ * vim: ft=css
+ */

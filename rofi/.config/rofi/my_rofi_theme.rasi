@@ -1,0 +1,56 @@
+* {
+    /* Remove defaults */
+    background-color: transparent;
+    spacing: 0;
+
+    text-color: #dfdfdf;
+}
+
+window {
+    font: "Hack 14";
+    width: 512px;
+    background-color: #222222ee;
+}
+
+message, inputbar {
+    padding: 14px 18px;
+    border: 0 0 1px 0;
+    border-color: #ffffff20;
+}
+
+inputbar {
+    /* Don't show prompt */
+    children: [entry];
+}
+
+listview {
+    padding: 10px 2px;
+}
+
+element {
+    padding: 8px 16px 8px 14px;
+    border: 0 0 0 4px;
+    /* Normal elements have invisible border, then by only changing the color
+     * the border appears */
+    border-color: transparent;
+}
+
+element selected {
+    /* Unfortunately rofi currently puts transparent blocks on top of each
+     * other, so alpha here is very low in order to still make this somewhat
+     * transparent */
+    background-color: #ffffff20;
+    border-color: #ffb52a;
+}
+
+element selected.active, element normal.active, element alternate.active {
+    border-color: #25f;
+}
+
+element selected.urgent, element normal.urgent, element alternate.urgent {
+    border-color: #e60053;
+}
+
+/*
+ * vim: ft=css
+ */
