@@ -18,9 +18,6 @@ Plug 'lzap/vim-selinux'
 "Plug 'junegunn/fzf.vim'
 call plug#end()
 
-" Load installed vim packages.
-set rtp^=/usr/share/vim/vimfiles/
-
 
 """""""""""
 " General "
