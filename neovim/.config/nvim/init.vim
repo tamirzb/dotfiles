@@ -127,6 +127,9 @@ set nohlsearch
 " Highlight current line.
 set cursorline
 
+" Display the effect of text substitution live.
+set inccommand=split
+
 " Use j and k even on the same line.
 nnoremap j gj
 nnoremap k gk
