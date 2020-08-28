@@ -1,0 +1,14 @@
+# Show notifications even over fullscreen windows
+layer=overlay
+
+default-timeout=8000
+
+# Style
+font=Cantarell 14
+width=350
+height=200
+padding=10
+border-size=0
+background-color=#323232e6
+
+# vim: ft=conf
