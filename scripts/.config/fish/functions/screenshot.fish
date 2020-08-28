@@ -1,3 +1,3 @@
-function screenshot -w maim
-    maim $argv | tee /tmp/screen.png | xclip -selection clipboard -t image/png -i
+function screenshot
+    grim -g (slurp) /dev/stdout | tee /tmp/screen.png | wl-copy
 end
