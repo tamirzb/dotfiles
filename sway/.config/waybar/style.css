@@ -1,0 +1,204 @@
+/*
+ * Waybar style based on:
+ * https://github.com/robertjk/dotfiles/blob/6aa35766b8e2e1516e91b2d44560bbbf90a78ce8/.config/waybar/style.css
+ */
+
+
+/* Keyframes */
+
+@keyframes blink-warning {
+    70% {
+        color: white;
+    }
+    to {
+        color: white;
+        background-color: orange;
+    }
+}
+
+@keyframes blink-critical {
+    70% {
+        color: white;
+    }
+    to {
+        color: white;
+        background-color: #ff3333;
+    }
+}
+
+
+/* Base styles */
+
+/* Reset all styles */
+* {
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* The whole bar */
+#waybar {
+    background-color: rgba(50, 50, 50, 0.9);
+    color: white;
+    font-family: RobotoMono;
+    font-size: 15px;
+}
+
+/* Each module */
+#battery,
+#clock,
+#cpu,
+#memory,
+#mode,
+#custom-internet,
+#network,
+#custom-updates,
+#pulseaudio,
+#backlight,
+#temperature {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* Modules that don't need their text to always have the same width, so can use
+ * non-monospace font */
+#window,
+#mode,
+#workspaces button {
+    font-family: SF Pro Display;
+}
+
+
+/* Module styles */
+
+#battery {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.warning {
+    color: orange;
+}
+
+#battery.critical {
+    color: #ff3333;
+}
+
+#battery.warning.discharging {
+    animation-name: blink-warning;
+    animation-duration: 3s;
+}
+
+#battery.critical.discharging {
+    animation-name: blink-critical;
+    animation-duration: 2s;
+}
+
+#temperature.critical {
+    color: #ff3333;
+}
+
+#cpu.warning {
+    color: orange;
+}
+
+#cpu.critical {
+    color: #ff3333;
+}
+
+#memory {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#memory.warning {
+    color: orange;
+}
+
+#memory.critical {
+    color: #ff3333;
+    animation-name: blink-critical;
+    animation-duration: 2s;
+}
+
+/* A pretty hacky way to hide backlight when it's off (i.e. when the lid is
+ * closed) */
+#backlight.off {
+    font-size: 0px;
+    padding: 0;
+}
+
+#custom-internet {
+    /* This is kinda part of the network module, so doesn't need a padding
+     * there */
+    padding-left: 0;
+}
+
+#custom-internet.warning {
+    color: orange;
+}
+
+#custom-internet.critical {
+    color: #ff3333;
+}
+
+#network.disconnected {
+    color: orange;
+}
+
+#custom-updates.none {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+}
+
+#custom-updates.arch, #custom-updates.arch_aur {
+    color: #55aaff;
+}
+
+#custom-updates.aur, #custom-updates.arch_aur {
+    background: rgba(50, 100, 50, 0.9);
+}
+
+#window {
+    margin-left: 32px;
+    margin-right: 32px;
+    font-size: 17px;
+}
+
+#mode {
+    background-color: #64727D;
+    font-style: italic;
+    margin: 2px 8px;
+    border: 2px solid #aaaaaa;
+}
+
+#workspaces button {
+    border-top: 2px solid transparent;
+    /* To compensate for the top border and still have vertical centering */
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #888888;
+}
+
+#workspaces button.focused {
+    border-color: #4c7899;
+    color: white;
+    background-color: #285577;
+}
+
+/* No hover effects on focused workspaces */
+#workspaces button.focused:hover {
+    background: #285577;
+    box-shadow: inherit;
+    text-shadow: inherit;
+}
+
+#workspaces button.urgent {
+    border-color: #c9545d;
+    color: #c9545d;
+}
