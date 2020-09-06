@@ -7,7 +7,7 @@
 }
 
 window {
-    font: "Hack 14";
+    font: "Cantarell 15";
     width: 512px;
     background-color: #222222ee;
 }
@@ -25,6 +25,7 @@ inputbar {
 
 listview {
     padding: 10px 2px;
+    lines: 10;
 }
 
 element {
