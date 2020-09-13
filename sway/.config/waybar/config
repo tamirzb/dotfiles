@@ -132,6 +132,7 @@
         // Run once every hour
         "restart-interval": 3600,
         "exec": "$HOME/.config/waybar/updates.fish",
+        "exec-on-event": false,
         "return-type": "json",
         "signal": 8,
         // Click to re-check updates
