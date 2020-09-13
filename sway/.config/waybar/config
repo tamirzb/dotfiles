@@ -76,6 +76,7 @@
         "interval": 5,
         "format": "<span alpha='80%' size='x-small' rise='1200'>RAM </span>{used:.2}G",
         "format-alt": "<span alpha='80%' size='x-small' rise='1200'>RAM </span>{used:.2}/{total:.2}G",
+        "tooltip-format": "{percentage}% used",
         "states": {
             "warning": 70,
             "critical": 90
