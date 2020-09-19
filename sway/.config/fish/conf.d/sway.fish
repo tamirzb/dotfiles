@@ -6,5 +6,5 @@ if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
     set -x QT_QPA_PLATFORM wayland
 
     set -x XDG_SESSION_TYPE wayland
-    exec sway
+    systemd-cat --stderr-priority=warning sway
 end
