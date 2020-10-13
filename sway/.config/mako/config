@@ -10,5 +10,6 @@ height=200
 padding=10
 border-size=0
 background-color=#323232e6
+anchor=bottom-right
 
 # vim: ft=conf
