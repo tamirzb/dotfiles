@@ -139,11 +139,9 @@
         // Click to re-check updates
         "on-click": "pkill -SIGRTMIN+8 waybar",
         // Right click to update Arch packages
-        "on-click-right":
-            "alacritty -e fish -i -C 'sudo pacman -Syu && pkill -SIGRTMIN+8 waybar'",
+        "on-click-right": "fish -c update_arch",
         // Middle click to update AUR packages
-        "on-click-middle":
-            "alacritty -e fish -i -C 'pikaur -Syua && pkill -SIGRTMIN+8 waybar'"
+        "on-click-middle": "fish -c update_aur"
     },
 
     "custom/needreboot": {
