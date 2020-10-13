@@ -15,6 +15,7 @@
         "sway/window"
     ],
     "modules-right": [
+        "custom/needreboot",
         "custom/updates",
         "network",
         "custom/internet",
@@ -143,6 +144,14 @@
         // Middle click to update AUR packages
         "on-click-middle":
             "alacritty -e fish -i -C 'pikaur -Syua && pkill -SIGRTMIN+8 waybar'"
+    },
+
+    "custom/needreboot": {
+        "interval": "once",
+        "exec": "$HOME/.config/waybar/needreboot.py",
+        "return-type": "json",
+        // Run every time the system is updated
+        "signal": 8
     },
 
     "sway/window": {

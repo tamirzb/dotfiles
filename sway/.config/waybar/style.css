@@ -53,6 +53,7 @@
 #memory,
 #mode,
 #custom-internet,
+#custom-needreboot,
 #network,
 #custom-updates,
 #pulseaudio,
@@ -146,6 +147,13 @@
     color: #ff3333;
 }
 
+#custom-needreboot.warning {
+    color: orange;
+}
+
+#custom-needreboot.critical {
+    color: #ff3333;
+}
 #network.disconnected {
     color: orange;
 }
