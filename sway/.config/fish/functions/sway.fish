@@ -5,5 +5,5 @@ function sway
     set -x QT_QPA_PLATFORM wayland
 
     set -x XDG_SESSION_TYPE wayland
-    systemd-cat --stderr-priority=warning sway $argv
+    systemd-cat --stderr-priority=warning -t sway sway $argv
 end
