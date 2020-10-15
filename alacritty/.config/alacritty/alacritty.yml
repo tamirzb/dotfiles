@@ -589,6 +589,7 @@ key_bindings:
   # Spawn a new alacritty instance in the same directory with Ctrl+Shift+Enter
   - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
   # Exit vi mode with Ctrl+C
+  - { key: C,        mods: Control,       mode: Vi, action: ScrollToBottom }
   - { key: C,        mods: Control,       mode: Vi, action: ToggleViMode }
 
   #- { key: Paste,                                action: Paste          }
