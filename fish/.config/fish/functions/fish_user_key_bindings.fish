@@ -19,6 +19,19 @@ function fish_user_key_bindings
     end
     bind \eC "fzf-bcd-widget"
 
+    # Alt+Shift+T: Like Ctrl+T, but including hidden files
+    function fzf-all-file-widget -d "List files and folders, including hidden"
+        set -l commandline (__fzf_parse_commandline)
+        set -l dir $commandline[1]
+        set -x FZF_CTRL_T_COMMAND "
+        command find -L \$dir -mindepth 1 \\( -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' \\) -prune \
+        -o -type f -print \
+        -o -type d -print \
+        -o -type l -print 2> /dev/null | sed 's@^\./@@'"
+        fzf-file-widget
+    end
+    bind \eT "fzf-all-file-widget"
+
     # Use Ctrl+X to disown a job
     bind \cx "disown 2>/dev/null && commandline -f force-repaint"
 end
