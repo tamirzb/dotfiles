@@ -171,6 +171,7 @@ command! -bang -complete=dir -nargs=+ Ag call fzf#vim#ag_raw(<q-args>, <bang>-1)
 nnoremap <leader>e :Files<CR>
 nnoremap <leader>f :FromIndex<CR>
 nnoremap <leader>t :BTags<CR>
+nnoremap <leader>T :Tags<CR>
 nnoremap <leader>l :Lines<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
