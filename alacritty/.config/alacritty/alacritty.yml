@@ -591,6 +591,9 @@ key_bindings:
   # Exit vi mode with Ctrl+C
   - { key: C,        mods: Control,       mode: Vi, action: ScrollToBottom }
   - { key: C,        mods: Control,       mode: Vi, action: ToggleViMode }
+  # Remove search bindings outside of vi mode
+  - { key: F,        mods: Control|Shift,           action: None }
+  - { key: B,        mods: Control|Shift,           action: None }
 
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }
