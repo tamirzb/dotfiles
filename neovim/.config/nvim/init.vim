@@ -69,6 +69,10 @@ filetype indent on
 " Remember 1000 files in v:oldfiles.
 set shada=!,'1000,<50,s10,h
 
+" Read .exrc files for project specific settings
+set exrc
+set secure
+
 
 """"""""""""""
 " Appearance "
