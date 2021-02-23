@@ -30,6 +30,9 @@ nnoremap : ;
 " Map space to <leader>.
 nmap <space> <leader>
 
+" Enable using the mouse to control things
+set mouse=a
+
 
 """""""""""""""""""""
 " Buffers & Windows "
