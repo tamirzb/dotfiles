@@ -1,3 +1,3 @@
 function screenshot
-    grim -g (slurp) /dev/stdout | tee /tmp/screen.png | wl-copy
+    grim -g (_select_region) - | tee /tmp/screen.png | wl-copy
 end
