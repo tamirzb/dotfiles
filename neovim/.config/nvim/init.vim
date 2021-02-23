@@ -76,6 +76,11 @@ set shada=!,'1000,<50,s10,h
 set exrc
 set secure
 
+" Save undo history in files to be available even after closing neovim
+set undofile
+" Save up to 10000 undos per file
+set undolevels=10000
+
 
 """"""""""""""
 " Appearance "
