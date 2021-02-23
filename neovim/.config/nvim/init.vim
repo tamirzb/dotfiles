@@ -193,3 +193,4 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>; :History:<CR>
 nnoremap <leader>/ :History/<CR>
+nnoremap <leader>a :Ag -w <cword><CR>
