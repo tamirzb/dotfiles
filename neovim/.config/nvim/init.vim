@@ -10,6 +10,7 @@ call plug#begin()
 Plug 'dag/vim-fish'
 Plug 'terminalnode/sway-vim-syntax'
 Plug 'lzap/vim-selinux'
+Plug 'moll/vim-bbye'
 "" Plugins available as Arch packages:
 "Plug 'w0ng/vim-hybrid'
 "Plug 'vim-airline/vim-airline'
@@ -59,8 +60,8 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
 " Use Ctrl+e to delete a buffer without closing the window
-nnoremap <C-w>e :b#\|bd#<CR>
-nnoremap <C-w><C-e> :b#\|bd#<CR>
+nnoremap <C-w>e :Bwipeout<CR>
+nnoremap <C-w><C-e> :Bwipeout<CR>
 
 
 """""""""""""""""""
