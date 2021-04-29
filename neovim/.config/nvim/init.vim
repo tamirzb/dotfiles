@@ -11,6 +11,7 @@ Plug 'dag/vim-fish'
 Plug 'terminalnode/sway-vim-syntax'
 Plug 'lzap/vim-selinux'
 Plug 'moll/vim-bbye'
+Plug 'simnalamburt/vim-mundo'
 "" Plugins available as Arch packages:
 "Plug 'w0ng/vim-hybrid'
 "Plug 'vim-airline/vim-airline'
