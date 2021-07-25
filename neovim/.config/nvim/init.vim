@@ -12,6 +12,7 @@ Plug 'terminalnode/sway-vim-syntax'
 Plug 'lzap/vim-selinux'
 Plug 'moll/vim-bbye'
 Plug 'simnalamburt/vim-mundo'
+Plug 'windwp/nvim-projectconfig'
 "" Plugins available as Arch packages:
 "Plug 'w0ng/vim-hybrid'
 "Plug 'vim-airline/vim-airline'
@@ -74,10 +75,6 @@ filetype indent on
 
 " Remember 1000 files in v:oldfiles.
 set shada=!,'1000,<50,s10,h
-
-" Read .exrc files for project specific settings
-set exrc
-set secure
 
 " Save undo history in files to be available even after closing neovim
 set undofile
@@ -197,3 +194,10 @@ nnoremap <leader>h :History<CR>
 nnoremap <leader>; :History:<CR>
 nnoremap <leader>/ :History/<CR>
 nnoremap <leader>a :Ag -w <cword><CR>
+
+
+
+" Include a file describing projects-specific configs (for nvim-projectconfig)
+" if exists
+" This is done last in order to overwrite previous settings
+lua pcall(require, 'projects')
