@@ -11,6 +11,7 @@ style = "BrightGreen|Green"
 numeric_search = false
 nonnumeric_search = true
 align = "Left"
+max_width = 8
 
 [[columns]]
 kind = "Separator"
@@ -20,8 +21,15 @@ nonnumeric_search = false
 align = "Left"
 
 [[columns]]
-kind = "Tty"
-style = "BrightWhite|Black"
+kind = "StartTime"
+style = "BrightMagenta|Magenta"
+numeric_search = false
+nonnumeric_search = false
+align = "Left"
+
+[[columns]]
+kind = "Separator"
+style = "White|BrightBlack"
 numeric_search = false
 nonnumeric_search = false
 align = "Left"
@@ -34,18 +42,48 @@ nonnumeric_search = false
 align = "Right"
 
 [[columns]]
-kind = "UsageMem"
-style = "ByPercentage"
+kind = "VmRss"
+style = "ByUnit"
+numeric_search = false
+nonnumeric_search = false
+align = "Right"
+
+# A bunch of slots to be able to --insert:
+
+[[columns]]
+kind = "Slot"
+style = "BrightCyan|Cyan"
 numeric_search = false
 nonnumeric_search = false
 align = "Right"
 
 [[columns]]
-kind = "CpuTime"
+kind = "Slot"
 style = "BrightCyan|Cyan"
 numeric_search = false
 nonnumeric_search = false
-align = "Left"
+align = "Right"
+
+[[columns]]
+kind = "Slot"
+style = "BrightCyan|Cyan"
+numeric_search = false
+nonnumeric_search = false
+align = "Right"
+
+[[columns]]
+kind = "Slot"
+style = "BrightCyan|Cyan"
+numeric_search = false
+nonnumeric_search = false
+align = "Right"
+
+[[columns]]
+kind = "Slot"
+style = "BrightCyan|Cyan"
+numeric_search = false
+nonnumeric_search = false
+align = "Right"
 
 [[columns]]
 kind = "Separator"
@@ -100,7 +138,7 @@ logic = "And"
 [display]
 show_self = false
 show_thread = false
-show_thread_in_tree = true
+show_thread_in_tree = false
 cut_to_terminal = true
 cut_to_pager = false
 cut_to_pipe = false
