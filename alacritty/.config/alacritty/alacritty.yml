@@ -772,8 +772,14 @@ key_bindings:
   #- { key: Left,                        mode: Vi|~Search, action: Left                    }
   #- { key: Right,                       mode: Vi|~Search, action: Right                   }
   #- { key: Key0,                        mode: Vi|~Search, action: First                   }
+
+  # Extra bindings are added here to make the defaults work.
+  # See https://github.com/alacritty/alacritty/issues/4111
   #- { key: Key4,   mods: Shift,         mode: Vi|~Search, action: Last                    }
+  - { key: 5,   mods: Shift,         mode: Vi|~Search, action: Last                    }
   #- { key: Key6,   mods: Shift,         mode: Vi|~Search, action: FirstOccupied           }
+  - { key: 7,   mods: Shift,         mode: Vi|~Search, action: FirstOccupied           }
+
   #- { key: H,      mods: Shift,         mode: Vi|~Search, action: High                    }
   #- { key: M,      mods: Shift,         mode: Vi|~Search, action: Middle                  }
   #- { key: L,      mods: Shift,         mode: Vi|~Search, action: Low                     }
