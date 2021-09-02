@@ -21,6 +21,7 @@ Plug 'windwp/nvim-projectconfig'
 "Plug 'tpope/vim-fugitive'
 "Plug 'junegunn/fzf'
 "Plug 'junegunn/fzf.vim'
+"Plug 'cespare/vim-toml'
 call plug#end()
 
 
