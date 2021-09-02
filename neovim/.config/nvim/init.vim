@@ -80,6 +80,9 @@ let g:winresizer_keycode_resize = 82
 " Detect file types and indent them accordingly.
 filetype indent on
 
+" By default, treat .h files as C files (not C++)
+let g:c_syntax_for_h = 1
+
 " Remember 1000 files in v:oldfiles.
 set shada=!,'1000,<50,s10,h
 
