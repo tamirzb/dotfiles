@@ -161,6 +161,9 @@ set inccommand=split
 nnoremap j gj
 nnoremap k gk
 
+" Always show complete menu, even if has only one option
+set completeopt=menuone
+
 
 """""""
 " FZF "
