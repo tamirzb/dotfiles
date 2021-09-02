@@ -11,6 +11,7 @@ Plug 'dag/vim-fish'
 Plug 'terminalnode/sway-vim-syntax'
 Plug 'lzap/vim-selinux'
 Plug 'moll/vim-bbye'
+Plug 'simeji/winresizer'
 Plug 'simnalamburt/vim-mundo'
 Plug 'windwp/nvim-projectconfig'
 "" Plugins available as Arch packages:
@@ -65,6 +66,12 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nnoremap <C-w>e :Bwipeout<CR>
 nnoremap <C-w><C-e> :Bwipeout<CR>
 
+" Enter winresizer with <leader>r
+let g:winresizer_start_key = "<leader>r"
+" Exit winresizer with r
+let g:winresizer_keycode_finish = 114
+" The default to change to resize mode is r, so change it to Shift+r
+let g:winresizer_keycode_resize = 82
 
 """""""""""""""""""
 " File management "
