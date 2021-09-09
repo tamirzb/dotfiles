@@ -36,6 +36,10 @@ element {
     border-color: transparent;
 }
 
+element-icon {
+    padding: 6px 8px 0 0;
+}
+
 element selected {
     /* Unfortunately rofi currently puts transparent blocks on top of each
      * other, so alpha here is very low in order to still make this somewhat
