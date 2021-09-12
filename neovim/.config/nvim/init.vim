@@ -14,6 +14,7 @@ Plug 'moll/vim-bbye'
 Plug 'simeji/winresizer'
 Plug 'simnalamburt/vim-mundo'
 Plug 'windwp/nvim-projectconfig'
+Plug 'nvim-lua/lsp-status.nvim'
 "" Plugins available as Arch packages:
 "Plug 'w0ng/vim-hybrid'
 "Plug 'vim-airline/vim-airline'
@@ -21,6 +22,7 @@ Plug 'windwp/nvim-projectconfig'
 "Plug 'tpope/vim-fugitive'
 "Plug 'junegunn/fzf'
 "Plug 'junegunn/fzf.vim'
+"Plug 'neovim/nvim-lspconfig'
 "Plug 'cespare/vim-toml'
 call plug#end()
 
@@ -120,6 +122,14 @@ let &listchars = "tab:>-,trail:\u2591,extends:>,precedes:<,nbsp:\u00b7"
 " Tell airline to use Powerline fonts, only if using a capable terminal.
 let g:airline_powerline_fonts = $TERM =~ "xterm"
 
+" Create airline parts for LSP status info
+call airline#parts#define_function('lsp_progress', 'v:lua.lsp_setup.status_progress')
+call airline#parts#define_function('lsp_diagnostics', 'v:lua.lsp_setup.status_diagnostics')
+call airline#parts#define_accent('lsp_diagnostics', 'bold')
+
+" Move filetype to section y, remove file encoding and put LSP status info
+let g:airline_section_x = airline#section#create_right(['lsp_diagnostics', 'lsp_progress'])
+let g:airline_section_y = airline#section#create_right(['filetype'])
 
 """"""""""""""""
 " Text editing "
@@ -163,6 +173,9 @@ nnoremap k gk
 
 " Always show complete menu, even if has only one option
 set completeopt=menuone
+
+" Setup language servers
+lua require('lsp_setup').setup()
 
 
 """""""

@@ -1,0 +1,14 @@
+# All .h files should be C header files
+If:
+  PathMatch: .*\.h
+CompileFlags:
+  Remove: -x*
+  Add: -xc-header
+
+---
+
+# Use C++17 (for C++ files)
+If:
+  PathMatch: [.*\.hpp, .*\.cpp]
+CompileFlags:
+  Add: -std=c++17
