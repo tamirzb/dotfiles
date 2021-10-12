@@ -101,9 +101,9 @@
         "format": "<small>{icon} </small>{volume:>2}%",
         "format-muted": "<small></small><span alpha='80%' size='x-small' rise='700'> MUTE </span>",
         "format-bluetooth":
-            "<span size='large' color='#55aaff'></span><small> {icon}</small> {volume}%",
+            "<span size='x-small' color='#55aaff' rise='700'> </span><small>{icon}</small> {volume}%",
         "format-bluetooth-muted":
-            "<span size='large' color='#55aaff'></span><small> </small><span alpha='80%' size='x-small' rise='700'> MUTE </span>",
+            "<span size='x-small' color='#55aaff' rise='700'> </span><small></small><span alpha='80%' size='x-small' rise='700'> MUTE </span>",
         "format-icons": {
             "headphone": "",
             "default": ""
