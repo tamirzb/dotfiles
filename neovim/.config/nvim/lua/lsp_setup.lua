@@ -34,6 +34,14 @@ local on_attach = function(client, bufnr)
                    lua_call("vim.diagnostic.goto_prev(lsp_setup.goto_opts)"))
     buf_set_keymap("n", "]d",
                    lua_call("vim.diagnostic.goto_next(lsp_setup.goto_opts)"))
+    -- Navigate only between error diagnostic messages
+    M.goto_error_opts = vim.tbl_extend("force", M.goto_opts, {
+        severity = vim.diagnostic.severity.ERROR
+    })
+    buf_set_keymap("n", "[D",
+                   lua_call("vim.diagnostic.goto_prev(lsp_setup.goto_error_opts)"))
+    buf_set_keymap("n", "]D",
+                   lua_call("vim.diagnostic.goto_next(lsp_setup.goto_error_opts)"))
 
     -- Use lsp omnifunc for Ctrl+N, and move normal Ctrl+N completion to
     -- Ctrl+X,Ctrl+N
