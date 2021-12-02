@@ -26,11 +26,10 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "<leader>h", lua_call("vim.lsp.buf.hover()"))
     -- Show the diagnostic message for the current line (in case it's too long
     -- to be displayed fully)
-    buf_set_keymap("n", "<leader>d",
-                   lua_call("vim.lsp.diagnostic.show_line_diagnostics()"))
+    buf_set_keymap("n", "<leader>d", lua_call("vim.diagnostic.open_float()"))
     -- Navigate between diagnostic messages
-    buf_set_keymap("n", "[d", lua_call("vim.lsp.diagnostic.goto_prev()"))
-    buf_set_keymap("n", "]d", lua_call("vim.lsp.diagnostic.goto_next()"))
+    buf_set_keymap("n", "[d", lua_call("vim.diagnostic.goto_prev()"))
+    buf_set_keymap("n", "]d", lua_call("vim.diagnostic.goto_next()"))
 
     -- Use lsp omnifunc for Ctrl+N, and move normal Ctrl+N completion to
     -- Ctrl+X,Ctrl+N
@@ -73,13 +72,12 @@ function M.setup()
     lsp_status.register_progress()
 end
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-        -- Disable diagnostics signs (which add a column at the left of a
-        -- buffer)
-        signs = false,
-        -- Don't update diagnostics in insert mode
-        update_in_insert = false
+vim.diagnostic.config({
+    -- Disable diagnostics signs (which add a column at the left of a
+    -- buffer)
+    signs = false,
+    -- Don't update diagnostics in insert mode
+    update_in_insert = false
 })
 
 lsp_status.config({
