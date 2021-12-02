@@ -91,7 +91,10 @@ vim.diagnostic.config({
     -- Don't update diagnostics in insert mode
     update_in_insert = false,
     -- Show more severe diagnostics before less severe ones
-    severity_sort = true
+    severity_sort = true,
+    -- Show the source of each diagnostic
+    virtual_text = { source = "always" },
+    float = { source = "always" }
 })
 
 lsp_status.config({
