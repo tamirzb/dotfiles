@@ -89,7 +89,9 @@ vim.diagnostic.config({
     -- buffer)
     signs = false,
     -- Don't update diagnostics in insert mode
-    update_in_insert = false
+    update_in_insert = false,
+    -- Show more severe diagnostics before less severe ones
+    severity_sort = true
 })
 
 lsp_status.config({
