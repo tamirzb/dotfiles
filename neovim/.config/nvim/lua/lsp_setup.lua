@@ -13,7 +13,7 @@ local on_attach = function(client, bufnr)
 
     -- Create a vimscript call to a lua function
     local function lua_call(func_call)
-        return "<cmd>call v:lua." .. func_call .. "<CR>"
+        return "<cmd>lua  " .. func_call .. "<CR>"
     end
 
     -- Keymaps are sort of based on the README of nvim-lspconfig
@@ -27,9 +27,13 @@ local on_attach = function(client, bufnr)
     -- Show the diagnostic message for the current line (in case it's too long
     -- to be displayed fully)
     buf_set_keymap("n", "<leader>d", lua_call("vim.diagnostic.open_float()"))
+
     -- Navigate between diagnostic messages
-    buf_set_keymap("n", "[d", lua_call("vim.diagnostic.goto_prev()"))
-    buf_set_keymap("n", "]d", lua_call("vim.diagnostic.goto_next()"))
+    M.goto_opts = { wrap = false }
+    buf_set_keymap("n", "[d",
+                   lua_call("vim.diagnostic.goto_prev(lsp_setup.goto_opts)"))
+    buf_set_keymap("n", "]d",
+                   lua_call("vim.diagnostic.goto_next(lsp_setup.goto_opts)"))
 
     -- Use lsp omnifunc for Ctrl+N, and move normal Ctrl+N completion to
     -- Ctrl+X,Ctrl+N
