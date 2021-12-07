@@ -1,0 +1,12 @@
+# Save history
+set history save on
+set history filename ~/.local/share/gdb/gdb_history
+set history size 100000000
+
+set pagination off
+
+# Skip files from the C++ standard library
+skip -gfi /usr/include/c++/*/*
+skip -gfi /usr/include/c++/*/*/*
+
+# vim: ft=gdb
