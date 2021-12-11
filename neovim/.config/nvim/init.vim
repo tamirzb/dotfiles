@@ -15,6 +15,7 @@ Plug 'simeji/winresizer'
 Plug 'simnalamburt/vim-mundo'
 Plug 'windwp/nvim-projectconfig'
 Plug 'nvim-lua/lsp-status.nvim'
+Plug 'folke/which-key.nvim'
 "" Plugins available as Arch packages:
 "Plug 'w0ng/vim-hybrid'
 "Plug 'vim-airline/vim-airline'

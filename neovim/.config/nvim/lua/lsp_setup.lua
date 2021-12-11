@@ -1,62 +1,65 @@
 local M = {}
 
 local lsp_status = require('lsp-status')
+local which_key = require('which-key')
 
 -- Set LSP related settings only after a language server is attached
 local on_attach = function(client, bufnr)
     lsp_status.on_attach(client)
 
-    local function buf_set_keymap(mode, key, action, opts)
-        opts = vim.tbl_extend("force", { noremap = true }, opts or {})
-        vim.api.nvim_buf_set_keymap(bufnr, mode, key, action, opts)
-    end
-
-    -- Create a vimscript call to a lua function
-    local function lua_call(func_call)
-        return "<cmd>lua  " .. func_call .. "<CR>"
-    end
+    -- Options to use when navigating diagnostics
+    local diag_goto_opts = { wrap = false }
+    local diag_goto_error_opts = vim.tbl_extend("force", diag_goto_opts,
+        { severity = vim.diagnostic.severity.ERROR })
 
     -- Keymaps are sort of based on the README of nvim-lspconfig
 
-    -- Like ctags Ctrl+], but with <leader>
-    -- TODO: Possibly change this to Ctrl+] (and maybe put Ctrl+] in another
-    --       keymap) once I feel this can more or less replace ctags
-    buf_set_keymap("n", "<leader>]", lua_call("vim.lsp.buf.definition()"))
-    -- Show a floating window with information about current symbol
-    buf_set_keymap("n", "<leader>h", lua_call("vim.lsp.buf.hover()"))
-    -- Show the diagnostic message for the current line (in case it's too long
-    -- to be displayed fully)
-    buf_set_keymap("n", "<leader>d", lua_call("vim.diagnostic.open_float()"))
+    -- Keymaps in normal mode
+    which_key.register({
+        -- Like ctags Ctrl+], but with <leader>
+        -- TODO: Possibly change this to Ctrl+] (and maybe put Ctrl+] in
+        --       another keymap) once I feel this can more or less replace
+        --       ctags
+        ["<leader>]"] = { vim.lsp.buf.definition, "Go to definition" },
+        -- Show a floating window with information about current symbol
+        ["<leader>h"] = { vim.lsp.buf.hover, "Symbol info" },
 
-    -- Navigate between diagnostic messages
-    M.goto_opts = { wrap = false }
-    buf_set_keymap("n", "[d",
-                   lua_call("vim.diagnostic.goto_prev(lsp_setup.goto_opts)"))
-    buf_set_keymap("n", "]d",
-                   lua_call("vim.diagnostic.goto_next(lsp_setup.goto_opts)"))
-    -- Navigate only between error diagnostic messages
-    M.goto_error_opts = vim.tbl_extend("force", M.goto_opts, {
-        severity = vim.diagnostic.severity.ERROR
-    })
-    buf_set_keymap("n", "[D",
-                   lua_call("vim.diagnostic.goto_prev(lsp_setup.goto_error_opts)"))
-    buf_set_keymap("n", "]D",
-                   lua_call("vim.diagnostic.goto_next(lsp_setup.goto_error_opts)"))
+        -- Show the diagnostic message for the current line (in case it's too
+        -- long to be displayed fully)
+        ["<leader>d"] = { vim.diagnostic.open_float, "Diagnostics info" },
+        -- Navigate between diagnostic messages
+        ["[d"] = { function() vim.diagnostic.goto_prev(diag_goto_opts) end,
+                   "Prev diagnostic" },
+        ["]d"] = { function() vim.diagnostic.goto_next(diag_goto_opts) end,
+                   "Next diagnostic" },
+        -- Navigate only between error diagnostic messages
+        ["[D"] = {
+            function() vim.diagnostic.goto_prev(diag_goto_error_opts) end,
+            "Prev error diagnostic"
+        },
+        ["]D"] = {
+            function() vim.diagnostic.goto_next(diag_goto_error_opts) end,
+            "Next error diagnostic"
+        }
+    }, { buffer = bufnr })
 
-    -- Use lsp omnifunc for Ctrl+N, and move normal Ctrl+N completion to
-    -- Ctrl+X,Ctrl+N
+    -- Keymaps in insert mode
+    which_key.register({
+        -- Use the omnifunc for Ctrl+N
+        ["<c-n>"] = { function ()
+            -- This hack is needed so when we're in the middle of a "normal"
+            -- Ctrl+N (i.e. performed via Ctrl+X,Ctrl+N) and we press Ctrl+N,
+            -- it will continue with the normal one and not use the omnifunc
+            if vim.fn.pumvisible() == 1 then
+                vim.api.nvim_input("<c-x><c-n>")
+            else
+                vim.lsp.omnifunc(1)
+            end
+        end, "LSP omnifunc complete" },
 
-    function M.ctrl_n()
-        -- This is needed so when we're in the middle of a "normal" Ctrl+N
-        -- (i.e. performed via Ctrl+X,Ctrl+N) and we press Ctrl+N, it will
-        -- continue with the normal one and not use the omnifunc
-        local result = (vim.fn.pumvisible() == 1 and "<c-n>" or
-                        lua_call("vim.lsp.omnifunc(1)"))
-        return vim.api.nvim_replace_termcodes(result, true, true, true)
-    end
-
-    buf_set_keymap("i", "<c-n>", "v:lua.lsp_setup.ctrl_n()", { expr = true })
-    buf_set_keymap("i", "<c-x><c-n>", "<c-n>")
+        -- Use the "regular" Ctrl+N with Ctrl+X,Ctrl+N
+        ["<c-x><c-n>"] = { "<c-n>", "Regular Ctrl+N" }
+    }, {mode = "i", buffer = bufnr })
 end
 
 M.clangd = {
