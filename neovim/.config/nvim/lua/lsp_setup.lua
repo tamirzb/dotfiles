@@ -97,7 +97,14 @@ vim.diagnostic.config({
     severity_sort = true,
     -- Show the source of each diagnostic
     virtual_text = { source = "always" },
-    float = { source = "always" }
+    float = {
+        source = "always",
+        -- Can't move the cursor to inside the floating window
+        focusable = false,
+        -- Hide the floating window pretty much when anything happens
+        close_events = { "BufLeave", "CursorMoved", "InsertEnter",
+                         "FocusLost" }
+    }
 })
 
 lsp_status.config({
