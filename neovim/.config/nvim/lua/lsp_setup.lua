@@ -1,5 +1,6 @@
 local M = {}
 
+local lspconfig = require('lspconfig')
 local lsp_status = require('lsp-status')
 local which_key = require('which-key')
 
@@ -78,12 +79,34 @@ M.clangd = {
     }
 }
 
+-- Make the language server recognize the lua libraries
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+M.sumneko_lua = {
+    on_attach = on_attach,
+    cmd = { "lua-language-server" },
+    -- The settings are pretty much copied from nvim-lspconfig's documentation
+    settings = { Lua = {
+        runtime = { version = 'LuaJIT', path = runtime_path },
+        -- Get the language server to recognize the `vim` global
+        diagnostics = { globals = {'vim'} },
+        -- Make the server aware of Neovim runtime files
+        workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+        -- Do not send telemetry data containing a randomized but unique
+        -- identifier
+        telemetry = { enable = false },
+    } }
+}
+
 -- Setup all language servers
 function M.setup()
     -- Put in the global namespace to be easily accessible from
     -- vimscript/keymaps
     _G.lsp_setup = M
-    require('lspconfig').clangd.setup(M.clangd)
+    lspconfig.clangd.setup(M.clangd)
+    lspconfig.sumneko_lua.setup(M.sumneko_lua)
     lsp_status.register_progress()
 end
 
