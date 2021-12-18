@@ -2,30 +2,46 @@
 " Plugins "
 """""""""""
 
-" Plugins are installed using vim-plug. To install vim-plug run:
-"   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-"   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+lua << EOF
 
-call plug#begin()
-Plug 'dag/vim-fish'
-Plug 'terminalnode/sway-vim-syntax'
-Plug 'lzap/vim-selinux'
-Plug 'moll/vim-bbye'
-Plug 'simeji/winresizer'
-Plug 'simnalamburt/vim-mundo'
-Plug 'windwp/nvim-projectconfig'
-Plug 'nvim-lua/lsp-status.nvim'
-Plug 'folke/which-key.nvim'
-"" Plugins available as Arch packages:
-"Plug 'w0ng/vim-hybrid'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-"Plug 'tpope/vim-fugitive'
-"Plug 'junegunn/fzf'
-"Plug 'junegunn/fzf.vim'
-"Plug 'neovim/nvim-lspconfig'
-"Plug 'cespare/vim-toml'
-call plug#end()
+-- Install packer if it's not already installed
+-- TODO: Run packer.sync() automatically
+local was_packer_installed, packer = pcall(require, "packer")
+if not was_packer_installed then
+    print("Installing packer...")
+    vim.fn.system({"git", "clone", "https://github.com/wbthomason/packer.nvim",
+                   vim.fn.stdpath("data") ..
+                   "/site/pack/packer/start/packer.nvim"})
+    print("Packer installed")
+    packer = require("packer")
+end
+
+packer.startup({ function (use)
+    use("wbthomason/packer.nvim")
+    use("dag/vim-fish")
+    use("terminalnode/sway-vim-syntax")
+    use("lzap/vim-selinux")
+    use("moll/vim-bbye")
+    use("simeji/winresizer")
+    use("simnalamburt/vim-mundo")
+    use("windwp/nvim-projectconfig")
+    use("nvim-lua/lsp-status.nvim")
+    use("folke/which-key.nvim")
+    -- Plugins available as Arch packages:
+    -- use("w0ng/vim-hybrid")
+    -- use("vim-airline/vim-airline")
+    -- use("vim-airline/vim-airline-themes")
+    -- use("tpope/vim-fugitive")
+    -- use("junegunn/fzf")
+    -- use("junegunn/fzf.vim")
+    -- use("neovim/nvim-lspconfig")
+    -- use("cespare/vim-toml")
+end, config = {
+    -- Clone with full history, makes it easier to debug plugins code
+    git = { depth = 999999 } }
+})
+
+EOF
 
 
 """""""""""
