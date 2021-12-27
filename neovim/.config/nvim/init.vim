@@ -53,7 +53,7 @@ nnoremap ; :
 nnoremap : ;
 
 " Map space to <leader>.
-nmap <space> <leader>
+let g:mapleader = " "
 
 " Enable using the mouse to control things
 set mouse=a
