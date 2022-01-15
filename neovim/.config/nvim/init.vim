@@ -144,6 +144,8 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
+" When wrapping an indented line, indent the rest of it the same
+set breakindent
 
 " Smart case search.
 set ignorecase
