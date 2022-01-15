@@ -64,9 +64,6 @@ lua require('config.fzf')
 " Buffers & Windows "
 """""""""""""""""""""
 
-" Allow hidden buffers that weren't saved.
-set hidden
-
 " Use Ctrl+e to delete a buffer without closing the window
 nnoremap <C-w>e :Bwipeout<CR>
 nnoremap <C-w><C-e> :Bwipeout<CR>
