@@ -192,7 +192,7 @@ nnoremap k gk
 set completeopt=menuone
 
 " Setup language servers
-lua require('lsp_setup').setup()
+lua require('config.lsp').setup()
 
 
 """""""
