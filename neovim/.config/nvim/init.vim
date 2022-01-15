@@ -27,13 +27,12 @@ packer.startup({ function (use)
     use("windwp/nvim-projectconfig")
     use("nvim-lua/lsp-status.nvim")
     use("folke/which-key.nvim")
+    use("ibhagwan/fzf-lua")
     -- Plugins available as Arch packages:
     -- use("w0ng/vim-hybrid")
     -- use("vim-airline/vim-airline")
     -- use("vim-airline/vim-airline-themes")
     -- use("tpope/vim-fugitive")
-    -- use("junegunn/fzf")
-    -- use("junegunn/fzf.vim")
     -- use("neovim/nvim-lspconfig")
     -- use("cespare/vim-toml")
 end, config = {
@@ -57,6 +56,8 @@ let g:mapleader = " "
 
 " Enable using the mouse to control things
 set mouse=a
+
+lua require('config.fzf')
 
 
 """""""""""""""""""""
@@ -193,49 +194,6 @@ set completeopt=menuone
 
 " Setup language servers
 lua require('config.lsp').setup()
-
-
-"""""""
-" FZF "
-"""""""
-
-" By default the FZF window should be on the entire screen
-let g:fzf_layout = {'down': '100%'}
-
-" Setup :FromIndex
-" Like :FZF, but uses an file index as list of possible files to open
-" File index path is stored in g:index_file, which by default is 'files'
-" The idea is kind of like tags file
-let g:index_file = "files"
-function! s:from_index()
-    if !filereadable(g:index_file)
-        echoerr "Couldn't find file '" . g:index_file . "'"
-        return
-    endif
-    call fzf#vim#files("", {"source": "cat " . g:index_file})
-endfunction
-command! FromIndex call s:from_index()
-
-function! s:ag_index(query)
-    if !filereadable(g:index_file)
-        echoerr "Couldn't find file '" . g:index_file . "'"
-        return
-    endif
-    call fzf#vim#grep("xargs -a " . g:index_file . " -d '\\n' ag --nogroup --column --color " . a:query, 0)
-endfunction
-command! -nargs=+ AgIndex call s:ag_index(<q-args>)
-
-command! -bang -complete=dir -nargs=+ Ag call fzf#vim#ag_raw(<q-args>, <bang>-1)
-
-" Shortcuts for different FZF commands
-nnoremap <leader>e :Files<CR>
-nnoremap <leader>f :FromIndex<CR>
-nnoremap <leader>t :BTags<CR>
-nnoremap <leader>T :Tags<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>; :History:<CR>
-nnoremap <leader>/ :History/<CR>
-nnoremap <leader>a :Ag -w <cword><CR>
 
 
 

@@ -3,6 +3,7 @@ local M = {}
 local lspconfig = require('lspconfig')
 local lsp_status = require('lsp-status')
 local which_key = require('which-key')
+local fzf_lua = require('fzf-lua')
 
 -- Set LSP related settings only after a language server is attached
 local on_attach = function(client, bufnr)
@@ -41,7 +42,27 @@ local on_attach = function(client, bufnr)
         ["]D"] = {
             function() vim.diagnostic.goto_next(diag_goto_error_opts) end,
             "Next error diagnostic"
-        }
+        },
+
+        -- FZF keymaps
+        -- The opts here are needed to hide the file for fzf-lua LSP providers
+        ["<leader>t"] = {
+            function()
+                fzf_lua.lsp_document_symbols({
+                    fzf_opts = { ["--with-nth"] = '5..' }
+                })
+            end,
+            "Fuzzy search current buffer symbols"
+        },
+        ["<leader>T"] = {
+            function()
+                fzf_lua.lsp_live_workspace_symbols({
+                    fzf_opts = { ["--with-nth"] = '5..' }
+                })
+            end,
+            "Fuzzy search project symbols"
+        },
+        ["<leader>l"] = { fzf_lua.lsp_references, "Fuzzy search references" }
     }, { buffer = bufnr })
 
     -- Keymaps in select mode
