@@ -71,21 +71,8 @@ require('which-key').setup({
 
 EOF
 
+lua require('config.buffers')
 
-"""""""""""""""""""""
-" Buffers & Windows "
-"""""""""""""""""""""
-
-" Use Ctrl+e to delete a buffer without closing the window
-nnoremap <C-w>e :Bwipeout<CR>
-nnoremap <C-w><C-e> :Bwipeout<CR>
-
-" Enter winresizer with <leader>r
-let g:winresizer_start_key = "<leader>r"
-" Exit winresizer with r
-let g:winresizer_keycode_finish = 114
-" The default to change to resize mode is r, so change it to Shift+r
-let g:winresizer_keycode_resize = 82
 
 """""""""""""""""""
 " File management "
