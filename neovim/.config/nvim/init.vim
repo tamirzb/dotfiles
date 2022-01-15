@@ -29,6 +29,7 @@ packer.startup({ function (use)
     use("ibhagwan/fzf-lua")
     use("nvim-lualine/lualine.nvim")
     use("arkav/lualine-lsp-progress")
+    use('noib3/nvim-cokeline')
     -- Plugins available as Arch packages:
     -- use("w0ng/vim-hybrid")
     -- use("tpope/vim-fugitive")
@@ -116,6 +117,8 @@ set list
 let &listchars = "tab:>-,trail:\u2591,extends:>,precedes:<,nbsp:\u00b7"
 
 lua require('config.statusline')
+
+lua require('config.bufferline')
 
 
 """"""""""""""""
