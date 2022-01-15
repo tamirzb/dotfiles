@@ -136,6 +136,9 @@ vnoremap > >gv
 nnoremap <C-j> o<Esc>
 nnoremap <C-k> O<Esc>
 
+" Map Alt+j to add a <CR> without going to insert mode
+nnoremap <M-j> a<CR><Esc>
+
 " Tab settings.
 set expandtab
 set shiftwidth=4
