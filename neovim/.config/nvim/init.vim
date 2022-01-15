@@ -59,6 +59,18 @@ set mouse=a
 
 lua require('config.fzf')
 
+lua << EOF
+
+require('which-key').setup({
+    -- Use which-key for spelling corrections (with z=)
+    plugins = { spelling = true },
+    -- Adding count to motions (e.g. d2) seems to be displaying which-key
+    -- immediately, so better without it
+    motions = { count = false }
+})
+
+EOF
+
 
 """""""""""""""""""""
 " Buffers & Windows "
