@@ -81,9 +81,6 @@ let g:winresizer_keycode_resize = 82
 " File management "
 """""""""""""""""""
 
-" Detect file types and indent them accordingly.
-filetype indent on
-
 " By default, treat .h files as C files (not C++)
 let g:c_syntax_for_h = 1
 
@@ -99,9 +96,6 @@ set undolevels=10000
 """"""""""""""
 " Appearance "
 """"""""""""""
-
-" Color text based on the file type.
-syntax on
 
 " Set the colorscheme to dark hybrid.
 colorscheme hybrid
@@ -143,8 +137,6 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
-" Disable python's defaults so they don't overwrite our tab settings.
-let g:python_recommended_style = 0
 
 " Smart case search.
 set ignorecase
