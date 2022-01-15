@@ -146,9 +146,6 @@ set tabstop=4
 set ignorecase
 set smartcase
 
-" Don't highlight searches.
-set nohlsearch
-
 " Highlight current line.
 set cursorline
 
