@@ -1,14 +1,11 @@
 local M = {}
 
 local lspconfig = require('lspconfig')
-local lsp_status = require('lsp-status')
 local which_key = require('which-key')
 local fzf_lua = require('fzf-lua')
 
 -- Set LSP related settings only after a language server is attached
-local on_attach = function(client, bufnr)
-    lsp_status.on_attach(client)
-
+local on_attach = function(_, bufnr)
     -- Options to use when navigating diagnostics
     local diag_goto_opts = { wrap = false }
     local diag_goto_error_opts = vim.tbl_extend("force", diag_goto_opts,
@@ -95,8 +92,6 @@ end
 
 M.clangd = {
     on_attach = on_attach,
-    handlers = lsp_status.extensions.clangd.setup(),
-    capabilities = lsp_status.capabilities,
     init_options = {
         clangdFileStatus = true
     },
@@ -132,12 +127,8 @@ M.sumneko_lua = {
 
 -- Setup all language servers
 function M.setup()
-    -- Put in the global namespace to be easily accessible from
-    -- vimscript/keymaps
-    _G.lsp_setup = M
     lspconfig.clangd.setup(M.clangd)
     lspconfig.sumneko_lua.setup(M.sumneko_lua)
-    lsp_status.register_progress()
 end
 
 vim.diagnostic.config({
@@ -159,47 +150,5 @@ vim.diagnostic.config({
                          "FocusLost" }
     }
 })
-
-lsp_status.config({
-    show_filename = false
-})
-
--- Print the numbers of all diagnostic types in the current buffer
-function status_diagnostics()
-    local result = {}
-
-    local function add_status(status)
-        if status then
-            table.insert(result, status)
-        end
-    end
-
-    add_status(lsp_status.status_errors())
-    add_status(lsp_status.status_warnings())
-    add_status(lsp_status.status_info())
-    add_status(lsp_status.status_hints())
-
-    return table.concat(result, " ")
-end
-
--- Don't display anything if we're in insert, insert completion or replace
--- modes
-function make_status_func(func)
-    local quiet_modes = { "i", "ic", "R" }
-
-    function result()
-        if (#vim.lsp.buf_get_clients() == 0 or
-            vim.tbl_contains(quiet_modes, vim.api.nvim_get_mode().mode)) then
-            return ""
-        end
-
-        return func()
-    end
-
-    return result
-end
-
-M.status_diagnostics = make_status_func(status_diagnostics)
-M.status_progress = make_status_func(lsp_status.status_progress)
 
 return M
