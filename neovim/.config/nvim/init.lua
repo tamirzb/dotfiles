@@ -69,7 +69,10 @@ which_key.register({
 
     -- Use j and k even on the same line
     ["j"] = { "gj", "which_key_ignore" },
-    ["k"] = { "gk", "which_key_ignore" }
+    ["k"] = { "gk", "which_key_ignore" },
+
+    -- Also copy file name on Ctrl+G
+    ["<C-g>"] = { "<cmd>let @+ = expand('%')<CR><C-g>", "which_key_ignore" }
 })
 
 -- Map space to <leader>
