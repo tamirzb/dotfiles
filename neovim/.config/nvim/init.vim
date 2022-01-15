@@ -97,11 +97,12 @@ set undolevels=10000
 " Appearance "
 """"""""""""""
 
+set termguicolors
 " Set the colorscheme to dark hybrid.
 colorscheme hybrid
 set background=dark
 " Don't use theme background, but rather terminal background.
-highlight Normal ctermbg=NONE
+highlight Normal guibg=NONE
 
 " Turn line numbers on.
 set number
