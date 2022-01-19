@@ -84,9 +84,6 @@ vim.o.mouse = "a"
 -- By default, treat .h files as C files (not C++)
 vim.g.c_syntax_for_h = 1
 
---  Remember 1000 files in v:oldfiles
-vim.o.shada = "!,'1000,<50,s10,h"
-
 -- Save undo history in files to be available even after closing neovim
 vim.o.undofile = true
 -- Save up to 10000 undos per file
