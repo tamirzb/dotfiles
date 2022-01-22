@@ -34,17 +34,6 @@ end, config = {
     git = { depth = 999999 } }
 })
 
--- Configure which-key, a plugin that will show help when stuck in the middle
--- of a keymap
-local which_key = require("which-key")
-which_key.setup({
-    -- Use which-key for spelling corrections (with z=)
-    plugins = { spelling = true },
-    -- Adding count to motions (e.g. d2) seems to be displaying which-key
-    -- immediately, so better without it
-    motions = { count = false }
-})
-
 -- The following keymaps for some reason don't work well with which-key
 
 -- Replace ; and :
@@ -58,7 +47,7 @@ vim.api.nvim_set_keymap("i", "<C-c>", "<Esc>", { noremap = true })
 vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true })
 vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true })
 
-which_key.register({
+require("which-key").register({
     -- Map Ctrl+j/k to add new lines without going to insert mode
     ["<C-j>"] = { "o<Esc>", "Enter new line below current line" },
     ["<C-k>"] = { "O<Esc>", "Enter new line above current line" },
@@ -182,6 +171,7 @@ require("config.lsp").setup()
 require("config.statusline")
 require("config.bufferline")
 require("config.fzf")
+require("config.which_key")
 
 
 -- Include a file describing projects-specific configs (for nvim-projectconfig)

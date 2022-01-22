@@ -115,13 +115,6 @@ local colorscheme = {
     healthError = { fg = colors.error },
     healthSuccess = { fg = colors.green },
     healthWarning = { fg = colors.yellow },
-
-    -- Colors for the WhichKey plugin
-    WhichKey = { fg = colors.yellow, style = "bold"},
-    WhichKeyGroup = { fg = colors.inactive },
-    WhichKeyDesc = { fg = colors.blue },
-    WhichKeySeperator = { fg = colors.text },
-    WhichKeyFloat = { bg = colors.window }
 }
 
 -- Allow choosing from the whole 24bit color range
