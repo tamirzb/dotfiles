@@ -165,6 +165,15 @@ vim.o.foldmethod = "syntax"
 -- But don't actually fold anything unless foldlevel is set
 vim.o.foldlevelstart = 99
 
+-- These providers are not used
+vim.g.loaded_python_provider = 0 -- This is python 2
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
+
+-- Disable netrw, to disable accidentally opening it by opening a directory
+vim.g.loaded_netrwPlugin = 1
+
 -- Load all separate config files
 require("config.buffers")
 require("config.lsp").setup()
