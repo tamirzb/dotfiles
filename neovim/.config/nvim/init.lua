@@ -140,6 +140,9 @@ vim.o.shiftround = true
 --  When wrapping an indented line, indent the rest of it the same
 vim.o.breakindent = true
 
+-- Do not break in the middle of a word when wrapping
+vim.o.linebreak = true
+
 -- Smart case search
 vim.o.ignorecase = true
 vim.o.smartcase = true
