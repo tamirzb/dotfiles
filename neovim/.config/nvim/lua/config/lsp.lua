@@ -3,6 +3,7 @@ local M = {}
 local lspconfig = require('lspconfig')
 local which_key = require('which-key')
 local fzf_lua = require('fzf-lua')
+local colors = require("config.colors")
 
 -- Set LSP related settings only after a language server is attached
 local on_attach = function(_, bufnr)
@@ -149,6 +150,33 @@ vim.diagnostic.config({
         close_events = { "BufLeave", "CursorMoved", "InsertEnter",
                          "FocusLost" }
     }
+})
+
+-- Set LSP colors
+require("config.utils").apply_highlights({
+    DiagnosticError = { fg = colors.error },
+    DiagnosticWarn = { fg = colors.yellow },
+    DiagnosticInformation = { fg = colors.paleblue },
+    DiagnosticHint = { fg = colors.purple },
+    DiagnosticVirtualTextError = { fg = colors.error },
+    DiagnosticFloatingError = { fg = colors.error },
+    DiagnosticSignError = { fg = colors.error },
+    DiagnosticUnderlineError = { style = "underline", sp = colors.error },
+    DiagnosticVirtualTextWarn = { fg = colors.yellow },
+    DiagnosticFloatingWarn = { fg = colors.yellow },
+    DiagnosticSignWarn = { fg = colors.yellow },
+    DiagnosticUnderlineWarn = { style = "underline", sp = colors.yellow },
+    DiagnosticVirtualTextInfo = { fg = colors.paleblue },
+    DiagnosticFloatingInfo = { fg = colors.paleblue },
+    DiagnosticSignInfo = { fg = colors.paleblue },
+    DiagnosticUnderlineInfo = { style = "underline", sp = colors.paleblue },
+    DiagnosticVirtualTextHint = { fg = colors.purple },
+    DiagnosticFloatingHint = { fg = colors.purple },
+    DiagnosticSignHint = { fg = colors.purple },
+    DiagnosticUnderlineHint = { style = "underline", sp = colors.purple },
+    LspReferenceText = { fg = colors.title, style = "underline" },
+    LspReferenceRead = { fg = colors.title, style = "underline" },
+    LspReferenceWrite = { fg = colors.title, style = "underline" },
 })
 
 return M
