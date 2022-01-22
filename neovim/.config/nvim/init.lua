@@ -67,13 +67,15 @@ which_key.register({
     -- Map Alt+j to add a <CR> without going to insert mode
     ["<M-j>"] = { "a<CR><Esc>", "Enter <CR>" },
 
-    -- Use j and k even on the same line
-    ["j"] = { "gj", "which_key_ignore" },
-    ["k"] = { "gk", "which_key_ignore" },
-
     -- Also copy file name on Ctrl+G
     ["<C-g>"] = { "<cmd>let @+ = expand('%')<CR><C-g>", "which_key_ignore" }
 })
+
+-- Use j and k even on the same (wrapped) line, but not when navigating to a
+-- specific line with a number
+local jk_opts = { noremap = true, expr = true }
+vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", jk_opts)
+vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", jk_opts)
 
 -- Map space to <leader>
 vim.g.mapleader = " "
@@ -101,6 +103,10 @@ vim.cmd("highlight Normal guibg=NONE")
 
 -- Turn line numbers on
 vim.o.number = true
+
+-- Other than current line, show numbers relative to current line (for easier
+-- [number]j/k)
+vim.o.relativenumber = true
 
 -- Line width should be <80 characters
 vim.o.textwidth = 79
