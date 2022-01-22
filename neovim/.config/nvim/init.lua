@@ -174,6 +174,12 @@ vim.g.loaded_node_provider = 0
 -- Disable netrw, to disable accidentally opening it by opening a directory
 vim.g.loaded_netrwPlugin = 1
 
+-- If inside a virtualenv, still use the main system python
+if os.getenv("VIRTUAL_ENV") then
+    local cmd = "which -a python3 | head -n2 | tail -n1"
+    vim.g.python3_host_prog = vim.fn.system(cmd):gsub("\n", "")
+end
+
 -- Load all separate config files
 require("config.buffers")
 require("config.lsp").setup()
