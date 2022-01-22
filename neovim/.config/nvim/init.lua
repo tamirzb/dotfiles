@@ -102,8 +102,18 @@ vim.cmd("highlight Normal guibg=NONE")
 -- Turn line numbers on
 vim.o.number = true
 
--- Add a column at 80 characters
-vim.o.colorcolumn = "79"
+-- Line width should be <80 characters
+vim.o.textwidth = 79
+-- Only auto-format comments with textwidth, not code
+vim.opt.formatoptions = vim.opt.formatoptions - "t" + "c"
+-- But auto-format everything for text/markdown
+vim.cmd("au FileType text,markdown setlocal formatoptions+=t")
+-- Color the last valid column
+vim.o.colorcolumn = tostring(vim.o.textwidth)
+
+-- When entering a new line according to textwidth, try to indent a bit to
+-- match lists
+vim.opt.formatoptions = vim.opt.formatoptions + "n"
 
 -- Display invisible characters
 vim.o.list = true
