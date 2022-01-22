@@ -156,6 +156,9 @@ vim.o.inccommand = "split"
 -- Always show complete menu, even if has only one option
 vim.o.completeopt = "menuone"
 
+-- For commands, on the first tab just show a menu, selecting an option only on
+-- the second tab
+vim.o.wildmode = "longest:full,full"
 
 -- Load all separate config files
 require("config.buffers")
