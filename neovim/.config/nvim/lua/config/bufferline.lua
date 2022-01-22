@@ -1,21 +1,9 @@
--- Colors to be used in the bar, mostly based on the hybrid colorscheme's
--- colors. If ever moving to a lua-based colorscheme, it would probably make
--- sense to remove this and just use the colorscheme's values directly.
-local colors = {
-    bar_bg = "#181818",
+local colors = require("config.colors")
 
-    unfocused_bg = "#373b41",
-    unfocused_fg = "#707880",
-
-    focused_bg = "NONE",
-    focused_fg = "#c5c8c6",
-
-    modified = "#b5bd68",
-    readonly = "#cc6666"
-}
-
--- cokeline bases the color of its bar on the TabLineFill highlight group
-vim.cmd("highlight TabLineFill guifg=" .. colors.bar_bg)
+-- Get the background color a given buffer should have
+local get_bg_color = function (buffer)
+    return buffer.is_focused and colors.active or colors.window
+end
 
 -- Shorten path until hopefully reaching a length of less than
 -- truncation_target
@@ -29,6 +17,12 @@ local shorten_path = function(path, truncation_target)
     return path
 end
 
+-- Set the bar background
+-- Other than this Cokeline should take care of applying highlights
+require("config.utils").apply_highlights({
+    TablineFill = { bg = colors.background }
+})
+
 require("cokeline").setup({
     show_if_buffers_are_at_least = 2,
 
@@ -41,12 +35,12 @@ require("cokeline").setup({
     },
 
     default_hl = {
-        focused = { fg = colors.focused_bg, bg = colors.focused_bg },
-        unfocused = { fg = colors.unfocused_fg, bg = colors.unfocused_bg }
+        focused = { fg = colors.text, bg = colors.active },
+        unfocused = { fg = colors.inactive, bg = colors.window }
     },
 
     components = {
-        { text = "" , hl = { fg = colors.bar_bg } },
+        { text = "" , hl = { fg = get_bg_color, bg = colors.background } },
 
         -- Since <leader>NUM can switch to max buffer number 10, if we surpass
         -- this number we can switch to buffers using their pick letter
@@ -76,15 +70,15 @@ require("cokeline").setup({
             return buffer.is_readonly and "[-]" or ""
         end, hl = { fg = function(buffer)
             -- Only display readonly color if the buffer is focused
-            return buffer.is_focused and colors.readonly or colors.unfocused_fg
+            return buffer.is_focused and colors.red or colors.inactive
         end } },
 
         -- Indicate if the buffer was modified
         { text = function(buffer)
             return buffer.is_modified and "[+]" or ""
-        end, hl = { fg = colors.modified } },
+        end, hl = { fg = colors.green } },
 
-        { text = " " , hl = { fg = colors.bar_bg } },
+        { text = "" , hl = { fg = get_bg_color, bg = colors.background } },
     }
 })
 
