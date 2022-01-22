@@ -1,3 +1,5 @@
+local colors = require("config.colors")
+
 -- The problem is that some functions can be too expensive to be called on each
 -- statusline update. Instead, this keeps a cache of the last result and the
 -- time it was executed, per buffer. Then, this cache is used to limit the
@@ -33,7 +35,7 @@ local temp_mark_inactive = {
     end,
 }
 local temp_mark = vim.tbl_extend("force", temp_mark_inactive, {
-    color = { fg = "#f0c674" }
+    color = { fg = colors.yellow }
 })
 
 -- Instead of just git branch, use "git describe" to get a more indicative
@@ -54,7 +56,32 @@ local git_describe = {
     icon = ""
 }
 
+local theme = {
+    normal = {
+        a = { fg = colors.statusline, bg = colors.blue, gui = "bold" },
+        b = { fg = colors.text, bg = colors.active },
+        c = { fg = colors.inactive, bg = colors.statusline }
+    },
+    visual = {
+        a = { fg = colors.statusline, bg = colors.orange, gui = "bold" },
+    },
+    replace = {
+        a = { fg = colors.statusline, bg = colors.red, gui = "bold" },
+    },
+    insert = {
+        a = { fg = colors.statusline, bg = colors.green, gui = "bold" },
+    }
+}
+
+-- lualine still leaves the one character in between vertical buffers unset, so
+-- set it to match the statusline color
+require("config.utils").apply_highlights({
+    StatusLine = { bg = colors.statusline },
+    StatusLineNC = { bg = colors.statusline }
+})
+
 require('lualine').setup({
+    options = { theme = theme },
     sections = {
         lualine_a = {"mode"},
         -- Prefer the filename over the branch name, to have the branch name
