@@ -160,6 +160,11 @@ vim.o.completeopt = "menuone"
 -- the second tab
 vim.o.wildmode = "longest:full,full"
 
+-- By default fold according to syntax
+vim.o.foldmethod = "syntax"
+-- But don't actually fold anything unless foldlevel is set
+vim.o.foldlevelstart = 99
+
 -- Load all separate config files
 require("config.buffers")
 require("config.lsp").setup()
