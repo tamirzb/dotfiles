@@ -133,6 +133,10 @@ vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
 vim.o.tabstop = 4
 
+-- When moving indentation (< and > in visual mode) always round to the nearest
+-- tabstop
+vim.o.shiftround = true
+
 --  When wrapping an indented line, indent the rest of it the same
 vim.o.breakindent = true
 
