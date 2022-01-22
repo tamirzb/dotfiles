@@ -107,13 +107,14 @@ vim.o.colorcolumn = "79"
 
 -- Display invisible characters
 vim.o.list = true
--- Configure 'list' to properly display only trailing invisible characters
 vim.opt.listchars = {
+    -- Display tabs as >---
     tab = ">-",
+    -- Show trailing spaces
     trail = "░",
+    -- When 'wrap' is off, display > or < to indicate there is something there
     extends = ">",
-    precedes = "<",
-    nbsp = "·"
+    precedes = "<"
 }
 
 -- Tab settings
