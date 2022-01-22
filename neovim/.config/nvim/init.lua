@@ -26,7 +26,6 @@ packer.startup({ function (use)
     use("arkav/lualine-lsp-progress")
     use('noib3/nvim-cokeline')
     -- Plugins available as Arch packages:
-    -- use("w0ng/vim-hybrid")
     -- use("tpope/vim-fugitive")
     -- use("neovim/nvim-lspconfig")
     -- use("cespare/vim-toml")
@@ -90,16 +89,6 @@ vim.g.c_syntax_for_h = 1
 vim.o.undofile = true
 -- Save up to 10000 undos per file
 vim.o.undolevels = 10000
-
--- Allow choosing from the whole 24bit color range
-vim.o.termguicolors = true
-
--- Set the colorscheme to dark hybrid
-vim.cmd("colorscheme hybrid")
-vim.o.background = "dark"
-
--- Don't use theme background, but rather terminal background
-vim.cmd("highlight Normal guibg=NONE")
 
 -- Turn line numbers on
 vim.o.number = true
@@ -187,6 +176,7 @@ if os.getenv("VIRTUAL_ENV") then
 end
 
 -- Load all separate config files
+require("config.colorscheme")
 require("config.buffers")
 require("config.lsp").setup()
 require("config.statusline")
