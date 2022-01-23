@@ -22,8 +22,6 @@ env:
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
   TERM: xterm-256color
-  # Don't try to scale according to screen "size"
-  WINIT_X11_SCALE_FACTOR: "1"
 
 window:
   # Window dimensions (changes require restart)
