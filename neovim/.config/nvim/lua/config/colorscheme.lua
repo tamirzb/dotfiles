@@ -88,7 +88,7 @@ local colorscheme = {
     Search = { fg = colors.title, bg = colors.selection, style = "bold" },
     SignColumn = { fg = colors.text, bg = colors.background },
     SpecialKey = { fg = colors.purple },
-    Title = { fg = colors.title, style = "bold" },
+    Title = { fg = colors.yellow },
     Visual = { bg = colors.selection },
     VisualNOS = { bg = colors.selection },
     WarningMsg = { fg = colors.yellow },
