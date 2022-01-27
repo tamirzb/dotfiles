@@ -21,6 +21,7 @@
         "custom/internet",
         "pulseaudio",
         "backlight",
+        "sway/language",
         "memory",
         "cpu",
         "temperature",
@@ -82,6 +83,12 @@
             "warning": 70,
             "critical": 90
         }
+    },
+
+    "sway/language": {
+        "format": "<span size='x-small'> </span>{shortDescription}",
+        "tooltip-format": "{flag} {long}",
+        "on-click": "$HOME/.config/waybar/switch_language.fish"
     },
 
     "backlight": {
