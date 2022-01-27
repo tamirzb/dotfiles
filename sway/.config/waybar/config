@@ -53,7 +53,7 @@
     },
 
     "temperature": {
-        "thermal-zone": 7,
+        // thermal-zone determined by the local config file
         "critical-threshold": 80,
         "interval": 3,
         "format":
@@ -177,7 +177,11 @@
         "format-icons": {
             "10:media": "  <big></big>  "
         }
-    }
+    },
+
+    // Local (per-machine) configuration
+    // Should include the thermal zone to show the temperature of
+    "include": "$HOME/.config/waybar/local"
 }
 
 // vim: ft=json
