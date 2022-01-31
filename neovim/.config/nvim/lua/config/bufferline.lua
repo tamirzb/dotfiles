@@ -26,12 +26,15 @@ require("config.utils").apply_highlights({
 require("cokeline").setup({
     show_if_buffers_are_at_least = 2,
 
-    -- If the buffer will disappear when it's no longer displayed by a window,
-    -- don't show it
     buffers = {
+        -- If the buffer will disappear when it's no longer displayed by a
+        -- window, don't show it
         filter_valid = function(buffer)
             return vim.api.nvim_buf_get_option(buffer.number, "bufhidden") == ""
-        end
+        end,
+
+        -- After deleting a buffer, focus on the buffer to its right
+        focus_on_delete = "next"
     },
 
     default_hl = {
