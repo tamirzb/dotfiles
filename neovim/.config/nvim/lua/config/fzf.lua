@@ -1,12 +1,6 @@
 local fzf_lua = require('fzf-lua')
 local which_key = require('which-key')
 
--- A bit of a hack to make all providers that deal with files never send
--- multiple selections to quickfix
-local fzf_lua_config = require('fzf-lua.config')
-local actions = require('fzf-lua.actions')
-fzf_lua_config.globals.files.actions.default = actions.file_edit
-
 fzf_lua.setup({
     winopts = {
         -- FZF should take the entire neovim screen
@@ -59,7 +53,18 @@ fzf_lua.setup({
     },
 
     -- Don't resume last search for live workspace symbols
-    lsp = { continue_last_search = false }
+    lsp = { continue_last_search = false },
+
+    -- Overwrite default actions for all providers that deal with files in
+    -- order to make them not send multiple selections to quickfix by default
+    actions = {
+        files = {
+            ["default"] = fzf_lua.actions.file_edit,
+            ["ctrl-x"] = fzf_lua.actions.file_split,
+            ["ctrl-v"] = fzf_lua.actions.file_vsplit,
+            ["alt-q"] = fzf_lua.actions.file_sel_to_qf,
+        }
+    }
 })
 
 -- FZF keymaps, not including LSP ones (which are registered only for LSP
@@ -73,7 +78,7 @@ which_key.register({
     a = { function()
         -- Add "-w" to the rg opts to only show matches surrounded by word
         -- boundaries
-        local rg_opts = fzf_lua_config.globals.grep.rg_opts
+        local rg_opts = require("fzf-lua.config").globals.grep.rg_opts
         rg_opts = rg_opts .. " -w"
         fzf_lua.grep_cword({ rg_opts = rg_opts })
     end, "Fuzzy search current word" }
