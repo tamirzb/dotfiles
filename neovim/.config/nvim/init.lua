@@ -34,36 +34,18 @@ end, config = {
     git = { depth = 999999 } }
 })
 
--- The following keymaps for some reason don't work well with which-key
+local utils = require("config.utils")
+local which_key = require("which-key")
 
 -- Replace ; and :
-vim.api.nvim_set_keymap("n", ";", ":", { noremap = true })
-vim.api.nvim_set_keymap("n", ":", ";", { noremap = true })
+utils.set_keymap("n", ";", ":", false, true)
+utils.set_keymap("n", ":", ";", false, true)
 
 -- Exit input mode with Ctrl+c
-vim.api.nvim_set_keymap("i", "<C-c>", "<Esc>", { noremap = true })
+utils.set_keymap("i", "<C-c>", "<Esc>")
 
--- Repeatedly use > and < to indent in visual mode
-vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true })
-vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true })
-
-require("which-key").register({
-    -- Map Ctrl+j/k to add new lines without going to insert mode
-    ["<C-j>"] = { "o<Esc>", "Enter new line below current line" },
-    ["<C-k>"] = { "O<Esc>", "Enter new line above current line" },
-
-    -- Map Alt+j to add a <CR> without going to insert mode
-    ["<M-j>"] = { "a<CR><Esc>", "Enter <CR>" },
-
-    -- Also copy file name on Ctrl+G
-    ["<C-g>"] = { "<cmd>let @+ = expand('%')<CR><C-g>", "which_key_ignore" }
-})
-
--- Use j and k even on the same (wrapped) line, but not when navigating to a
--- specific line with a number
-local jk_opts = { noremap = true, expr = true }
-vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", jk_opts)
-vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", jk_opts)
+-- Also copy file name on Ctrl+G
+utils.set_keymap("n", "<C-g>", "<cmd>let @+ = expand('%')<CR><C-g>")
 
 -- Map space to <leader>
 vim.g.mapleader = " "
@@ -71,83 +53,14 @@ vim.g.mapleader = " "
 -- Enable using the mouse to control things
 vim.o.mouse = "a"
 
--- By default, treat .h files as C files (not C++)
-vim.g.c_syntax_for_h = 1
-
 -- Save undo history in files to be available even after closing neovim
 vim.o.undofile = true
 -- Save up to 10000 undos per file
 vim.o.undolevels = 10000
 
--- Turn line numbers on
-vim.o.number = true
-
--- Other than current line, show numbers relative to current line (for easier
--- [number]j/k)
-vim.o.relativenumber = true
-
--- Line width should be <80 characters
-vim.o.textwidth = 79
--- Only auto-format comments with textwidth, not code
-vim.opt.formatoptions = vim.opt.formatoptions - "t" + "c"
--- But auto-format everything for text/markdown
-vim.cmd("au FileType text,markdown setlocal formatoptions+=t")
--- Color the last valid column
-vim.o.colorcolumn = tostring(vim.o.textwidth)
-
--- When entering a new line according to textwidth, try to indent a bit to
--- match lists
-vim.opt.formatoptions = vim.opt.formatoptions + "n"
-
--- Display invisible characters
-vim.o.list = true
-vim.opt.listchars = {
-    -- Display tabs as >---
-    tab = ">-",
-    -- Show trailing spaces
-    trail = "░",
-    -- When 'wrap' is off, display > or < to indicate there is something there
-    extends = ">",
-    precedes = "<"
-}
-
--- Tab settings
-vim.o.expandtab = true
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
-vim.o.tabstop = 4
-
--- When moving indentation (< and > in visual mode) always round to the nearest
--- tabstop
-vim.o.shiftround = true
-
---  When wrapping an indented line, indent the rest of it the same
-vim.o.breakindent = true
-
--- Do not break in the middle of a word when wrapping
-vim.o.linebreak = true
-
--- Smart case search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Highlight current line
-vim.o.cursorline = true
-
--- Display the effect of text substitution live
-vim.o.inccommand = "split"
-
--- Always show complete menu, even if has only one option
-vim.o.completeopt = "menuone"
-
 -- For commands, on the first tab just show a menu, selecting an option only on
 -- the second tab
 vim.o.wildmode = "longest:full,full"
-
--- By default fold according to syntax
-vim.o.foldmethod = "syntax"
--- But don't actually fold anything unless foldlevel is set
-vim.o.foldlevelstart = 99
 
 -- These providers are not used
 vim.g.loaded_python_provider = 0 -- This is python 2
@@ -166,6 +79,7 @@ end
 
 -- Load all separate config files
 require("config.colorscheme")
+require("config.text_editing")
 require("config.buffers")
 require("config.lsp").setup()
 require("config.statusline")
