@@ -1,3 +1,4 @@
 map <C-f> navigate next
 map <C-b> navigate previous
+map <C-l> nohlsearch
 set selection-clipboard clipboard
