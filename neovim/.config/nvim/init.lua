@@ -62,6 +62,10 @@ vim.o.undolevels = 10000
 -- the second tab
 vim.o.wildmode = "longest:full,full"
 
+-- When navigating to different parts in the file (Ctrl+{U,D}, gg, G, etc),
+-- move to the start of the line
+vim.o.startofline = true
+
 -- These providers are not used
 vim.g.loaded_python_provider = 0 -- This is python 2
 vim.g.loaded_ruby_provider = 0
