@@ -162,7 +162,8 @@
     "sway/window": {
         "format": "{}",
         "max-length": 120,
-        "tooltip": false
+        "tooltip": false,
+        "icon": false
     },
 
     "sway/mode": {
