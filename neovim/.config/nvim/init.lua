@@ -81,6 +81,14 @@ if os.getenv("VIRTUAL_ENV") then
     vim.g.python3_host_prog = vim.fn.system(cmd):gsub("\n", "")
 end
 
+-- Git keymaps
+which_key.register({
+    g = {
+        name = "Git",
+        b = { "<cmd>G blame<CR>", "Git blame" },
+        d = { "<cmd>Gdiff<CR>", "Git diff" }
+    }
+}, { prefix = "<leader>" })
 -- Load all separate config files
 require("config.colorscheme")
 require("config.text_editing")
