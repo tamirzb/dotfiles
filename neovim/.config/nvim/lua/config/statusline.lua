@@ -45,13 +45,9 @@ local git_describe = {
         local git_dir = vim.fn.FugitiveGitDir()
         if git_dir == "" then return "" end
 
-        local cmd = "git --git-dir=%s describe --contains --all HEAD"
+        local cmd = "git --git-dir=%s describe --contains --all HEAD 2>&1"
         cmd = cmd:format(git_dir)
-
-        local handle = io.popen(cmd)
-        local result = handle:read("*a")
-        handle:close()
-        return result:gsub('\n', '')
+        return vim.fn.system(cmd):gsub("\n", "")
     end, 5),
     icon = ""
 }
