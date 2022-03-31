@@ -38,12 +38,14 @@ require("cokeline").setup({
     },
 
     default_hl = {
-        focused = { fg = colors.text, bg = colors.active },
-        unfocused = { fg = colors.inactive, bg = colors.window }
+        fg = function(buffer)
+            return buffer.is_focused and colors.text or colors.inactive
+        end,
+        bg = get_bg_color
     },
 
     components = {
-        { text = "" , hl = { fg = get_bg_color, bg = colors.background } },
+        { text = "" , fg = get_bg_color, bg = colors.background },
 
         -- Since <leader>NUM can switch to max buffer number 10, if we surpass
         -- this number we can switch to buffers using their pick letter
@@ -71,17 +73,17 @@ require("cokeline").setup({
         -- Indicate if the buffer is readonly
         { text = function(buffer)
             return buffer.is_readonly and "[-]" or ""
-        end, hl = { fg = function(buffer)
+        end, fg = function(buffer)
             -- Only display readonly color if the buffer is focused
             return buffer.is_focused and colors.red or colors.inactive
-        end } },
+        end },
 
         -- Indicate if the buffer was modified
         { text = function(buffer)
             return buffer.is_modified and "[+]" or ""
-        end, hl = { fg = colors.green } },
+        end, fg = colors.green },
 
-        { text = "" , hl = { fg = get_bg_color, bg = colors.background } },
+        { text = "" , fg = get_bg_color, bg = colors.background },
     }
 })
 
