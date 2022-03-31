@@ -47,7 +47,8 @@ local on_attach = function(_, bufnr)
         ["<leader>t"] = {
             function()
                 fzf_lua.lsp_document_symbols({
-                    fzf_opts = { ["--with-nth"] = '5..' }
+                    fzf_opts = { ["--with-nth"] = '4..',
+                                 ["--delimiter"] = ":" }
                 })
             end,
             "Fuzzy search current buffer symbols"
@@ -55,7 +56,8 @@ local on_attach = function(_, bufnr)
         ["<leader>T"] = {
             function()
                 fzf_lua.lsp_live_workspace_symbols({
-                    fzf_opts = { ["--with-nth"] = '5..' }
+                    fzf_opts = { ["--with-nth"] = '4..',
+                                 ["--delimiter"] = ":" }
                 })
             end,
             "Fuzzy search project symbols"
