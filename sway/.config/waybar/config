@@ -132,7 +132,7 @@
         "format-ethernet": "",
         "format-disconnected": "⚠",
         "tooltip-format-disconnected": "Disconnected",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{frequency}MHz\n{ipaddr}/{cidr}\nDown: {bandwidthDownOctets} Up: {bandwidthUpOctets}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{frequency}GHz\n{ipaddr}/{cidr}\nDown: {bandwidthDownOctets} Up: {bandwidthUpOctets}",
         "tooltip-format-ethernet": "{ipaddr}/{cidr}\nDown: {bandwidthDownOctets} Up: {bandwidthUpOctets}",
         "on-click": "iwgtk"
     },
