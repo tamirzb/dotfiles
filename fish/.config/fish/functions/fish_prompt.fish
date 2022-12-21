@@ -1,50 +1,31 @@
 function fish_prompt --description 'Write out the prompt'
     set -l last_status $status
 
-    if not set -q __fish_git_prompt_show_informative_status
-        set -g __fish_git_prompt_show_informative_status 1
-    end
-    if not set -q __fish_git_prompt_hide_untrackedfiles
-        set -g __fish_git_prompt_hide_untrackedfiles 1
-    end
-    if not set -q __fish_git_prompt_showstashstate
-        set -g __fish_git_prompt_showstashstate 1
-    end
-    if not set -q __fish_git_prompt_showcolorhints
-        set -g __fish_git_prompt_showcolorhints 1
-    end
-    if not set -q __fish_git_prompt_describe_style
-        set -g __fish_git_prompt_describe_style branch
-    end
+    # Git prompt config:
 
-    if not set -q __fish_git_prompt_color_branch
-        set -g __fish_git_prompt_color_branch magenta --bold
-    end
-    if not set -q __fish_git_prompt_color_branch_detached
-        set -g __fish_git_prompt_color_branch_detached magenta
-    end
-    if not set -q __fish_git_prompt_color_dirtystate
-        set -g __fish_git_prompt_color_dirtystate blue
-    end
-    if not set -q __fish_git_prompt_color_stagedstate
-        set -g __fish_git_prompt_color_stagedstate yellow
-    end
-    if not set -q __fish_git_prompt_color_invalidstate
-        set -g __fish_git_prompt_color_invalidstate red
-    end
-    if not set -q __fish_git_prompt_color_untrackedfiles
-        set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
-    end
-    if not set -q __fish_git_prompt_color_cleanstate
-        set -g __fish_git_prompt_color_cleanstate green --bold
-    end
-    if not set -q __fish_git_prompt_color_stashstate
-        set -g __fish_git_prompt_color_stashstate cyan
-    end
+    # Show a bunch of information about a git repo
+    # Note that for big repos where this ends up being slow, it can be disabled
+    # with `git config --local bash.showInformativeStatus false`
+    set -g __fish_git_prompt_show_informative_status 1
+    # Show how many untracked files there are in the repository
+    set -g __fish_git_prompt_showuntrackedfiles 1
+    # Show how many stashes there are
+    set -g __fish_git_prompt_showstashstate 1
+    # Describe current HEAD relative to newer tag or branch, such as
+    # `(master~4)`
+    set -g __fish_git_prompt_describe_style branch
+    # Allows distinguishing between detached and non-detached
+    set -g __fish_git_prompt_showcolorhints 1
 
-    if not set -q __fish_prompt_normal
-        set -g __fish_prompt_normal (set_color normal)
-    end
+    # Git prompt colors
+    set -g __fish_git_prompt_color_branch magenta --bold
+    set -g __fish_git_prompt_color_branch_detached magenta
+    set -g __fish_git_prompt_color_dirtystate blue
+    set -g __fish_git_prompt_color_stagedstate yellow
+    set -g __fish_git_prompt_color_invalidstate red
+    set -g __fish_git_prompt_color_untrackedfiles 666
+    set -g __fish_git_prompt_color_cleanstate green --bold
+    set -g __fish_git_prompt_color_stashstate cyan
 
     set -l color_cwd
     set -l prefix
