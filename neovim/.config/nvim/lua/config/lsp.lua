@@ -120,8 +120,12 @@ M.sumneko_lua = {
         runtime = { version = 'LuaJIT', path = runtime_path },
         -- Get the language server to recognize the `vim` global
         diagnostics = { globals = {'vim'} },
-        -- Make the server aware of Neovim runtime files
-        workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+        workspace = {
+            -- Make the server aware of Neovim runtime files
+            library = vim.api.nvim_get_runtime_file("", true),
+            -- Don't automatically try to load support for 3rd party libraries
+            checkThirdParty = false
+        },
         -- Do not send telemetry data containing a randomized but unique
         -- identifier
         telemetry = { enable = false },
