@@ -22,6 +22,7 @@
         "pulseaudio",
         "backlight",
         "sway/language",
+        "keyboard-state",
         "memory",
         "cpu",
         "temperature",
@@ -90,6 +91,15 @@
         "tooltip-format": "{flag} {long}",
         "min-length": 4,
         "on-click": "$HOME/.config/waybar/switch_language.fish"
+    },
+
+    "keyboard-state": {
+        "capslock": true,
+        "format": "{icon}",
+        "format-icons": {
+            "locked": "CAPS",
+            "unlocked": ""
+        }
     },
 
     "backlight": {

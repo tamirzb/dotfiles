@@ -127,6 +127,13 @@
     animation-duration: 2s;
 }
 
+#keyboard-state label.locked {
+    color: white;
+    background-color: orange;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
 /* A pretty hacky way to hide backlight when it's off (i.e. when the lid is
  * closed) */
 #backlight.off {
