@@ -65,15 +65,6 @@ local on_attach = function(_, bufnr)
         ["<leader>l"] = { fzf_lua.lsp_references, "Fuzzy search references" }
     }, { buffer = bufnr })
 
-    -- Keymaps in select mode
-    which_key.register({
-        -- Format the selected text
-        -- Needs to be entirely a vim command string as there's no way (that
-        -- I'm aware of) to leave insert mode synchronously in lua
-        ["<leader>f"] = { "<esc><cmd>lua vim.lsp.buf.range_formatting()<cr>",
-                          "Format selected" }
-    }, { mode = "x", buffer = bufnr })
-
     -- Keymaps in insert mode
     which_key.register({
         -- Use the omnifunc for Ctrl+N
