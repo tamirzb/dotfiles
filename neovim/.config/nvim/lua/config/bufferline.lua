@@ -20,7 +20,10 @@ end
 -- Set the bar background
 -- Other than this Cokeline should take care of applying highlights
 require("config.utils").apply_highlights({
-    TablineFill = { bg = colors.background }
+    -- Used to be TabLineFill, now seems to be TabLine. Doing both just in
+    -- case.
+    TabLine = { bg = colors.background },
+    TabLineFill = { bg = colors.background }
 })
 
 require("cokeline").setup({
