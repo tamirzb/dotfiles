@@ -6,6 +6,9 @@ local colors = require("config.colors")
 require("which-key").setup({
     -- Use which-key for spelling corrections (with z=)
     plugins = { spelling = true },
+    -- When using which-key to autocomplete spelling corrections, show
+    -- which-key immediately instead of waiting
+    triggers_nowait = { "z=" },
     -- Adding count to motions (e.g. d2) seems to be displaying which-key
     -- immediately, so better without it
     motions = { count = false }
