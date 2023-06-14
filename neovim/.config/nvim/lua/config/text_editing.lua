@@ -67,8 +67,10 @@ vim.o.linebreak = true
 
 -- Use j and k even on the same (wrapped) line, but not when navigating to a
 -- specific line with a number
-utils.set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", true)
-utils.set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", true)
+for _, mode in ipairs({"n", "x"}) do
+    utils.set_keymap(mode, "j", "v:count == 0 ? 'gj' : 'j'", true)
+    utils.set_keymap(mode, "k", "v:count == 0 ? 'gk' : 'k'", true)
+end
 
 
 --
