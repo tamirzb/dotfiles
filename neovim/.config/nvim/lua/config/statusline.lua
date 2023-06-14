@@ -76,8 +76,16 @@ require("config.utils").apply_highlights({
     StatusLineNC = { bg = colors.statusline }
 })
 
+local options = { theme = theme }
+-- Use basic symbols if fancy fonts are not available
+if os.getenv("NVIM_NO_FANCY_FONTS") then
+    options["component_separators"] = "|"
+    options["section_separators"] = ""
+    options["icons_enabled"] = false
+end
+
 require('lualine').setup({
-    options = { theme = theme },
+    options = options,
     sections = {
         lualine_a = {"mode"},
         -- Prefer the filename over the branch name, to have the branch name

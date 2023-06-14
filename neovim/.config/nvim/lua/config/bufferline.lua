@@ -1,5 +1,23 @@
 local colors = require("config.colors")
 
+-- Set symbols based on whether fancy fonts are enabled
+local symbols
+if os.getenv("NVIM_NO_FANCY_FONTS") then
+    symbols = {
+        pre_separator = "",
+        post_separator = " ",
+        padding = " ",
+        inside_separator = " | ",
+    }
+else
+    symbols = {
+        pre_separator = "",
+        post_separator = "",
+        padding = "",
+        inside_separator = "  ",
+    }
+end
+
 -- Get the background color a given buffer should have
 local get_bg_color = function (buffer)
     return buffer.is_focused and colors.active or colors.window
@@ -48,7 +66,9 @@ require("cokeline").setup({
     },
 
     components = {
-        { text = "" , fg = get_bg_color, bg = colors.background },
+        { text = symbols.pre_separator,  fg = get_bg_color,
+                 bg = colors.background },
+        { text = symbols.padding , bg = get_bg_color },
 
         -- Since <leader>NUM can switch to max buffer number 10, if we surpass
         -- this number we can switch to buffers using their pick letter
@@ -63,7 +83,7 @@ require("cokeline").setup({
             return buffer.index > 10 and buffer.pick_letter:upper() or ""
         end },
         -- Separator after buffer index/pick letter
-        { text = "  " },
+        { text = symbols.inside_separator },
 
         -- Unique prefix (if more than one file with the same filename is open)
         { text = function(buffer)
@@ -86,7 +106,9 @@ require("cokeline").setup({
             return buffer.is_modified and "[+]" or ""
         end, fg = colors.green },
 
-        { text = "" , fg = get_bg_color, bg = colors.background },
+        { text = symbols.padding , bg = get_bg_color },
+        { text = symbols.post_separator , fg = get_bg_color,
+                 bg = colors.background },
     }
 })
 
