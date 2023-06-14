@@ -4,6 +4,15 @@ require("which-key").register({
     ["<C-w><C-e>"] = { "<cmd>Bwipeout<cr>", "which_key_ignore" }
 })
 
+-- Add a command to make a temporary buffer non-temporary
+vim.api.nvim_create_user_command("KeepBufferAlive", function()
+    vim.opt_local.buflisted = true
+    vim.opt_local.bufhidden = ""
+    -- Hacky way to get the tabline to redraw, but the redrawtabline command
+    -- doesn't seem to work
+    vim.opt.showtabline = 2
+end, {})
+
 -- Enter winresizer with <leader>r
 vim.g.winresizer_start_key = "<leader>r"
 -- Exit winresizer with r
