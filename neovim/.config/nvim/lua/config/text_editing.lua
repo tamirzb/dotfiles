@@ -46,13 +46,17 @@ vim.o.textwidth = 79
 vim.o.colorcolumn = tostring(vim.o.textwidth)
 
 -- Only auto-format comments with textwidth, not code
-vim.opt.formatoptions = vim.opt.formatoptions - "t" + "c"
+vim.opt.formatoptions:remove("t")
+vim.opt.formatoptions:append("c")
 -- But auto-format everything for text/markdown
-vim.cmd("au FileType text,markdown setlocal formatoptions+=t")
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "text,markdown",
+    callback = function() vim.opt_local.formatoptions:append("t") end
+})
 
 -- When entering a new line according to textwidth, try to indent a bit to
 -- match lists
-vim.opt.formatoptions = vim.opt.formatoptions + "n"
+vim.opt.formatoptions:append("n")
 
 
 --
