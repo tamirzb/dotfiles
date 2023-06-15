@@ -141,6 +141,6 @@ require('lualine').setup({
         }
     },
 
-    -- Display statusline of quickfix/location list nicely
-    extensions = { "quickfix" }
+    -- Display statusline of the following nicely
+    extensions = { "quickfix", "mundo", "man" }
 })
