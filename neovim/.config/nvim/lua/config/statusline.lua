@@ -23,8 +23,15 @@ local expensive_func = function(func, min_reexec_seconds)
     end
 end
 
--- Show relative path (for both active and inactive)
-local filename = { "filename", path = 1 }
+-- Configure the filename component for both active and inactive
+local filename = {
+    "filename",
+    -- Show relative path
+    path = 1,
+    -- Mark when the file doesn't exist (but there is a file name)
+    newfile_status = true,
+    symbols = { newfile = "[*]" }
+}
 
 -- Display a mark if the buffer is a temporary buffer
 local temp_mark_inactive = {
