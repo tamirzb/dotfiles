@@ -103,7 +103,7 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-M.sumneko_lua = {
+M.lua_ls = {
     on_attach = on_attach,
     cmd = { "lua-language-server" },
     -- The settings are pretty much copied from nvim-lspconfig's documentation
@@ -126,7 +126,7 @@ M.sumneko_lua = {
 -- Setup all language servers
 function M.setup()
     lspconfig.clangd.setup(M.clangd)
-    lspconfig.sumneko_lua.setup(M.sumneko_lua)
+    lspconfig.lua_ls.setup(M.lua_ls)
 end
 
 vim.diagnostic.config({
