@@ -1,0 +1,15 @@
+{
+  "fzf-lua": { "branch": "main", "commit": "cb0943a41df4bb59475a13c4dcc7256cc230a2e3" },
+  "lazy.nvim": { "branch": "main", "commit": "b7043f2983d7aead78ca902f3f2053907081859a" },
+  "lualine-lsp-progress": { "branch": "master", "commit": "56842d097245a08d77912edf5f2a69ba29f275d7" },
+  "lualine.nvim": { "branch": "master", "commit": "05d78e9fd0cdfb4545974a5aa14b1be95a86e9c9" },
+  "nvim-cokeline": { "branch": "main", "commit": "cb4bbdf9bb6c8a070a655f04842bb86a101e040d" },
+  "nvim-projectconfig": { "branch": "master", "commit": "05fd34831e170db269d1b84597615bcdcdde930e" },
+  "sway-vim-syntax": { "branch": "master", "commit": "0e3ee955a27d4b64e412a8caa727e7a3c0ceaa4d" },
+  "vim-bbye": { "branch": "master", "commit": "25ef93ac5a87526111f43e5110675032dbcacf56" },
+  "vim-fish": { "branch": "master", "commit": "50b95cbbcd09c046121367d49039710e9dc9c15f" },
+  "vim-mundo": { "branch": "master", "commit": "b53d35fb5ca9923302b9ef29e618ab2db4cc675e" },
+  "vim-selinux": { "branch": "master", "commit": "ac5362b9b3ad32215136bda0b7d12bdfe02f3d2f" },
+  "which-key.nvim": { "branch": "main", "commit": "d871f2b664afd5aed3dc1d1573bef2fb24ce0484" },
+  "winresizer": { "branch": "master", "commit": "9bd559a03ccec98a458e60c705547119eb5350f3" }
+}
