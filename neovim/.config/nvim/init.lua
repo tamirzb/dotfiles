@@ -1,38 +1,70 @@
--- Install packer if it's not already installed
--- TODO: Run packer.sync() automatically
-local was_packer_installed, packer = pcall(require, "packer")
-if not was_packer_installed then
-    print("Installing packer...")
-    vim.fn.system({"git", "clone", "https://github.com/wbthomason/packer.nvim",
-                   vim.fn.stdpath("data") ..
-                   "/site/pack/packer/start/packer.nvim"})
-    print("Packer installed")
-    packer = require("packer")
+-- Fancy function to look for lazy.nvim in multiple locations, and even
+-- possibly clone it if needed
+local get_lazy = function()
+    -- First check if we can simply require "lazy". This is for the
+    -- possible scenario where lazy.nvim is installed as a system package.
+    local is_lazy_installed, lazy = pcall(require, "lazy")
+    if is_lazy_installed then
+        return lazy
+    end
+
+    -- We couldn't just require it, so let's see if lazy.nvim exists in the
+    -- neovim directory
+    local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+    if not vim.loop.fs_stat(lazy_path) then
+        -- We couldn't find lazy.nvim anywhere. Before immediately doing a git
+        -- clone, ask the user.
+        local response = vim.fn.input("lazy.nvim plugin manager not found\n" ..
+                                      "Clone it from GitHub? [y/n]: ")
+        if response ~= "y" then
+            return nil
+        end
+
+        -- User agreed, clone lazy.nvim
+        vim.fn.system({ "git", "clone",
+                        "https://github.com/folke/lazy.nvim.git",
+                        "--branch=stable", lazy_path })
+    end
+
+    -- Load lazy.nvim from the neovim directory
+    vim.opt.rtp:prepend(lazy_path)
+    return require("lazy")
 end
 
--- Plugins
-packer.startup({ function (use)
-    use("wbthomason/packer.nvim")
-    use("dag/vim-fish")
-    use("terminalnode/sway-vim-syntax")
-    use("lzap/vim-selinux")
-    use("moll/vim-bbye")
-    use("simeji/winresizer")
-    use("simnalamburt/vim-mundo")
-    use("windwp/nvim-projectconfig")
-    use("folke/which-key.nvim")
-    use("ibhagwan/fzf-lua")
-    use("nvim-lualine/lualine.nvim")
-    use("arkav/lualine-lsp-progress")
-    use('noib3/nvim-cokeline')
-    -- Plugins available as Arch packages:
-    -- use("tpope/vim-fugitive")
-    -- use("neovim/nvim-lspconfig")
-    -- use("cespare/vim-toml")
-end, config = {
-    -- Clone with full history, makes it easier to debug plugins code
-    git = { depth = 999999 } }
-})
+local lazy = get_lazy()
+if not lazy then
+    -- This config file is too dependant on plugins to work without them
+    os.exit()
+end
+
+-- Setup lazy.nvim plugin manager
+lazy.setup(
+    -- Plugins
+    {
+        "dag/vim-fish",
+        "terminalnode/sway-vim-syntax",
+        "lzap/vim-selinux",
+        "moll/vim-bbye",
+        "simeji/winresizer",
+        "simnalamburt/vim-mundo",
+        "windwp/nvim-projectconfig",
+        "folke/which-key.nvim",
+        "ibhagwan/fzf-lua",
+        "nvim-lualine/lualine.nvim",
+        "arkav/lualine-lsp-progress",
+        "noib3/nvim-cokeline",
+        -- Plugins available as Arch packages:
+        -- "tpope/vim-fugitive",
+        -- "neovim/nvim-lspconfig",
+        -- "cespare/vim-toml",
+    },
+    {
+        -- Clone full repository, makes it easier to debug plugins code
+        git = { filter = false },
+        -- Don't reset runtime path, we want to use system packages as well
+        performance = { rtp = { reset = false } }
+    }
+)
 
 local utils = require("config.utils")
 local which_key = require("which-key")
