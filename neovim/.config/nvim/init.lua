@@ -37,6 +37,10 @@ if not lazy then
     os.exit()
 end
 
+-- Map space to <leader>
+-- Need to set this first as the winresizer plugin config depends on it
+vim.g.mapleader = " "
+
 -- Setup lazy.nvim plugin manager
 lazy.setup(
     -- Plugins
@@ -45,7 +49,10 @@ lazy.setup(
         "terminalnode/sway-vim-syntax",
         "lzap/vim-selinux",
         "moll/vim-bbye",
-        "simeji/winresizer",
+        -- Annoyingly the way winresizer sets keybinding ends up setting the
+        -- default before being able to read our configured one, load it lazily
+        -- only after the keybinding is pressed
+        { "simeji/winresizer", keys = "<leader>r" },
         "simnalamburt/vim-mundo",
         "windwp/nvim-projectconfig",
         "folke/which-key.nvim",
@@ -83,9 +90,6 @@ utils.set_keymap("i", "<C-c>", "<Esc>")
 
 -- Also copy file name on Ctrl+G
 utils.set_keymap("n", "<C-g>", "<cmd>let @+ = expand('%')<CR><C-g>")
-
--- Map space to <leader>
-vim.g.mapleader = " "
 
 -- Enable using the mouse to control things
 vim.o.mouse = "a"
