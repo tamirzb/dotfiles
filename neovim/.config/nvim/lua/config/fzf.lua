@@ -29,14 +29,10 @@ fzf_lua.setup({
         },
     },
 
-    -- Scroll the preview window with Alt+u/d, needs to be setup for both
-    -- FZF and builtin previewer
     keymap = {
-        fzf = {
-            ["alt-d"] = "preview-page-down",
-            ["alt-u"] = "preview-page-up",
-        },
         builtin = {
+            -- Scroll the preview window with Alt+u/d. Already set in FZF
+            -- config but needs to also be set for fzf-lua's builtin.
             ["<m-d>"] = "preview-page-down",
             ["<m-u>"] = "preview-page-up",
 
