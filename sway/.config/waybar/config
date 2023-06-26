@@ -90,7 +90,7 @@
         "format": "<span size='x-small'> </span>{shortDescription}",
         "tooltip-format": "{flag} {long}",
         "min-length": 4,
-        "on-click": "$HOME/.config/waybar/switch_language.fish"
+        "on-click": "swaymsg input type:keyboard xkb_switch_layout next"
     },
 
     "keyboard-state": {
