@@ -16,6 +16,7 @@
     ],
     "modules-right": [
         "custom/needreboot",
+        "bluetooth",
         "custom/updates",
         "network",
         "custom/internet",
@@ -160,6 +161,18 @@
         "on-click-right": "alacritty -e fish -i -C update_arch",
         // Middle click to update AUR packages
         "on-click-middle": "alacritty -e fish -i -C update_aur"
+    },
+
+    "bluetooth": {
+        "format-off": "",
+        "format-on": "",
+        "format-connected": "<small> </small>{num_connections}",
+        "tooltip-format-on": "Bluetooth on, no devices connected",
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}"
+        // In the future, can show battery percentage (perhaps when this is no
+        // longer experimental in BlueZ). Could also use upower module for
+        // this?
     },
 
     "custom/needreboot": {

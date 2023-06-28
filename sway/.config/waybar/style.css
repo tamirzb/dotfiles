@@ -59,7 +59,8 @@
 #pulseaudio,
 #backlight,
 #language,
-#temperature {
+#temperature,
+#bluetooth {
     padding-left: 8px;
     padding-right: 8px;
 }
@@ -177,6 +178,10 @@
 
 #custom-updates.aur, #custom-updates.arch_aur {
     background: rgba(50, 100, 50, 0.9);
+}
+
+#bluetooth {
+    color: #55aaff;
 }
 
 #window {
