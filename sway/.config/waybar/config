@@ -196,4 +196,4 @@
     "include": "$HOME/.config/waybar/local"
 }
 
-// vim: ft=json
+// vim: ft=jsonc
