@@ -197,6 +197,10 @@
     border: 2px solid #aaaaaa;
 }
 
+#scratchpad {
+    margin-left: 10px;
+}
+
 #workspaces button {
     border-top: 2px solid transparent;
     /* To compensate for the top border and still have vertical centering */

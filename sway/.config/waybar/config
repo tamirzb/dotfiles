@@ -9,6 +9,7 @@
 
     "modules-left": [
         "sway/workspaces",
+        "sway/scratchpad",
         "sway/mode"
     ],
     "modules-center": [
@@ -192,6 +193,11 @@
 
     "sway/mode": {
         "tooltip": false
+    },
+
+    "sway/scratchpad": {
+        "format": "<small> </small>{count}",
+        "on-click": "swaymsg scratchpad show"
     },
 
     "sway/workspaces": {
