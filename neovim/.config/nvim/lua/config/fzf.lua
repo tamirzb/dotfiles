@@ -44,8 +44,8 @@ fzf_lua.setup({
 
     -- Set these to FZF's default, not fzf-lua's default
     fzf_opts = {
-        ["--layout"] = false,
-        ["--info"] = false
+        ["--layout"] = "default",
+        ["--info"] = "default"
     },
 
     -- Don't resume last search for live workspace symbols
