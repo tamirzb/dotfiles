@@ -1,3 +1,3 @@
-function ls -w exa
-    command exa $argv
+function ls -w eza
+    command eza $argv
 end
