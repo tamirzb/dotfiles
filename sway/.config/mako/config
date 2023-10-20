@@ -12,4 +12,7 @@ border-size=0
 background-color=#323232e6
 anchor=bottom-right
 
+[mode=do-not-disturb]
+invisible=1
+
 # vim: ft=conf
