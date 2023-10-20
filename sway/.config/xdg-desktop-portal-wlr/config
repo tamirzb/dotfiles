@@ -1,0 +1,6 @@
+[screencast]
+# Hide notifications while screencast is active
+exec_before=makoctl mode -a do-not-disturb
+exec_after=makoctl mode -r do-not-disturb
+
+# vim: ft=dosini
