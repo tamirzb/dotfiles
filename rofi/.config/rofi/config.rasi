@@ -24,6 +24,7 @@ configuration {
     kb-remove-to-eol: "";
 
 /* Cancel with Esc/Control+c */
+    kb-secondary-copy: "";
     kb-cancel: "Escape,Control+c";
 
 /* Remove Super+*NUM* to avoid confusion with i3 */
