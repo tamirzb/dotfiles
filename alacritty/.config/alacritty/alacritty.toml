@@ -1,0 +1,91 @@
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.bright]
+black = "#373b41"
+blue = "#81a2be"
+cyan = "#8abeb7"
+green = "#b5bd68"
+magenta = "#b294bb"
+red = "#cc6666"
+white = "#c5c8c6"
+yellow = "#f0c674"
+
+[colors.cursor]
+cursor = "#c5c8c6"
+text = "#1d1f21"
+
+[colors.normal]
+black = "#282a2e"
+blue = "#5f819d"
+cyan = "#5e8d87"
+green = "#8c9440"
+magenta = "#85678f"
+red = "#a54242"
+white = "#707880"
+yellow = "#de935f"
+
+[colors.primary]
+background = "#1d1f21"
+foreground = "#c5c8c6"
+
+[window]
+dynamic_padding = true
+opacity = 0.95
+
+[window.padding]
+x = 7
+y = 7
+
+[font]
+size = 14
+
+[font.normal]
+family = "Hack"
+
+[env]
+TERM = "xterm-256color"
+
+[scrolling]
+history = 100000
+
+# Spawn a new alacritty instance in the same directory with Ctrl+Shift+Enter
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Control|Shift"
+
+# Also scroll to bottom when exiting vi mode with Ctrl+C
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "C"
+mode = "Vi|~Search"
+mods = "Control"
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "C"
+mode = "Vi|~Search"
+mods = "Control"
+
+# Remove search bindings outside of vi mode
+[[keyboard.bindings]]
+action = "None"
+key = "F"
+mods = "Control|Shift"
+[[keyboard.bindings]]
+action = "None"
+key = "B"
+mods = "Control|Shift"
+
+# Extra bindings are added here to make the defaults work.
+# See https://github.com/alacritty/alacritty/issues/4111
+[[keyboard.bindings]]
+action = "Last"
+key = 5
+mode = "Vi|~Search"
+mods = "Shift"
+[[keyboard.bindings]]
+action = "FirstOccupied"
+key = 7
+mode = "Vi|~Search"
+mods = "Shift"
