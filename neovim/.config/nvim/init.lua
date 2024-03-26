@@ -69,11 +69,13 @@ lazy.setup(
         -- Clone full repository, makes it easier to debug plugins code
         git = { filter = false },
         performance = {
-            -- Don't reset package path, we want to use system packages as well
+            -- Don't reset pathes, we want to use system packages as well
             reset_packpath = false,
-            -- Disable netrw, to disable accidentally opening it by opening a
-            -- directory
-            rtp = { disabled_plugins = { "netrwPlugin" } }
+            rtp = { reset = false,
+                    -- Disable netrw, to disable accidentally opening it by
+                    -- opening a directory
+                    disabled_plugins = { "netrwPlugin" }
+            }
         }
     }
 )
