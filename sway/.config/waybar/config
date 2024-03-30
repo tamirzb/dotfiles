@@ -38,7 +38,7 @@
     "clock": {
       "interval": 1,
       "format": "{:%H:%M}",
-      "format-alt": "{:<span font_desc='SF Pro'>%d/%m/%y</span>}",
+      "format-alt": "<span font_desc='SF Pro'>{:%d/%m/%y}</span>",
       "tooltip-format": "{:%H:%M:%S, %e %B %Y}"
     },
 
