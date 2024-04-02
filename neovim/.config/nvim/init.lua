@@ -60,6 +60,7 @@ lazy.setup(
         "nvim-lualine/lualine.nvim",
         "tamirzb/lualine-lsp-progress",
         "noib3/nvim-cokeline",
+        "Pocco81/TrueZen.nvim",
         -- Plugins available as Arch packages:
         -- "tpope/vim-fugitive",
         -- "tpope/vim-rhubarb",

@@ -1,7 +1,12 @@
--- Use Ctrl+e to delete a buffer without closing the window
 require("which-key").register({
+    -- Use Ctrl+e to delete a buffer without closing the window
     ["<C-w>e"] = { "<cmd>Bwipeout<cr>", "Delete buffer" },
-    ["<C-w><C-e>"] = { "<cmd>Bwipeout<cr>", "which_key_ignore" }
+    ["<C-w><C-e>"] = { "<cmd>Bwipeout<cr>", "which_key_ignore" },
+
+    -- <leader>f to toggle focus on current window, meaning hiding all other
+    -- windows and current window takes full space.
+    ["<leader>f"] = { require("true-zen").focus,
+                      "Toggle focus on current window" }
 })
 
 -- Add a command to make a temporary buffer non-temporary
