@@ -1,6 +1,12 @@
 local fzf_lua = require('fzf-lua')
 local which_key = require('which-key')
 
+-- When fzf-lua searches for files (fzf_lua.files) it allows hidden files are
+-- ok but ignores files in .git. This behavior is not replicated by default in
+-- fzf_lua.grep*, so we do it ourselves.
+local rg_opts = "--hidden --glob=!*.git " ..
+                fzf_lua.config.globals.grep.rg_opts
+
 fzf_lua.setup({
     winopts = {
         -- FZF should take the entire neovim screen
@@ -50,6 +56,8 @@ fzf_lua.setup({
 
     -- Don't resume last search for live workspace symbols
     lsp = { continue_last_search = false },
+
+    grep = { rg_opts = rg_opts },
 
     -- Overwrite default actions for all providers that deal with files in
     -- order to make them not send multiple selections to quickfix by default
