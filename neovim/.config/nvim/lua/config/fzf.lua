@@ -72,13 +72,7 @@ which_key.register({
     [";"] = { fzf_lua.command_history, "Fuzzy search command history" },
     ["/"] = { fzf_lua.search_history, "Fuzzy search search history" },
     z = { fzf_lua.resume, "Resume last fuzzy search" },
-    a = { function()
-        -- Add "-w" to the rg opts to only show matches surrounded by word
-        -- boundaries
-        local rg_opts = require("fzf-lua.config").globals.grep.rg_opts
-        rg_opts = rg_opts .. " -w"
-        fzf_lua.grep_cword({ rg_opts = rg_opts })
-    end, "Fuzzy search current word" }
+    a = { fzf_lua.grep_cword, "Fuzzy search current word" },
 }, { prefix = "<leader>" })
 
 which_key.register({
