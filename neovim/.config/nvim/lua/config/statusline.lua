@@ -147,3 +147,7 @@ require('lualine').setup({
     -- Display statusline of the following nicely
     extensions = { "quickfix", "mundo", "man" }
 })
+
+-- Since the status line shows the mode, there is no need to also show this in
+-- the last line
+vim.opt.showmode = false
