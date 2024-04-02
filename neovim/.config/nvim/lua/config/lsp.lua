@@ -6,7 +6,15 @@ local fzf_lua = require('fzf-lua')
 local colors = require("config.colors")
 
 -- Set LSP related settings only after a language server is attached
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
+    -- Disallow LSP server from setting highlights
+    -- It seems that for e.g. the Lua LSP server it ends up removing the
+    -- highlight for TODO or XXX. In the future I might end up adopting a
+    -- plugin to highlight stuff like this inside a comment, in which case I
+    -- could restore this.
+    -- Ref: https://old.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90
+    client.server_capabilities.semanticTokensProvider = nil
+
     -- Options to use when navigating diagnostics
     local diag_goto_opts = { wrap = false }
     local diag_goto_error_opts = vim.tbl_extend("force", diag_goto_opts,
