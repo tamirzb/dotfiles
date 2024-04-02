@@ -71,6 +71,7 @@ which_key.register({
     b = { fzf_lua.buffers, "Fuzzy search buffers" },
     [";"] = { fzf_lua.command_history, "Fuzzy search command history" },
     ["/"] = { fzf_lua.search_history, "Fuzzy search search history" },
+    z = { fzf_lua.resume, "Resume last fuzzy search" },
     a = { function()
         -- Add "-w" to the rg opts to only show matches surrounded by word
         -- boundaries
