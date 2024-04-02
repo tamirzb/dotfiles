@@ -57,7 +57,8 @@ begin
     if flock -n 9
         # No other instance is running, check for updates ourselves
         set updates_arch (checkupdates | wc -l)
-        set updates_aur (pikaur -Qua 2> /dev/null | wc -l)
+        # Count non-empty lines from pikaur
+        set updates_aur (pikaur -Qua 2> /dev/null | grep "\S" | wc -l)
         print_updates $updates_arch $updates_aur | tee $updates_file
     else
         # Another instance is running, wait for it to finish then read its
