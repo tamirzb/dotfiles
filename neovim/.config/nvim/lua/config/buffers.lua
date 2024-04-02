@@ -19,3 +19,7 @@ vim.g.winresizer_start_key = "<leader>r"
 vim.g.winresizer_keycode_finish = string.byte("r")
 -- The default to change to resize mode is r, so change it to Shift+r
 vim.g.winresizer_keycode_resize = string.byte("R")
+
+-- When opening a new window in a split put the new window to the right
+-- instead of the current window
+vim.opt.splitright = true
