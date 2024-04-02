@@ -8,6 +8,7 @@ if os.getenv("NVIM_NO_FANCY_FONTS") then
         post_separator = " ",
         padding = " ",
         inside_separator = " | ",
+        git = ""
     }
 else
     symbols = {
@@ -15,12 +16,17 @@ else
         post_separator = "",
         padding = "",
         inside_separator = "  ",
+        git = " "
     }
 end
 
 -- Get the background color a given buffer should have
 local get_bg_color = function (buffer)
     return buffer.is_focused and colors.active or colors.window
+end
+
+local is_fugitive_buffer = function(buffer)
+    return buffer.path:match("^fugitive:///") ~= nil
 end
 
 -- Shorten path until hopefully reaching a length of less than
@@ -85,8 +91,16 @@ require("cokeline").setup({
         -- Separator after buffer index/pick letter
         { text = symbols.inside_separator },
 
+        -- Indicate if it's a fugitive buffer
+        { text = function(buffer)
+            return is_fugitive_buffer(buffer) and symbols.git or ""
+        end },
+
         -- Unique prefix (if more than one file with the same filename is open)
         { text = function(buffer)
+            -- Fugitive's unique prefixes are not very indicative
+            if is_fugitive_buffer(buffer) then return "" end
+
             -- Overall length should ideally be <= 30
             return shorten_path(buffer.unique_prefix, 30 - #buffer.filename)
         end },
