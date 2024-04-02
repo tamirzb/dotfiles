@@ -140,10 +140,11 @@ which_key.register({
 require("config.colorscheme")
 require("config.text_editing")
 require("config.buffers")
+require("config.fzf")
+-- LSP needs to be after FZF as it can overwrite some keybindigs
 require("config.lsp").setup()
 require("config.statusline")
 require("config.bufferline")
-require("config.fzf")
 require("config.which_key")
 
 

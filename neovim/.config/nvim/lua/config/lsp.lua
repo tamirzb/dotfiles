@@ -52,6 +52,8 @@ local on_attach = function(client, bufnr)
 
         -- FZF keymaps
         -- The opts here are needed to hide the file for fzf-lua LSP providers
+        -- Note that the tags keybindings are overwriting the existing ones
+        -- that don't use LSP
         ["<leader>t"] = {
             function()
                 fzf_lua.lsp_document_symbols({

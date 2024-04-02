@@ -105,6 +105,11 @@ which_key.register({
     z = { fzf_lua.resume, "Resume last fuzzy search" },
     a = { fzf_lua.grep_cword, "Fuzzy search current word" },
     s = { ":FzfLuaGrep ", "Prompt to search" },
+
+    -- The tags keybindings are basically fallback, to be overwritten if LSP is
+    -- active
+    t = { fzf_lua.btags, "Fuzzy search current buffer tags" },
+    T = { fzf_lua.tags, "Fuzzy search ctags" }
 }, { prefix = "<leader>", silent = false })
 
 which_key.register({
