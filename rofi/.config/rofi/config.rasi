@@ -5,6 +5,7 @@ configuration {
 /* Keep the terminal open after running a shell command */
     run-shell-command: "{terminal} -e fish -i -C {cmd}";
 
+    max-history-size: 75;
     cache-dir: "~/.local/share/rofi/";
 
     show-icons: true;
