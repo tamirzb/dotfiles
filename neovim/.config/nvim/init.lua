@@ -62,6 +62,7 @@ lazy.setup(
         "noib3/nvim-cokeline",
         -- Plugins available as Arch packages:
         -- "tpope/vim-fugitive",
+        -- "tpope/vim-rhubarb",
         -- "neovim/nvim-lspconfig",
         -- "cespare/vim-toml",
     },
@@ -129,6 +130,12 @@ which_key.register({
         d = { "<cmd>Gdiff<CR>", "Git diff" }
     }
 }, { prefix = "<leader>" })
+-- In visual mode only browse is an option, so can just use <leader>g
+which_key.register({
+    g = { "<esc><cmd>'<,'>GBrowse!<CR>",
+          "Git browse - copy link to selection" }
+}, { mode = "x", prefix = "<leader>" })
+
 -- Load all separate config files
 require("config.colorscheme")
 require("config.text_editing")
