@@ -117,5 +117,9 @@ vim.o.foldmethod = "syntax"
 -- But don't actually fold anything unless foldlevel is set
 vim.o.foldlevelstart = 99
 
+-- This is supposed to make diffing better
+-- See: https://github.com/neovim/neovim/pull/14537
+vim.opt.diffopt:append("linematch:60")
+
 -- By default, treat .h files as C files (not C++)
 vim.g.c_syntax_for_h = 1
