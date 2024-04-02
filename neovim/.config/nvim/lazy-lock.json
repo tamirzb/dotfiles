@@ -1,6 +1,6 @@
 {
   "fzf-lua": { "branch": "main", "commit": "cb0943a41df4bb59475a13c4dcc7256cc230a2e3" },
-  "lualine-lsp-progress": { "branch": "master", "commit": "56842d097245a08d77912edf5f2a69ba29f275d7" },
+  "lualine-lsp-progress": { "branch": "master", "commit": "7bf02f81fada10aad137e32f17ee823e08c0c3d2" },
   "lualine.nvim": { "branch": "master", "commit": "05d78e9fd0cdfb4545974a5aa14b1be95a86e9c9" },
   "nvim-cokeline": { "branch": "main", "commit": "cb4bbdf9bb6c8a070a655f04842bb86a101e040d" },
   "nvim-projectconfig": { "branch": "master", "commit": "05fd34831e170db269d1b84597615bcdcdde930e" },

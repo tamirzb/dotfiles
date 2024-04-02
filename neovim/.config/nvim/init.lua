@@ -58,7 +58,7 @@ lazy.setup(
         "folke/which-key.nvim",
         "ibhagwan/fzf-lua",
         "nvim-lualine/lualine.nvim",
-        "arkav/lualine-lsp-progress",
+        "tamirzb/lualine-lsp-progress",
         "noib3/nvim-cokeline",
         -- Plugins available as Arch packages:
         -- "tpope/vim-fugitive",

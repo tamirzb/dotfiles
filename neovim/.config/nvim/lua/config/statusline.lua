@@ -103,6 +103,9 @@ require('lualine').setup({
             -- LSP's init progress (from lualine-lsp-progress plugin)
             {
                 "lsp_progress",
+                -- Don't remove the LSP client name after the processing is
+                -- done
+                timer = { lsp_client_name_enddelay = false },
                 -- Only show if the buffer has an LSP client attached
                 cond = function() return #vim.lsp.buf_get_clients() > 0 end
             },
