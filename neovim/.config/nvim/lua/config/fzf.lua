@@ -71,6 +71,29 @@ fzf_lua.setup({
     }
 })
 
+-- fzf-lua wants you to first call `:FzfLua grep` then write the search in
+-- another prompt, I prefer everything in a single command. This also allows
+-- adding flags to rg.
+-- This can even support flags for rg, e.g. `:FzfLuaGrep -i case-insensitive`.
+-- To use this to search for a string with spaces use
+-- `:FzfLuaGrep string\ with\ spaces`.
+vim.api.nvim_create_user_command("FzfLuaGrep", function(opts)
+    -- The search string should be the last argument. Take it out of the array.
+    local args_len = #opts.fargs
+    local search = opts.fargs[args_len]
+    table.remove(opts.fargs, args_len)
+
+    -- The rest of the arguments should be flags
+    local cur_rg_opts = rg_opts
+    for _, arg in ipairs(opts.fargs) do
+        -- All flags should start with a hyphen
+        assert(arg:sub(1,1) == "-", "Received an argument that is not a flag")
+        cur_rg_opts = cur_rg_opts .. " " .. arg
+    end
+
+    fzf_lua.grep({ search = search, rg_opts = cur_rg_opts })
+end, { nargs = "+" })
+
 -- FZF keymaps, not including LSP ones (which are registered only for LSP
 -- buffers)
 
@@ -81,7 +104,8 @@ which_key.register({
     ["/"] = { fzf_lua.search_history, "Fuzzy search search history" },
     z = { fzf_lua.resume, "Resume last fuzzy search" },
     a = { fzf_lua.grep_cword, "Fuzzy search current word" },
-}, { prefix = "<leader>" })
+    s = { ":FzfLuaGrep ", "Prompt to search" },
+}, { prefix = "<leader>", silent = false })
 
 which_key.register({
     a = { function()
