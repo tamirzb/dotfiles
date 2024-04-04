@@ -16,6 +16,7 @@
         "sway/window"
     ],
     "modules-right": [
+        "privacy",
         "custom/needreboot",
         "bluetooth",
         "custom/updates",
@@ -174,6 +175,15 @@
         // In the future, can show battery percentage (perhaps when this is no
         // longer experimental in BlueZ). Could also use upower module for
         // this?
+    },
+
+    // Display icons when the screen is shared and/or when the mic is open
+    "privacy": {
+        "icon-size": 15,
+        "modules": [
+            { "type": "screenshare" },
+            { "type": "audio-in" }
+        ]
     },
 
     "custom/needreboot": {

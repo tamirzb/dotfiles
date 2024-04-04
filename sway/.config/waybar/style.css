@@ -60,7 +60,8 @@
 #backlight,
 #language,
 #temperature,
-#bluetooth {
+#bluetooth,
+#privacy {
     padding-left: 8px;
     padding-right: 8px;
 }
@@ -182,6 +183,10 @@
 
 #bluetooth {
     color: #55aaff;
+}
+
+#privacy {
+    color: #55ff55;
 }
 
 #window {
