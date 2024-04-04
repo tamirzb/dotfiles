@@ -61,7 +61,8 @@
 #language,
 #temperature,
 #bluetooth,
-#privacy {
+#privacy,
+#tray {
     padding-left: 7px;
     padding-right: 8px;
 }

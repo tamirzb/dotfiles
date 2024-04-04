@@ -19,6 +19,7 @@
         "privacy",
         "custom/needreboot",
         "bluetooth",
+        "tray",
         "custom/updates",
         "network",
         "custom/internet",
@@ -184,6 +185,11 @@
             { "type": "screenshare" },
             { "type": "audio-in" }
         ]
+    },
+
+    "tray": {
+        "icon-size": 15,
+        "spacing": 4
     },
 
     "custom/needreboot": {
