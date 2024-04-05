@@ -45,7 +45,6 @@ vim.g.mapleader = " "
 lazy.setup(
     -- Plugins
     {
-        "dag/vim-fish",
         "lzap/vim-selinux",
         "moll/vim-bbye",
         -- Annoyingly the way winresizer sets keybinding ends up setting the
