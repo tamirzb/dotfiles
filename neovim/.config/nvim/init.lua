@@ -46,7 +46,6 @@ lazy.setup(
     -- Plugins
     {
         "dag/vim-fish",
-        "terminalnode/sway-vim-syntax",
         "lzap/vim-selinux",
         "moll/vim-bbye",
         -- Annoyingly the way winresizer sets keybinding ends up setting the
@@ -110,6 +109,10 @@ vim.o.wildmode = "longest:full,full"
 -- When navigating to different parts in the file (Ctrl+{U,D}, gg, G, etc),
 -- move to the start of the line
 vim.o.startofline = true
+
+-- By default neovim only expects sway syntax in sway/config, so add also
+-- sway/*.conf
+vim.filetype.add({pattern = { ['.*/sway/.+%.conf'] = 'swayconfig' } })
 
 -- These providers are not used
 vim.g.loaded_python_provider = 0 -- This is python 2
