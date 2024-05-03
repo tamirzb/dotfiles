@@ -63,7 +63,6 @@ lazy.setup(
         -- "tpope/vim-fugitive",
         -- "tpope/vim-rhubarb",
         -- "neovim/nvim-lspconfig",
-        -- "cespare/vim-toml",
     },
     {
         -- Clone full repository, makes it easier to debug plugins code
