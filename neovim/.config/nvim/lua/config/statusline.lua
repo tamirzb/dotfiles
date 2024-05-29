@@ -37,8 +37,9 @@ local filename = {
 local temp_mark_inactive = {
     function() return "temp" end,
     cond = function()
-        return vim.api.nvim_buf_get_option(0, "bufhidden") ~= "" or
-               not vim.api.nvim_buf_get_option(0, "buflisted")
+        local opts = { scope = "local" }
+        return vim.api.nvim_get_option_value("bufhidden", opts) ~= "" or
+               not vim.api.nvim_get_option_value("buflisted", opts)
     end,
 }
 local temp_mark = vim.tbl_extend("force", temp_mark_inactive, {
@@ -107,7 +108,9 @@ require('lualine').setup({
                 -- done
                 timer = { lsp_client_name_enddelay = false },
                 -- Only show if the buffer has an LSP client attached
-                cond = function() return #vim.lsp.buf_get_clients() > 0 end
+                cond = function()
+                    return #vim.lsp.get_clients({ bufnr = 0 }) > 0
+                end
             },
             -- Count of each diagnostic type
             {

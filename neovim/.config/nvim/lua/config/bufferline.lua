@@ -57,7 +57,8 @@ require("cokeline").setup({
         -- If the buffer will disappear when it's no longer displayed by a
         -- window, don't show it
         filter_valid = function(buffer)
-            return vim.api.nvim_buf_get_option(buffer.number, "bufhidden") == ""
+            local opts = { buf = buffer.number }
+            return vim.api.nvim_get_option_value("bufhidden", opts) == ""
         end,
 
         -- After deleting a buffer, focus on the buffer to its right

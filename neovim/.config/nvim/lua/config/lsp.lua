@@ -85,7 +85,7 @@ local on_attach = function(client, bufnr)
             if vim.fn.pumvisible() == 1 then
                 vim.api.nvim_input("<c-x><c-n>")
             else
-                vim.lsp.omnifunc(1)
+                vim.lsp.omnifunc(1, 0)
             end
         end, "LSP omnifunc complete" },
 
@@ -148,9 +148,9 @@ vim.diagnostic.config({
     -- Show more severe diagnostics before less severe ones
     severity_sort = true,
     -- Show the source of each diagnostic
-    virtual_text = { source = "always" },
+    virtual_text = { source = true },
     float = {
-        source = "always",
+        source = true,
         -- Can't move the cursor to inside the floating window
         focusable = false,
         -- Hide the floating window pretty much when anything happens

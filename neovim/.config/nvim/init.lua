@@ -11,7 +11,7 @@ local get_lazy = function()
     -- We couldn't just require it, so let's see if lazy.nvim exists in the
     -- neovim directory
     local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-    if not vim.loop.fs_stat(lazy_path) then
+    if not vim.uv.fs_stat(lazy_path) then
         -- We couldn't find lazy.nvim anywhere. Before immediately doing a git
         -- clone, ask the user.
         local response = vim.fn.input("lazy.nvim plugin manager not found\n" ..
