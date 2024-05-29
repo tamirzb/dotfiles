@@ -35,7 +35,7 @@ local on_attach = function(client, bufnr)
         -- Show the diagnostic message for the current line (in case it's too
         -- long to be displayed fully)
         ["<leader>d"] = { vim.diagnostic.open_float, "Diagnostics info" },
-        -- Navigate between diagnostic messages
+        -- Remap the default diganoistics navigation keymaps to not wrap
         ["[d"] = { function() vim.diagnostic.goto_prev(diag_goto_opts) end,
                    "Prev diagnostic" },
         ["]d"] = { function() vim.diagnostic.goto_next(diag_goto_opts) end,
@@ -93,6 +93,13 @@ local on_attach = function(client, bufnr)
         ["<c-x><c-n>"] = { "<c-n>", "Regular Ctrl+N" }
     }, {mode = "i", buffer = bufnr })
 end
+
+-- Remove neovim default LSP mapping of K to hover, already using <leader>h
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(ev)
+        vim.keymap.del("n", "K", { buffer = ev.buf })
+    end,
+})
 
 M.clangd = {
     on_attach = on_attach,
