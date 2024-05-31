@@ -7,6 +7,14 @@ local which_key = require('which-key')
 local rg_opts = "--hidden --glob=!*.git " ..
                 fzf_lua.config.globals.grep.rg_opts
 
+-- fzf-lua adds ctrl-g as an action in some modes. We have our own use for it
+-- so remove the action.
+local remove_ctrl_g_action = {
+    actions = {
+        ["ctrl-g"] = false
+    }
+}
+
 fzf_lua.setup({
     winopts = {
         -- FZF should take the entire neovim screen
@@ -36,6 +44,11 @@ fzf_lua.setup({
     },
 
     keymap = {
+        fzf = {
+            -- Not sure why but fzf-lua ends up removing this specific keymap
+            -- from FZF_DEFAULT_OPTS, so re-set it
+            ["ctrl-u"] = "half-page-up",
+        },
         builtin = {
             -- Scroll the preview window with Alt+u/d. Already set in FZF
             -- config but needs to also be set for fzf-lua's builtin.
@@ -57,7 +70,7 @@ fzf_lua.setup({
     -- Don't resume last search for live workspace symbols
     lsp = { continue_last_search = false },
 
-    grep = { rg_opts = rg_opts },
+    grep = { rg_opts = rg_opts, actions = remove_ctrl_g_action.actions },
 
     -- Overwrite default actions for all providers that deal with files in
     -- order to make them not send multiple selections to quickfix by default
@@ -67,8 +80,13 @@ fzf_lua.setup({
             ["ctrl-x"] = fzf_lua.actions.file_split,
             ["ctrl-v"] = fzf_lua.actions.file_vsplit,
             ["alt-q"] = fzf_lua.actions.file_sel_to_qf,
-        }
-    }
+        },
+    },
+
+    -- Remove ctrl-g from some modes
+    files = remove_ctrl_g_action,
+    tags = remove_ctrl_g_action,
+    awesome_colorschemes = remove_ctrl_g_action,
 })
 
 -- fzf-lua wants you to first call `:FzfLua grep` then write the search in
