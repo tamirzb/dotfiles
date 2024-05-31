@@ -57,7 +57,7 @@ lazy.setup(
         "ibhagwan/fzf-lua",
         "nvim-lualine/lualine.nvim",
         "tamirzb/lualine-lsp-progress",
-        "noib3/nvim-cokeline",
+        { "noib3/nvim-cokeline", dependencies = { "nvim-lua/plenary.nvim" } },
         "Pocco81/TrueZen.nvim",
         -- Plugins available as Arch packages:
         -- "tpope/vim-fugitive",
