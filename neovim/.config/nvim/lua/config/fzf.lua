@@ -20,9 +20,6 @@ fzf_lua.setup({
         -- FZF should take the entire neovim screen
         fullscreen = true,
 
-        -- Display the current line in the preview as if it's selected
-        hl = { cursorline = "Visual" },
-
         preview = {
             -- The preview should take half the screen
             vertical = "up:50%",
@@ -42,6 +39,9 @@ fzf_lua.setup({
             scrollbar = false
         },
     },
+
+    -- Display the current line in the preview as if it's selected
+    hls = { cursorline = "Visual" },
 
     keymap = {
         fzf = {
