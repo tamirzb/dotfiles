@@ -1,9 +1,9 @@
 local M = {}
 
 local lspconfig = require('lspconfig')
-local which_key = require('which-key')
 local fzf_lua = require('fzf-lua')
 local colors = require("config.colors")
+local utils = require("config.utils")
 
 -- Set LSP related settings only after a language server is attached
 local on_attach = function(client, bufnr)
@@ -23,7 +23,7 @@ local on_attach = function(client, bufnr)
     -- Keymaps are sort of based on the README of nvim-lspconfig
 
     -- Keymaps in normal mode
-    which_key.register({
+    utils.which_key_register({
         -- Like ctags Ctrl+], but with <leader>
         -- TODO: Possibly change this to Ctrl+] (and maybe put Ctrl+] in
         --       another keymap) once I feel this can more or less replace
@@ -76,7 +76,7 @@ local on_attach = function(client, bufnr)
     }, { buffer = bufnr })
 
     -- Keymaps in insert mode
-    which_key.register({
+    utils.which_key_register({
         -- Use the omnifunc for Ctrl+N
         ["<c-n>"] = { function ()
             -- This hack is needed so when we're in the middle of a "normal"

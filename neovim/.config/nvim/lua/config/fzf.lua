@@ -1,5 +1,5 @@
 local fzf_lua = require('fzf-lua')
-local which_key = require('which-key')
+local utils = require('config.utils')
 
 -- When fzf-lua searches for files (fzf_lua.files) it allows hidden files are
 -- ok but ignores files in .git. This behavior is not replicated by default in
@@ -115,7 +115,7 @@ end, { nargs = "+" })
 -- FZF keymaps, not including LSP ones (which are registered only for LSP
 -- buffers)
 
-which_key.register({
+utils.which_key_register({
     e = { fzf_lua.files, "Fuzzy search files" },
     b = { fzf_lua.buffers, "Fuzzy search buffers" },
     [";"] = { fzf_lua.command_history, "Fuzzy search command history" },
@@ -130,7 +130,7 @@ which_key.register({
     T = { fzf_lua.tags, "Fuzzy search ctags" }
 }, { prefix = "<leader>", silent = false })
 
-which_key.register({
+utils.which_key_register({
     a = { function()
         -- This doesn't work if we are selecting more than one line
         local _, start_row, _, _ = unpack(vim.fn.getpos("."))

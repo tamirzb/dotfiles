@@ -125,18 +125,15 @@ if os.getenv("VIRTUAL_ENV") then
 end
 
 -- Git keymaps
-which_key.register({
-    g = {
-        name = "Git",
-        b = { "<cmd>G blame<CR>", "Git blame" },
-        d = { "<cmd>Gdiff<CR>", "Git diff" }
-    }
-}, { prefix = "<leader>" })
+which_key.add({ "<leader>g", group = "Git" })
+utils.which_key_register({
+    b = { "<cmd>G blame<CR>", "Git blame" },
+    d = { "<cmd>Gdiff<CR>", "Git diff" }
+}, { prefix = "<leader>g" })
+
 -- In visual mode only browse is an option, so can just use <leader>g
-which_key.register({
-    g = { "<esc><cmd>'<,'>GBrowse!<CR>",
-          "Git browse - copy link to selection" }
-}, { mode = "x", prefix = "<leader>" })
+which_key.add({ "<leader>g", "<esc><cmd>'<,'>GBrowse!<CR>",
+                desc = "Git browse - copy link to selection", mode = "x" })
 
 -- Load all separate config files
 require("config.colorscheme")

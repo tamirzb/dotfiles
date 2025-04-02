@@ -1,4 +1,5 @@
 local colors = require("config.colors")
+local which_key = require('which-key')
 
 -- Set symbols based on whether fancy fonts are enabled
 local symbols
@@ -128,18 +129,14 @@ require("cokeline").setup({
 })
 
 -- Map <leader>NUM to switch to buffer NUM
-local keymaps = {}
 for i = 1,10 do
     -- <leader>0 should switch to buffer number 10
     local key = i == 10 and "0" or tostring(i)
-    keymaps[key] = {
-        string.format("<Plug>(cokeline-focus-%s)", i), "which_key_ignore"
-    }
+    which_key.add({ "<leader>"..key,
+                    string.format("<Plug>(cokeline-focus-%s)", i),
+                    hidden = true })
 end
 
 -- <leader><leader>LETTER should switch to buffer according to pick letter
-keymaps["<leader>"] = {
-    "<Plug>(cokeline-pick-focus)", "Switch to buffer by its \"pick letter\""
-}
-
-require("which-key").register(keymaps, { prefix = "<leader>" })
+which_key.add({ "<leader><leader>", "<Plug>(cokeline-pick-focus)",
+                desc = "Switch to buffer by its \"pick letter\"" })
