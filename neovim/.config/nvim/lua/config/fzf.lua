@@ -67,6 +67,10 @@ fzf_lua.setup({
         ["--info"] = "default"
     },
 
+    -- fzf-lua by default shows an icon for each LSP symbol, change it to only
+    -- show the type (e.g. "Function", "Variable") but without a matching icon
+    lsp = { symbols = { symbol_style = 3 } },
+
     grep = { rg_opts = rg_opts, actions = remove_ctrl_g_action.actions },
 
     -- Overwrite default actions for all providers that deal with files in
