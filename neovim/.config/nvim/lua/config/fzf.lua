@@ -67,9 +67,6 @@ fzf_lua.setup({
         ["--info"] = "default"
     },
 
-    -- Don't resume last search for live workspace symbols
-    lsp = { continue_last_search = false },
-
     grep = { rg_opts = rg_opts, actions = remove_ctrl_g_action.actions },
 
     -- Overwrite default actions for all providers that deal with files in
