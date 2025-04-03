@@ -7,14 +7,6 @@ local utils = require("config.utils")
 
 -- Set LSP related settings only after a language server is attached
 local on_attach = function(client, bufnr)
-    -- Disallow LSP server from setting highlights
-    -- It seems that for e.g. the Lua LSP server it ends up removing the
-    -- highlight for TODO or XXX. In the future I might end up adopting a
-    -- plugin to highlight stuff like this inside a comment, in which case I
-    -- could restore this.
-    -- Ref: https://old.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90
-    client.server_capabilities.semanticTokensProvider = nil
-
     -- Keymaps are sort of based on the README of nvim-lspconfig
 
     -- Keymaps in normal mode
@@ -181,5 +173,17 @@ require("config.utils").apply_highlights({
     LspReferenceRead = { fg = colors.title, style = "underline" },
     LspReferenceWrite = { fg = colors.title, style = "underline" },
 })
+
+-- Hide all semantic highlights set by LSP servers
+-- At the moment I am still not ready to adopt this. First it changes a bit the
+-- colors from what I am used to and second it overwrites todo marks (e.g. TODO
+-- or XXX). For the colors I guess eventually I should just adapt my
+-- colorscheme to these highlights (as well as obviously treesitter
+-- eventually). For todo I should either use a plugin that highlights these
+-- stuff or put the todo mark as higher priority.
+-- More info: :help lsp-semantic-highlight
+for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+    vim.api.nvim_set_hl(0, group, {})
+end
 
 return M
