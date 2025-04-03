@@ -104,22 +104,17 @@ M.clangd = {
     }
 }
 
--- Make the language server recognize the lua libraries
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
 M.lua_ls = {
     on_attach = on_attach,
-    cmd = { "lua-language-server" },
-    -- The settings are pretty much copied from nvim-lspconfig's documentation
     settings = { Lua = {
-        runtime = { version = 'LuaJIT', path = runtime_path },
-        -- Get the language server to recognize the `vim` global
-        diagnostics = { globals = {'vim'} },
+        runtime = { version = 'LuaJIT' },
         workspace = {
             -- Make the server aware of Neovim runtime files
-            library = vim.api.nvim_get_runtime_file("", true),
+            library = {
+                vim.env.VIMRUNTIME,
+                -- And also of the third party luv library
+                "${3rd}/luv/library"
+            },
             -- Don't automatically try to load support for 3rd party libraries
             checkThirdParty = false
         },
