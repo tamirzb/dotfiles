@@ -15,11 +15,6 @@ local on_attach = function(client, bufnr)
     -- Ref: https://old.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90
     client.server_capabilities.semanticTokensProvider = nil
 
-    -- Options to use when navigating diagnostics
-    local diag_goto_opts = { wrap = false }
-    local diag_goto_error_opts = vim.tbl_extend("force", diag_goto_opts,
-        { severity = vim.diagnostic.severity.ERROR })
-
     -- Keymaps are sort of based on the README of nvim-lspconfig
 
     -- Keymaps in normal mode
@@ -36,17 +31,21 @@ local on_attach = function(client, bufnr)
         -- long to be displayed fully)
         ["<leader>d"] = { vim.diagnostic.open_float, "Diagnostics info" },
         -- Remap the default diganoistics navigation keymaps to not wrap
-        ["[d"] = { function() vim.diagnostic.goto_prev(diag_goto_opts) end,
+        ["[d"] = { function() vim.diagnostic.jump({ count = -1 }) end,
                    "Prev diagnostic" },
-        ["]d"] = { function() vim.diagnostic.goto_next(diag_goto_opts) end,
+        ["]d"] = { function() vim.diagnostic.jump({ count = 1 }) end,
                    "Next diagnostic" },
         -- Navigate only between error diagnostic messages
         ["[D"] = {
-            function() vim.diagnostic.goto_prev(diag_goto_error_opts) end,
+            function() vim.diagnostic.jump({
+                count = -1, severity = vim.diagnostic.severity.ERROR
+            }) end,
             "Prev error diagnostic"
         },
         ["]D"] = {
-            function() vim.diagnostic.goto_next(diag_goto_error_opts) end,
+            function() vim.diagnostic.jump({
+                count = 1, severity = vim.diagnostic.severity.ERROR
+            }) end,
             "Next error diagnostic"
         },
 
@@ -147,6 +146,12 @@ vim.diagnostic.config({
         -- Hide the floating window pretty much when anything happens
         close_events = { "BufLeave", "CursorMoved", "InsertEnter",
                          "FocusLost" }
+    },
+    jump = {
+        -- Open the diagnostic floating window when jumping into one
+        float = true,
+        -- Don't wrap around when jumping between diagnostics
+        wrap = false
     }
 })
 
