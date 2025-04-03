@@ -41,6 +41,8 @@ M.lua_ls = {
 function M.setup()
     lspconfig.clangd.setup(M.clangd)
     lspconfig.lua_ls.setup(M.lua_ls)
+    lspconfig.pyright.setup({})
+    lspconfig.ruff.setup({})
 end
 
 vim.diagnostic.config({
