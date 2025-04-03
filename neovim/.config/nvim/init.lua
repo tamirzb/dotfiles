@@ -58,10 +58,14 @@ lazy.setup(
         "nvim-lualine/lualine.nvim",
         { "noib3/nvim-cokeline", dependencies = { "nvim-lua/plenary.nvim" } },
         "Pocco81/TrueZen.nvim",
+        -- This is available as an Arch package but for some reason if I
+        -- install it as an Arch package I don't get :Lsp* commands.
+        -- Eventually I could consider getting rid of this as all it has are
+        -- some default configurations for LSPs.
+        "neovim/nvim-lspconfig",
         -- Plugins available as Arch packages:
         -- "tpope/vim-fugitive",
         -- "tpope/vim-rhubarb",
-        -- "neovim/nvim-lspconfig",
     },
     {
         -- Clone full repository, makes it easier to debug plugins code
