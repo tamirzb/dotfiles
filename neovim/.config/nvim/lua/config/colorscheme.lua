@@ -4,42 +4,44 @@
 local colors = require("config.colors")
 
 local colorscheme = {
-    -- Syntax colors
-    Type = { fg = colors.orange },
-    StorageClass = { fg = colors.orange },
-    Structure = { fg = colors.aqua },
-    Comment = { fg = colors.comment },
-    Conditional = { fg = colors.blue },
-    Constant = { fg = colors.red },
-    Character = { fg = colors.red },
-    Number = { fg = colors.red },
-    Boolean = { fg = colors.red },
-    Float = { fg = colors.red },
-    Function = { fg = colors.yellow },
-    Identifier = { fg = colors.purple },
-    Statement = { fg = colors.blue },
-    Keyword = { fg = colors.blue },
-    Label = { fg = colors.blue },
-    Operator = { fg = colors.aqua },
-    Exception = { fg = colors.blue },
-    PreProc = { fg = colors.aqua },
-    Include = { fg = colors.aqua },
-    Define = { fg = colors.aqua },
-    Macro = { fg = colors.aqua },
-    Typedef = { fg = colors.orange },
-    PreCondit = { fg = colors.aqua },
-    Repeat = { fg = colors.blue },
-    String = { fg = colors.green },
-    Special = { fg = colors.green },
-    SpecialChar = { fg = colors.green },
-    Tag = { fg = colors.green },
-    Delimiter = { fg = colors.green },
-    SpecialComment = { fg = colors.green },
-    Debug = { fg = colors.green },
-    Underlined = { fg = colors.paleblue, style = "underline" },
-    Ignore = { fg = colors.disabled },
+    -- Syntax colors, based on old vim-hybrid
+    -- This is for how "old" vim did syntax, i.e. without treesitter/LSP, but
+    -- then treesitter & LSP still base themselves on these
+    Type = { fg = colors.orange }, -- int, long, char, etc.
+    StorageClass = { fg = colors.orange }, -- static, register, volatile, etc.
+    Structure = { fg = colors.aqua }, -- struct, union, enum, etc.
+    Comment = { fg = colors.comment }, -- any comment
+    Conditional = { fg = colors.blue }, -- if, then, else, endif, switch, etc.
+    Constant = { fg = colors.red }, -- any constant
+    Character = { fg = colors.red }, -- a character constant: 'c', '\n'
+    Number = { fg = colors.red }, -- a number constant: 234, 0xff
+    Boolean = { fg = colors.red }, -- a boolean constant: TRUE, false
+    Float = { fg = colors.red }, -- a floating point constant: 2.3e10
+    Function = { fg = colors.yellow }, -- function name
+    Identifier = { fg = colors.purple }, -- any variable name
+    Statement = { fg = colors.blue }, -- any statement
+    Keyword = { fg = colors.blue }, -- any other keyword
+    Label = { fg = colors.blue }, -- case, default, etc.
+    Operator = { fg = colors.aqua }, -- "sizeof", "+", "*", etc.
+    Exception = { fg = colors.blue }, -- try, catch, throw
+    PreProc = { fg = colors.aqua }, -- generic Preprocessor
+    Include = { fg = colors.aqua }, -- preprocessor #include
+    Define = { fg = colors.aqua }, -- preprocessor #define
+    Macro = { fg = colors.aqua }, -- same as Define
+    Typedef = { fg = colors.orange }, -- a typedef
+    PreCondit = { fg = colors.aqua }, -- preprocessor #if, #else, #endif, etc.
+    Repeat = { fg = colors.blue }, -- for, do, while, etc.
+    String = { fg = colors.green }, -- a string constant: "this is a string"
+    Special = { fg = colors.green }, -- any special symbol
+    SpecialChar = { fg = colors.green }, -- special character in a constant
+    Tag = { fg = colors.green }, -- you can use CTRL-] on this
+    Delimiter = { fg = colors.green }, -- character that needs attention
+    SpecialComment = { fg = colors.green }, -- special things inside a comment
+    Debug = { fg = colors.green }, -- debugging statements
+    Underlined = { fg = colors.paleblue, style = "underline" }, -- e.g. links
+    Ignore = { fg = colors.disabled }, -- left blank, hidden
     Error = { fg = colors.error, style = "bold,underline" },
-    Todo = { fg = colors.yellow },
+    Todo = { fg = colors.yellow }, -- e.g. TODO, XXX, FIXME
 
     htmlLink = { fg = colors.paleblue, style = "underline" },
     htmlH1 = { fg = colors.aqua, style = "bold" },
