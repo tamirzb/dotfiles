@@ -30,7 +30,7 @@ require("which-key").setup({
 
 -- Set colors for the which-key window
 require("config.utils").apply_highlights({
-    WhichKey = { fg = colors.yellow, style = "bold"},
+    WhichKey = { fg = colors.yellow, bold = true},
     WhichKeyGroup = { fg = colors.inactive },
     WhichKeyDesc = { fg = colors.blue },
     WhichKeySeperator = { fg = colors.text },

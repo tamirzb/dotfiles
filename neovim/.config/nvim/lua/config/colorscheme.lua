@@ -38,20 +38,20 @@ local colorscheme = {
     Delimiter = { fg = colors.green }, -- character that needs attention
     SpecialComment = { fg = colors.green }, -- special things inside a comment
     Debug = { fg = colors.green }, -- debugging statements
-    Underlined = { fg = colors.paleblue, style = "underline" }, -- e.g. links
+    Underlined = { fg = colors.paleblue, underline = true }, -- e.g. links
     Ignore = { fg = colors.disabled }, -- left blank, hidden
-    Error = { fg = colors.error, style = "bold,underline" },
+    Error = { fg = colors.error, bold = true, underline = true },
     Todo = { fg = colors.yellow }, -- e.g. TODO, XXX, FIXME
 
-    htmlLink = { fg = colors.paleblue, style = "underline" },
-    htmlH1 = { fg = colors.aqua, style = "bold" },
-    htmlH2 = { fg = colors.red, style = "bold" },
-    htmlH3 = { fg = colors.green, style = "bold" },
-    htmlH4 = { fg = colors.yellow, style = "bold" },
-    htmlH5 = { fg = colors.purple, style = "bold" },
-    markdownH1 = { fg = colors.aqua, style = "bold" },
-    markdownH2 = { fg = colors.red, style = "bold" },
-    markdownH3 = { fg = colors.green, style = "bold" },
+    htmlLink = { fg = colors.paleblue, underline = true },
+    htmlH1 = { fg = colors.aqua, bold = true },
+    htmlH2 = { fg = colors.red, bold = true },
+    htmlH3 = { fg = colors.green, bold = true },
+    htmlH4 = { fg = colors.yellow, bold = true },
+    htmlH5 = { fg = colors.purple, bold = true },
+    markdownH1 = { fg = colors.aqua, bold = true },
+    markdownH2 = { fg = colors.red, bold = true },
+    markdownH3 = { fg = colors.green, bold = true },
     markdownH1Delimiter = { fg = colors.aqua },
     markdownH2Delimiter = { fg = colors.red },
     markdownH3Delimiter = { fg = colors.green },
@@ -72,13 +72,13 @@ local colorscheme = {
     -- Color for lines that were deleted
     DiffDelete = { fg = colors.diff_delete, bg = colors.diff_delete },
     ErrorMsg = { fg = colors.error },
-    Folded = { fg = colors.disabled, style = "italic" },
+    Folded = { fg = colors.disabled, italic = true },
     FoldColumn = { fg = colors.inactive },
     IncSearch = { fg = colors.title, bg = colors.selection,
-                  style = "underline" },
+                  underline = true },
     LineNr = { fg = colors.line_numbers, bg = colors.background },
     CursorLineNr = { fg = colors.yellow, bg = colors.background },
-    MatchParen = { fg = colors.yellow, style = "bold" },
+    MatchParen = { fg = colors.yellow, bold = true },
     ModeMsg = { fg = colors.yellow },
     MoreMsg = { fg = colors.yellow },
     NonText = { fg = colors.disabled },
@@ -87,7 +87,7 @@ local colorscheme = {
     PmenuThumb = { bg = colors.selection },
     PmenuSel = { fg = colors.window, bg = colors.blue },
     Question = { fg = colors.green },
-    Search = { fg = colors.title, bg = colors.selection, style = "bold" },
+    Search = { fg = colors.title, bg = colors.selection, bold = true },
     SignColumn = { fg = colors.text, bg = colors.background },
     SpecialKey = { fg = colors.purple },
     Title = { fg = colors.yellow },
@@ -95,7 +95,7 @@ local colorscheme = {
     VisualNOS = { bg = colors.selection },
     WarningMsg = { fg = colors.yellow },
     Whitespace = { fg = colors.selection },
-    WildMenu = { fg = colors.orange, style = "bold" },
+    WildMenu = { fg = colors.orange, bold = true },
     CursorColumn = { bg = colors.current },
     CursorLine = { bg = colors.current },
     VertSplit = { fg = colors.border },
@@ -108,10 +108,10 @@ local colorscheme = {
     diffNewFile = { fg = colors.title },
 
     -- Colors for spell checking
-    SpellBad = { fg = colors.error, style = "italic,underline" },
-    SpellCap = { fg = colors.blue, style = "italic,underline" },
-    SpellLocal = { fg = colors.aqua, style = "italic,underline" },
-    SpellRare = { fg = colors.purple, style = "italic,underline" },
+    SpellBad = { fg = colors.error, italic = true, underline = true },
+    SpellCap = { fg = colors.blue, italic = true, underline = true },
+    SpellLocal = { fg = colors.aqua, italic = true, underline = true },
+    SpellRare = { fg = colors.purple, italic = true, underline = true },
 
     -- Colors for :checkhealth
     healthError = { fg = colors.error },
