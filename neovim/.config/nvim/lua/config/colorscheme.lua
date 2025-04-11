@@ -119,8 +119,5 @@ local colorscheme = {
     healthWarning = { fg = colors.yellow },
 }
 
--- Allow choosing from the whole 24bit color range
-vim.o.termguicolors = true
-
 -- Apply the colorscheme
 require("config.utils").apply_highlights(colorscheme)
