@@ -1,0 +1,52 @@
+[pull]
+    # Always rebase on pull
+    rebase = true
+
+[fetch]
+    # On fetch, prune local references for branches/tags that were deleted on
+    # the remote
+    prune = true
+    pruneTags = true
+    # Do this for all remotes
+    all = true
+
+[push]
+    # On push, if upstream is not set, assume it's the remote branch with the
+    # same name
+    autoSetupRemote = true
+    # Automatically push all local tags that aren't on the remote when
+    # doing a push
+    followTags = true
+
+[commit]
+    # Show diff when editing a commit
+    verbose = true
+
+[rebase]
+    # Always squash commits added with --fixup on rebase
+    autoSquash = true
+    # Force-update branches that point to commits that are being rebased
+    updateRefs = true
+
+# When solving a conflict (on rebase) record the solution and then use it if
+# ever encountering the same conflict
+[rerere]
+    enabled = true
+    autoupdate = true
+
+[branch]
+    # Sort branches (on `git branch`) based on most recent commit
+    sort = -committerdate
+
+[tag]
+    # Sort tags according to versions (e.g. 0.10 is higher than 0.9) starting
+    # from the highest version
+    sort = -version:refname
+
+[diff]
+    # Supposed to make the diff better
+    algorithm = histogram
+    # Use different colors for lines that were only moved and not edited
+    colorMoved = plain
+    # Detect if a file has been renamed (can be more expensive)
+    renames = true
