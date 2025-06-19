@@ -63,9 +63,8 @@ lazy.setup(
         -- Eventually I could consider getting rid of this as all it has are
         -- some default configurations for LSPs.
         "neovim/nvim-lspconfig",
-        -- Plugins available as Arch packages:
-        -- "tpope/vim-fugitive",
-        -- "tpope/vim-rhubarb",
+        "tpope/vim-fugitive",
+        "tpope/vim-rhubarb",
     },
     {
         -- Clone full repository, makes it easier to debug plugins code
