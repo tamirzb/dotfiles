@@ -1,69 +1,31 @@
 #!/usr/bin/fish
 
 #
-# This script gets the number of Arch and AUR package updates available, and
-# prints the results in a waybar format
+# This script monitors the JSON file created by arch_updates_monitor.py using
+# inotify and prints the content whenever it changes.
 #
 
+set updates_file "$XDG_RUNTIME_DIR/arch_updates_monitor.json"
 
-# Print a waybar-format output
-function print_output -a text tooltip class
-    echo "{\"text\": \"$text\", \"tooltip\": \"$tooltip\"," \
-           "\"class\": \"$class\" }"
-end
-
-# Print the result of an updates check
-function print_updates -a arch aur
-    if test $arch -gt 0
-        set class "arch"
-        set tooltip "Arch updates: $arch"
-    end
-    if test $aur -gt 0
-        set -a class "aur"
-        set -a tooltip "AUR updates: $aur"
-    end
-
-    if test -z "$class"
-        print_output "" \
-                     "No updates found\nLast checked: "(date +"%H:%M") \
-                     "none"
-    else
-        print_output "" (string join "\n" $tooltip) (string join "_" $class)
-    end
-end
-
-
-# If we don't have an internet connection, wait until we do
-while not ping -q -w 2 -c 1 8.8.8.8 &> /dev/null
-    print_output "" "" ""
-    sleep 20
-end
-
-
-# Unfortunately waybar executes this script once per output, so we need to make
-# sure we only actually check updates once. We do this by having the main
-# instance of the script (first one, who actually does the update checking)
-# lock a file via flock, and then when it's done the other instances can just
-# read that file.
-set updates_file /tmp/waybar_updates-(id -u)
-set lock_file "$updates_file".lock
-
-
-print_output  "Checking updates..." loading
-
-begin
-    # Try to obtain the lock. If it fails, it means another instance is already
-    # checking updates
-    if flock -n 9
-        # No other instance is running, check for updates ourselves
-        set updates_arch (checkupdates | wc -l)
-        # Count non-empty lines from pikaur
-        set updates_aur (pikaur -Qua 2> /dev/null | grep "\S" | wc -l)
-        print_updates $updates_arch $updates_aur | tee $updates_file
-    else
-        # Another instance is running, wait for it to finish then read its
-        # result
-        flock 9
+# Function to read and print the JSON file
+function print_json_content
+    if test -f $updates_file
         cat $updates_file
+    else
+        # File doesn't exist yet
+        echo '{"text": "!", "tooltip": "Updates json file not available", "class": "error"}'
     end
-end 9>$lock_file
+end
+
+# Print initial content
+print_json_content
+
+# Monitor the file for changes using inotifywait
+# -m: monitor continuously
+# -e modify: watch for file modifications
+# -e create: watch for file creation (in case it doesn't exist initially)
+# -e move: watch for file moves (atomic writes)
+# --format '': suppress default output format
+inotifywait -m -e modify -e create -e move --format '' "$updates_file" 2>/dev/null | while read
+    print_json_content
+end

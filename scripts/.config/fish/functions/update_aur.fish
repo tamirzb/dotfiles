@@ -1,3 +1,3 @@
 function update_aur
-    pikaur -Syua && pkill -SIGRTMIN+8 waybar
+    pikaur -Syua && updates_recheck
 end

@@ -1,3 +1,3 @@
 function update_arch
-    sudo pacman -Syu && pkill -SIGRTMIN+8 waybar
+    sudo pacman -Syu && updates_recheck
 end

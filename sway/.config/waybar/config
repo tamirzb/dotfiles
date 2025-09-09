@@ -152,14 +152,11 @@
     },
 
     "custom/updates": {
-        // Run once every hour
-        "restart-interval": 3600,
         "exec": "$HOME/.config/waybar/updates.fish",
         "exec-on-event": false,
         "return-type": "json",
-        "signal": 8,
         // Click to re-check updates
-        "on-click": "pkill -SIGRTMIN+8 waybar",
+        "on-click": "fish -c updates_recheck",
         // Right click to update Arch packages
         "on-click-right": "alacritty -e fish -i -C update_arch",
         // Middle click to update AUR packages
