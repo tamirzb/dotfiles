@@ -115,7 +115,7 @@ class UpdatesMonitor:
 
         except Exception as e:
             self._print(f"Error during update check: {e}")
-            self._write_json("!", "Error checking updates\n{e}", "error")
+            self._write_json("!", f"Error checking updates\n{e}", "error")
 
     def _wait_with_timeout(self, timeout_seconds):
         """Wait for signal with timeout using alarm"""
@@ -159,7 +159,7 @@ class UpdatesMonitor:
             self._print(f"Unexpected error: {e}")
             self._write_json(
                 "!",
-                "Unexpected error, terminating updates monitor\n{e}",
+                f"Unexpected error, terminating updates monitor\n{e}",
                 "error",
             )
             raise
