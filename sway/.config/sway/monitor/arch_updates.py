@@ -1,42 +1,19 @@
-#!/usr/bin/env python3
-
-
 """
-A Python daemon that continuously monitors Arch and AUR package updates.
-Writes the output to $XDG_RUNTIME_DIR for waybar consumption.
+Continuously monitors Arch and AUR package updates.
 """
 
 
 import asyncio
-import json
-import os
 import signal
-import sys
 from datetime import datetime
-from pathlib import Path
+
+from .base_monitor import BaseMonitor
 
 
-class UpdatesMonitor:
+class UpdatesMonitor(BaseMonitor):
     def __init__(self):
+        super().__init__("arch_updates_monitor.json")
         self.signal_event = asyncio.Event()
-
-    def _print(self, *args, **kwargs):
-        """Print with flush=True to ensure immediate output"""
-        print(*args, **kwargs, flush=True)
-
-    def _write_json(self, text="", tooltip="", class_name=""):
-        """Write waybar JSON format to output file"""
-        data = {"text": text, "tooltip": tooltip, "class": class_name}
-
-        try:
-            with open(self.output_file, "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False)
-                f.write("\n")
-        except Exception as e:
-            # If we have an error writing the json file we have no way to
-            # communicate, might as well exit
-            self._print(f"Unexpected error while writing json file: {e}")
-            sys.exit(1)
 
     async def _get_arch_updates(self):
         """Get number of Arch updates"""
@@ -79,28 +56,26 @@ class UpdatesMonitor:
 
     async def _check_updates(self):
         """Check for updates and write result"""
-        self._print("Checking for updates...")
-        self._write_json("", "Checking updates...", "checking")
+        self.log("Checking for updates...")
+        self.write_json("", "Checking updates...", "checking")
 
         try:
             arch_updates, aur_updates = await asyncio.gather(
                 self._get_arch_updates(), self._get_aur_updates()
             )
 
-            self._print(
+            self.log(
                 f"Found {arch_updates} Arch updates, {aur_updates} AUR updates"
             )
 
             if arch_updates == 0 and aur_updates == 0:
-                # No updates
                 current_time = datetime.now().strftime("%H:%M")
-                self._write_json(
+                self.write_json(
                     "",
                     f"No updates found\nLast checked: {current_time}",
                     "none",
                 )
             else:
-                # Updates available
                 tooltips = []
                 classes = []
 
@@ -112,19 +87,16 @@ class UpdatesMonitor:
                     tooltips.append(f"AUR updates: {aur_updates}")
                     classes.append("aur")
 
-                self._write_json("", "\n".join(tooltips), "_".join(classes))
+                self.write_json("", "\n".join(tooltips), "_".join(classes))
 
         except Exception as e:
-            self._print(f"Error during update check: {e}")
-            self._write_json("!", f"Error checking updates\n{e}", "error")
+            self.log(f"Error during update check: {e}")
+            self.write_json("!", f"Error checking updates\n{e}", "error")
 
     async def run(self):
         """Main loop"""
         try:
-            self._print("Starting waybar updates monitor")
-
-            xdg_runtime_dir = Path(os.environ["XDG_RUNTIME_DIR"])
-            self.output_file = xdg_runtime_dir / "arch_updates_monitor.json"
+            self.log("Starting waybar updates monitor")
 
             loop = asyncio.get_running_loop()
             loop.add_signal_handler(signal.SIGUSR1, self.signal_event.set)
@@ -133,26 +105,19 @@ class UpdatesMonitor:
             while True:
                 await self._check_updates()
 
-                self._print("Waiting for next check (1 hour) or signal...")
+                self.log("Waiting for next check (1 hour) or signal...")
                 self.signal_event.clear()
                 try:
                     await asyncio.wait_for(self.signal_event.wait(), timeout=3600)
-                    self._print(
-                        "Received signal, checking updates immediately"
-                    )
+                    self.log("Received signal, checking updates immediately")
                 except asyncio.TimeoutError:
                     pass
 
         except Exception as e:
-            self._print(f"Unexpected error: {e}")
-            self._write_json(
+            self.log(f"Unexpected error: {e}")
+            self.write_json(
                 "!",
                 f"Unexpected error, terminating updates monitor\n{e}",
                 "error",
             )
             raise
-
-
-if __name__ == "__main__":
-    monitor = UpdatesMonitor()
-    asyncio.run(monitor.run())

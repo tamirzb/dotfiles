@@ -1,7 +1,7 @@
 #!/usr/bin/fish
 
 #
-# This script monitors the JSON file created by arch_updates_monitor.py using
+# This script monitors the JSON file created by the updates monitor using
 # inotify and prints the content whenever it changes.
 #
 
