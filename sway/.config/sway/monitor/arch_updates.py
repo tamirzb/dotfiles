@@ -1,5 +1,7 @@
 """
-Continuously monitors Arch and AUR package updates.
+# A Python daemon that continuously monitors Arch and AUR package updates. It
+# runs in the background checking for updates hourly or instantly via `pkill
+# -USR1` and writes JSON status to `$XDG_RUNTIME_DIR` for waybar consumption.
 """
 
 
@@ -8,12 +10,14 @@ import signal
 from datetime import datetime
 
 from .base_monitor import BaseMonitor
+from .internet import InternetMonitor
 
 
 class UpdatesMonitor(BaseMonitor):
-    def __init__(self):
+    def __init__(self, internet_monitor: InternetMonitor):
         super().__init__("arch_updates_monitor.json")
         self.signal_event = asyncio.Event()
+        self.internet_monitor = internet_monitor
 
     async def _get_arch_updates(self):
         """Get number of Arch updates"""
@@ -103,6 +107,10 @@ class UpdatesMonitor(BaseMonitor):
 
             # Main loop - check every hour or on signal
             while True:
+                if not self.internet_monitor.internet_working.is_set():
+                    self.write_json("", "", "")
+                    await self.internet_monitor.internet_working.wait()
+
                 await self._check_updates()
 
                 self.log("Waiting for next check (1 hour) or signal...")
@@ -117,7 +125,7 @@ class UpdatesMonitor(BaseMonitor):
             self.log(f"Unexpected error: {e}")
             self.write_json(
                 "!",
-                f"Unexpected error, terminating updates monitor\n{e}",
+                f"Unexpected error, terminating monitor\n{e}",
                 "error",
             )
             raise

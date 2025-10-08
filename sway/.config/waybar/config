@@ -135,7 +135,6 @@
     },
 
     "custom/internet": {
-        "interval": 8,
         "exec": "$HOME/.config/waybar/internet.fish",
         "return-type": "json"
     },
