@@ -7,27 +7,22 @@ Writes the output to $XDG_RUNTIME_DIR for waybar consumption.
 """
 
 
+import asyncio
 import json
 import os
 import signal
-import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
 
 
 class UpdatesMonitor:
+    def __init__(self):
+        self.signal_event = asyncio.Event()
+
     def _print(self, *args, **kwargs):
         """Print with flush=True to ensure immediate output"""
         print(*args, **kwargs, flush=True)
-
-    def _handle_signal(self, signum, frame):
-        """Handle USR1 signal to trigger immediate update check"""
-        self._print(f"Received signal {signum}, checking updates immediately")
-
-    def _handle_alarm(self, signum, frame):
-        """Handle alarm timeout signal"""
-        pass
 
     def _write_json(self, text="", tooltip="", class_name=""):
         """Write waybar JSON format to output file"""
@@ -43,48 +38,54 @@ class UpdatesMonitor:
             self._print(f"Unexpected error while writing json file: {e}")
             sys.exit(1)
 
-    def _check_internet(self):
-        """Check internet connectivity"""
-        try:
-            result = subprocess.run(
-                ["ping", "-q", "-w", "2", "-c", "1", "8.8.8.8"],
-                stdout=subprocess.DEVNULL,
-                timeout=5,
-            )
-            return result.returncode == 0
-        except Exception as e:
-            self._print(f"Internet check failed: {e}")
-            return False
-
-    def _get_arch_updates(self):
+    async def _get_arch_updates(self):
         """Get number of Arch updates"""
-        result = subprocess.run(
-            ["checkupdates"], capture_output=True, text=True, timeout=90
+        proc = await asyncio.create_subprocess_exec(
+            "checkupdates",
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
         )
-        lines = result.stdout.strip().split("\n")
-        return len([line for line in lines if line.strip()])
+        try:
+            stdout, stderr = await asyncio.wait_for(
+                proc.communicate(), timeout=90
+            )
+            lines = stdout.decode().strip().split("\n")
+            return len([line for line in lines if line.strip()])
+        except asyncio.TimeoutError:
+            proc.kill()
+            await proc.wait()
+            raise RuntimeError("Arch updates check timed out")
 
-    def _get_aur_updates(self):
+    async def _get_aur_updates(self):
         """Get number of AUR updates"""
-        result = subprocess.run(
-            ["pikaur", "-Qua"],
-            capture_output=True,
-            text=True,
-            timeout=90,
-            check=True,
+        proc = await asyncio.create_subprocess_exec(
+            "pikaur",
+            "-Qua",
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
         )
-        # Count non-empty lines
-        lines = result.stdout.strip().split("\n")
-        return len([line for line in lines if line.strip()])
+        try:
+            stdout, stderr = await asyncio.wait_for(
+                proc.communicate(), timeout=90
+            )
+            if proc.returncode != 0:
+                raise Exception(f"pikaur exited with code {proc.returncode}")
+            lines = stdout.decode().strip().split("\n")
+            return len([line for line in lines if line.strip()])
+        except asyncio.TimeoutError:
+            proc.kill()
+            await proc.wait()
+            raise RuntimeError("AUR check timed out")
 
-    def _check_updates(self):
+    async def _check_updates(self):
         """Check for updates and write result"""
         self._print("Checking for updates...")
         self._write_json("", "Checking updates...", "checking")
 
         try:
-            arch_updates = self._get_arch_updates()
-            aur_updates = self._get_aur_updates()
+            arch_updates, aur_updates = await asyncio.gather(
+                self._get_arch_updates(), self._get_aur_updates()
+            )
 
             self._print(
                 f"Found {arch_updates} Arch updates, {aur_updates} AUR updates"
@@ -117,24 +118,7 @@ class UpdatesMonitor:
             self._print(f"Error during update check: {e}")
             self._write_json("!", f"Error checking updates\n{e}", "error")
 
-    def _wait_with_timeout(self, timeout_seconds):
-        """Wait for signal with timeout using alarm"""
-        # Wait for any signal, with a maximum of timeout_seconds as a SIGALRM
-        # will be sent after that
-        signal.alarm(timeout_seconds)
-        signal.pause()
-        signal.alarm(0)  # Cancel alarm
-
-    def _wait_for_internet(self):
-        """Wait for internet connection with 20s retry"""
-        while not self._check_internet():
-            self._print("No internet connection, waiting...")
-            self._write_json("", "", "")
-
-            # Wait 20 seconds or until USR1 signal received
-            self._wait_with_timeout(20)
-
-    def run(self):
+    async def run(self):
         """Main loop"""
         try:
             self._print("Starting waybar updates monitor")
@@ -142,19 +126,23 @@ class UpdatesMonitor:
             xdg_runtime_dir = Path(os.environ["XDG_RUNTIME_DIR"])
             self.output_file = xdg_runtime_dir / "arch_updates_monitor.json"
 
-            # Setup signal handlers
-            signal.signal(signal.SIGUSR1, self._handle_signal)
-            signal.signal(signal.SIGALRM, self._handle_alarm)
+            loop = asyncio.get_running_loop()
+            loop.add_signal_handler(signal.SIGUSR1, self.signal_event.set)
 
             # Main loop - check every hour or on signal
             while True:
-                self._wait_for_internet()
+                await self._check_updates()
 
-                self._check_updates()
-
-                # Wait for 1 hour (3600 seconds) or until USR1 signal
                 self._print("Waiting for next check (1 hour) or signal...")
-                self._wait_with_timeout(3600)
+                self.signal_event.clear()
+                try:
+                    await asyncio.wait_for(self.signal_event.wait(), timeout=3600)
+                    self._print(
+                        "Received signal, checking updates immediately"
+                    )
+                except asyncio.TimeoutError:
+                    pass
+
         except Exception as e:
             self._print(f"Unexpected error: {e}")
             self._write_json(
@@ -167,4 +155,4 @@ class UpdatesMonitor:
 
 if __name__ == "__main__":
     monitor = UpdatesMonitor()
-    monitor.run()
+    asyncio.run(monitor.run())
