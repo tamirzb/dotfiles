@@ -160,7 +160,7 @@ class InternetMonitor(BaseMonitor):
             self.internet_204 = ConnectivityStatus.FAILED
 
     async def _run_multiple_pings(
-        self, ttl: Optional[int], count: int, delay: float = 0.2
+        self, ttl: Optional[int], count: int, delay: float = 0.5
     ) -> set:
         """
         Create multiple ping tasks and return the set of running tasks.
@@ -198,7 +198,7 @@ class InternetMonitor(BaseMonitor):
         internet_started = False
         http_started = False
 
-        gateway_tasks = await self._run_multiple_pings(ttl=1, count=10)
+        gateway_tasks = await self._run_multiple_pings(ttl=1, count=5)
         all_running_tasks.update(gateway_tasks)
 
         while all_running_tasks:
@@ -218,7 +218,7 @@ class InternetMonitor(BaseMonitor):
 
                     if result and not internet_started:
                         internet_tasks = await self._run_multiple_pings(
-                            ttl=None, count=5
+                            ttl=None, count=3
                         )
                         all_running_tasks.update(internet_tasks)
                         internet_started = True
