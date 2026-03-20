@@ -21,9 +21,19 @@ local get_lazy = function()
         end
 
         -- User agreed, clone lazy.nvim
-        vim.fn.system({ "git", "clone",
-                        "https://github.com/folke/lazy.nvim.git",
-                        "--branch=stable", lazy_path })
+        local clone = vim.system({
+            "git",
+            "clone",
+            "https://github.com/folke/lazy.nvim.git",
+            "--branch=stable",
+            lazy_path,
+        }, { text = true }):wait()
+        if clone.code ~= 0 then
+            vim.api.nvim_echo({{
+                "Failed to clone lazy.nvim: " .. clone.stderr,
+            }}, true, { err = true })
+            return nil
+        end
     end
 
     -- Load lazy.nvim from the neovim directory
@@ -85,14 +95,14 @@ local utils = require("config.utils")
 local which_key = require("which-key")
 
 -- Replace ; and :
-utils.set_keymap("n", ";", ":", false, true)
-utils.set_keymap("n", ":", ";", false, true)
+vim.keymap.set("n", ";", ":", { silent = false })
+vim.keymap.set("n", ":", ";", { silent = false })
 
 -- Exit input mode with Ctrl+c
-utils.set_keymap("i", "<C-c>", "<Esc>")
+vim.keymap.set("i", "<C-c>", "<Esc>")
 
 -- Also copy file name on Ctrl+G
-utils.set_keymap("n", "<C-g>", "<cmd>let @+ = expand('%')<CR><C-g>")
+vim.keymap.set("n", "<C-g>", "<cmd>let @+ = expand('%')<CR><C-g>")
 
 -- Enable using the mouse to control things
 vim.o.mouse = "a"
@@ -122,8 +132,12 @@ vim.g.loaded_node_provider = 0
 
 -- If inside a virtualenv, still use the main system python
 if os.getenv("VIRTUAL_ENV") then
-    local cmd = "which -a python3 | head -n2 | tail -n1"
-    vim.g.python3_host_prog = vim.fn.system(cmd):gsub("\n", "")
+    local which = vim.system({ "which", "-a", "python3" },
+                             { text = true }):wait()
+    if which.code == 0 then
+        local paths = vim.split(vim.trim(which.stdout), "\n", { plain = true })
+        vim.g.python3_host_prog = paths[2] or paths[1]
+    end
 end
 
 -- Git keymaps

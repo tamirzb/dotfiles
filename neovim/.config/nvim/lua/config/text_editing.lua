@@ -1,9 +1,6 @@
 -- All configuration related to the core text editing part of neovim
 
 
-local utils = require("config.utils")
-
-
 --
 -- Indentation/whitespace
 --
@@ -15,8 +12,8 @@ vim.o.softtabstop = 4
 vim.o.tabstop = 4
 
 -- Repeatedly use > and < to indent in visual mode
-utils.set_keymap("v", "<", "<gv")
-utils.set_keymap("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
 
 -- When moving indentation (< and > in visual mode) always round to the nearest
 -- tabstop
@@ -72,8 +69,10 @@ vim.o.linebreak = true
 -- Use j and k even on the same (wrapped) line, but not when navigating to a
 -- specific line with a number
 for _, mode in ipairs({"n", "x"}) do
-    utils.set_keymap(mode, "j", "v:count == 0 ? 'gj' : 'j'", true)
-    utils.set_keymap(mode, "k", "v:count == 0 ? 'gk' : 'k'", true)
+    vim.keymap.set(mode, "j", "v:count == 0 ? 'gj' : 'j'",
+                   { expr = true })
+    vim.keymap.set(mode, "k", "v:count == 0 ? 'gk' : 'k'",
+                   { expr = true })
 end
 
 
@@ -82,11 +81,11 @@ end
 --
 
 -- Map Ctrl+j/k to add new lines without going to insert mode
-utils.set_keymap("n", "<C-j>", "o<Esc>")
-utils.set_keymap("n", "<C-k>", "O<Esc>")
+vim.keymap.set("n", "<C-j>", "o<Esc>")
+vim.keymap.set("n", "<C-k>", "O<Esc>")
 
 -- Map Alt+j to add a <CR> without going to insert mode
-utils.set_keymap("n", "<M-j>", "a<CR><Esc>")
+vim.keymap.set("n", "<M-j>", "a<CR><Esc>")
 
 
 --
