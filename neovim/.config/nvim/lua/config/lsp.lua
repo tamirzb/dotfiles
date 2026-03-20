@@ -145,7 +145,7 @@ end, })
 require("config.utils").apply_highlights({
     DiagnosticError = { fg = colors.error },
     DiagnosticWarn = { fg = colors.yellow },
-    DiagnosticInformation = { fg = colors.paleblue },
+    DiagnosticInfo = { fg = colors.paleblue },
     DiagnosticHint = { fg = colors.purple },
     DiagnosticVirtualTextError = { fg = colors.error },
     DiagnosticFloatingError = { fg = colors.error },

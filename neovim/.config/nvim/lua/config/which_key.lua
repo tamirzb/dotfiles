@@ -33,6 +33,6 @@ require("config.utils").apply_highlights({
     WhichKey = { fg = colors.yellow, bold = true},
     WhichKeyGroup = { fg = colors.inactive },
     WhichKeyDesc = { fg = colors.blue },
-    WhichKeySeperator = { fg = colors.text },
+    WhichKeySeparator = { fg = colors.text },
     WhichKeyFloat = { bg = colors.window }
 })
