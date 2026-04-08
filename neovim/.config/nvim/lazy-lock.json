@@ -3,7 +3,7 @@
   "fzf-lua": { "branch": "main", "commit": "98fb51f2820ead2f8e3c37a7071d7a113b07e2c1" },
   "lualine.nvim": { "branch": "master", "commit": "834a5817f7e2be22a7062620032d49c600c35fab" },
   "nvim-cokeline": { "branch": "main", "commit": "9fbed130683b7b6f73198c09e35ba4b33f547c08" },
-  "nvim-lspconfig": { "branch": "master", "commit": "442e077e326ac467daf9cd63e72120fb450a850b" },
+  "nvim-lspconfig": { "branch": "master", "commit": "bedca8b426b2fee0ccac596d167d71bbe971253f" },
   "nvim-projectconfig": { "branch": "master", "commit": "db11fd7d51f7180ede292a7584eb62bb48f91863" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "vim-bbye": { "branch": "master", "commit": "25ef93ac5a87526111f43e5110675032dbcacf56" },

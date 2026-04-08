@@ -1,6 +1,5 @@
 local M = {}
 
-local lspconfig = require('lspconfig')
 local fzf_lua = require('fzf-lua')
 local colors = require("config.colors")
 local utils = require("config.utils")
@@ -39,10 +38,9 @@ M.lua_ls = {
 
 -- Setup all language servers
 function M.setup()
-    lspconfig.clangd.setup(M.clangd)
-    lspconfig.lua_ls.setup(M.lua_ls)
-    lspconfig.pyright.setup({})
-    lspconfig.ruff.setup({})
+    vim.lsp.config("clangd", M.clangd)
+    vim.lsp.config("lua_ls", M.lua_ls)
+    vim.lsp.enable({ "clangd", "lua_ls", "pyright", "ruff" })
 end
 
 vim.diagnostic.config({
@@ -65,7 +63,7 @@ vim.diagnostic.config({
     },
     jump = {
         -- Open the diagnostic floating window when jumping into one
-        float = true,
+        on_jump = function() vim.diagnostic.open_float() end,
         -- Don't wrap around when jumping between diagnostics
         wrap = false
     }

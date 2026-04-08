@@ -130,16 +130,6 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
 
--- If inside a virtualenv, still use the main system python
-if os.getenv("VIRTUAL_ENV") then
-    local which = vim.system({ "which", "-a", "python3" },
-                             { text = true }):wait()
-    if which.code == 0 then
-        local paths = vim.split(vim.trim(which.stdout), "\n", { plain = true })
-        vim.g.python3_host_prog = paths[2] or paths[1]
-    end
-end
-
 -- Git keymaps
 which_key.add({ "<leader>g", group = "Git" })
 utils.which_key_register({
