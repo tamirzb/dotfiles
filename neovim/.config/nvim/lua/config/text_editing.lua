@@ -110,6 +110,8 @@ vim.o.inccommand = "split"
 
 -- Always show complete menu, even if has only one option
 vim.o.completeopt = "menuone"
+-- Show popup window next to complete window with extra info (when available)
+vim.opt.completeopt:append("popup")
 
 -- By default fold according to syntax
 vim.o.foldmethod = "syntax"
