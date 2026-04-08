@@ -146,7 +146,7 @@ require('lualine').setup({
     },
 
     -- Display statusline of the following nicely
-    extensions = { "quickfix", "mundo", "man" }
+    extensions = { "quickfix", "man" }
 })
 
 -- Since the status line shows the mode, there is no need to also show this in

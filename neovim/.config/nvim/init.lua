@@ -61,7 +61,6 @@ lazy.setup(
         -- default before being able to read our configured one, load it lazily
         -- only after the keybinding is pressed
         { "simeji/winresizer", keys = "<leader>r" },
-        "simnalamburt/vim-mundo",
         "windwp/nvim-projectconfig",
         "folke/which-key.nvim",
         "ibhagwan/fzf-lua",
@@ -90,6 +89,9 @@ lazy.setup(
         }
     }
 )
+
+-- Load the builtin undotree plugin so :Undotree is available.
+vim.cmd.packadd("nvim.undotree")
 
 local utils = require("config.utils")
 local which_key = require("which-key")
