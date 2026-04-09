@@ -110,7 +110,18 @@ vim.api.nvim_create_autocmd("LspAttach", { callback = function(args)
         -- Note that the tags keybindings are overwriting the existing ones
         -- that don't use LSP
         ["<leader>t"] = {
-            fzf_lua.lsp_document_symbols,
+            function()
+                fzf_lua.lsp_document_symbols({
+                    -- fzf-lua seems to include line/column before the symbol
+                    -- text, hide those fields and show only the symbol.
+                    fzf_opts = {
+                        ["--delimiter"] = "[:\t]",
+                        ["--with-nth"] = "-1",
+                        ["--nth"] = "-1"
+                    },
+                    line_field_index = "{2}"
+                })
+            end,
             "Fuzzy search current buffer symbols"
         },
         ["<leader>T"] = {
