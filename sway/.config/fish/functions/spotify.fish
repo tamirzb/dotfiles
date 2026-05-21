@@ -1,3 +1,4 @@
 function spotify
-    command spotify --enable-features=UseOzonePlatform --ozone-platform=wayland
+    set -e DISPLAY
+    command spotify
 end
